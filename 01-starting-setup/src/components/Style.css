@@ -1,0 +1,9 @@
+.tag {
+    display: block;
+    background-color: coral;
+    border: black 2px;
+    border-radius: 20px;
+    text-align: center;
+    margin: 50px;
+    padding: 2px;
+}
