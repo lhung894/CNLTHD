@@ -1,3 +1,6 @@
+/*=============*/
+/* COMPONENTS */
+/*============*/
 /*import Functional from "./Components/Functional.js";
 import Class from "./Components/Class";
 function App() {
@@ -13,6 +16,9 @@ function App() {
 
 export default App;*/
 
+/*====================*/
+/* STYLING COMPONENTS */
+/*====================*/
 import React, { useState } from 'react';
 
 import CourseGoalList from './components/CourseGoals/CourseGoalList/CourseGoalList';
