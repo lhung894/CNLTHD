@@ -4,11 +4,13 @@ import './index.css';
 import App from './App';
 import DemoJsx from './components/DemoJsx/DemoJsx';
 import reportWebVitals from './reportWebVitals';
+import DemoComponentAPI from './components/DemoComponentAPI/DemoComponentAPI.tsx';
 
 ReactDOM.render(
   <React.StrictMode>
     {/* <App /> */}
-    <DemoJsx />
+    {/* <DemoJsx /> */}
+    <DemoComponentAPI/>
   </React.StrictMode>,
   document.getElementById('root')
 );
