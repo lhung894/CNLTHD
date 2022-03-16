@@ -1,0 +1,11 @@
+.text-color_on-change {
+   color: red;
+}
+
+.text-color_on-submit {
+   color: green;
+}
+
+.text-color_on-hover {
+   color: blue;
+}
