@@ -14,28 +14,28 @@ const OnTypeEx = (props) => {
    );
    const [onOverTextField, setOnOverTextField] = useState("This text should be changed on hover");
 
-   const OnType = (event) => {
+   const onType = (event) => {
       setOnChangeTextField(event.target.value);
    };
 
-   const Onsubmit = (event) => {
+   const onSubmit = (event) => {
       event.preventDefault();
       setOnSumbitTextField(onChangeTextField);
-      setItem([...item, onChangeTextField]);
+      setItem((preVious) => {
+         console.log(preVious);
+         return [...item, preVious];
+      });
    };
 
-   const Onover = () => {
+   const onOver = () => {
       setOnOverTextField("Changed");
    };
 
-   const putInPTag = (str) => {
-      return <p>{str}</p>;
-   };
    return (
       <div>
          <Temp>
-            <form onSubmit={Onsubmit}>
-               <input type="text" onChange={OnType} placeholder="Type here"></input>
+            <form onSubmit={onSubmit}>
+               <input type="text" onChange={onType} placeholder="Type here"></input>
                <span>
                   <button type="submit">submit</button>
                </span>
@@ -44,7 +44,7 @@ const OnTypeEx = (props) => {
          <Temp className="temp_display">
             <p className="text-color_on-change">{onChangeTextField}</p>
             <p className="text-color_on-submit">{onSumbitTextField}</p>
-            <p onPointerOver={Onover} className="text-color_on-hover">
+            <p onPointerOver={onOver} className="text-color_on-hover">
                {onOverTextField}
             </p>
          </Temp>
