@@ -21,9 +21,9 @@ const OnTypeEx = (props) => {
    const onSubmit = (event) => {
       event.preventDefault();
       setOnSumbitTextField(onChangeTextField);
-      setItem((preVious) => {
-         console.log(preVious);
-         return [...item, preVious];
+
+      setItem((previous) => {
+         return [...previous, onChangeTextField];
       });
    };
 
