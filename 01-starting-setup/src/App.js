@@ -1,11 +1,12 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Hello from "./module";
 import Card from "./Card";
 import Temp from "./Temp";
-import OnTypeEx from "./OnTypeEx";
+import EventHandlerEx from "./EventHandlerEx";
 
 const App = () => {
    const [number, setNumber] = useState(100);
+   const [data, setData] = useState([]);
    const stateChange = () => {
       if (number == 200) {
          setNumber(100);
@@ -15,6 +16,13 @@ const App = () => {
       }
    };
 
+   const makeAPICall = async () => {
+      const response = await fetch("http://localhost:8080/api/thisinhs", { mode: "cors" });
+      const result = await response.json();
+      setData(result);
+      console.log(data);
+   };
+
    return (
       <div>
          <Temp>
@@ -22,10 +30,17 @@ const App = () => {
             <Hello item="hello"></Hello>
             <span className="item-align">
                <button onClick={stateChange}>Click</button>
+               <button onClick={makeAPICall}>CallAPI</button>
             </span>
          </Temp>
-
-         <OnTypeEx></OnTypeEx>
+         <EventHandlerEx></EventHandlerEx>
+         <Temp>
+            <Temp className="temp_display">
+               {data.map((data) => (
+                  <p>{data.maThiSinh}</p>
+               ))}
+            </Temp>
+         </Temp>
       </div>
    );
 };

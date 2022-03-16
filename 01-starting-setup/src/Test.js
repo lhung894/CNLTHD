@@ -1,6 +1,6 @@
-function Form() {
-   function handleSubmit(event) {
-      event.preventDefault();
+const Form = () => {
+   function handleSubmit(e) {
+      e.preventDefault();
       console.log("You clicked submit.");
    }
 
@@ -9,4 +9,4 @@ function Form() {
          <button type="submit">Submit</button>
       </form>
    );
-}
+};
