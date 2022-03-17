@@ -80,11 +80,11 @@ export default App;*/
 /*====================*/
 /* FORM */
 /*====================*/
-import Register from "./components/Form/Register";
+import RegisterFunc from "./components/Form/RegisterFunc";
 function App() {
     return (
         <div>
-            <Register></Register>
+            <RegisterFunc></RegisterFunc>
         </div>
     );
 }
