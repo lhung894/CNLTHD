@@ -1,5 +1,7 @@
 
 import './App.css';
+import Clock from './Components/Clock';
+import Lifecycle from './Components/Lifecycle';
 import State from './Components/State';
 import './Components/Welcomes'
 import Welcomes from './Components/Welcomes';
@@ -11,6 +13,8 @@ export default function App() {
        <Welcomes name="Hưng" age="18" gender="boy"></Welcomes>
        <Welcomes name="Kiệt" age="215" gender="girl"></Welcomes>
        <State></State>
+       <Lifecycle />
+       <Clock />
        </div>
   )
 }
