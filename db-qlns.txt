@@ -1,0 +1,101 @@
+nhân viên có chi tiết thông tin
+//
+nhân viên thuộc phòng ban (fr)
+phòng ban có nhiều nhân viên
+//
+công việc có nhiều nhân viên đảm nhiệm
+nhân viên có công việc (fr)
+//
+chức vụ có nhiều nhân viên đảm nhiệm
+nhân viên có chức vụ (fr)
+//
+dự án có nhiều nhân viên
+nhân viên tham gia nhiều dự án
+//
+nhân viên có nhiều chấm công
+chấm công thuộc nhân viên (fr)
+//
+nhân viên có nhiều lương
+lương thuộc nhân viên (fr)
+
+- nhanvien
+id
+hoten
+ngayvaolam
+luongcb
+phongban_id
+congviec_id
+chucvu_id
+
+- chitietnhanvien
+id
+sdt
+mail
+ngaysinh
+gioitinh
+noisinh
+trinhdohocvan
+cccd/cmnd
+ngaycap
+diachi
+hinhanh
+nhanvien_id
+
+- phongban
+id
+tenphongban
+sdtphongban
+
+- congviec
+id
+tencongviec
+hesocongviec
+
+- chucvu
+id
+tenchucvu
+hesochucvu
+phucapchucvu
+
+- duan
+id
+tenduan
+phantramduan
+thuongduan
+ngaybd
+ngaykt
+
+- phancongduan
+id
+duan_id
+nhanvien_id
+phantramthamgia
+
+- chamcong
+id
+ngaychamcong
+trangthai_id
+nhanvien_id
+
+- trangthaichamcong
+id
+tentrangthai
+
+- luong
+id
+nhanvien_id 
+(luongcb
+hscongviec
+hschucvu
+phantramthamgia
+chamcong)
+ngaytinhluong
+luongthuclanh
+
+--------------
+
+phucap
+
+hopdong
+
+thuongphat
