@@ -3,9 +3,7 @@ import Temp from "./Temp";
 import "./OnTypeEx.css";
 
 const OnTypeEx = (props) => {
-   let temp = ["hello"];
    const [item, setItem] = useState([]);
-
    const [onChangeTextField, setOnChangeTextField] = useState("This text should be changed on typing");
    const [onSumbitTextField, setOnSumbitTextField] = useState("This text should be changed on submit");
    const [onOverTextField, setOnOverTextField] = useState("This text should be changed on hover");

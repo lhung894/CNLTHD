@@ -10,3 +10,17 @@ const Form = () => {
       </form>
    );
 };
+
+const itemData = items.map((item) => {
+   return {
+      id: item.maThiSinh,
+      name: item.hoTen,
+   };
+});
+
+const itemData = items.map((item) => {
+   return {
+      id: item.maThiSinh,
+      name: item.hoTen,
+   };
+});

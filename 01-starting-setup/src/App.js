@@ -1,8 +1,9 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import Hello from "./module";
 import Card from "./Card";
 import Temp from "./Temp";
 import EventHandlerEx from "./EventHandlerEx";
+import List from "./List";
 
 const App = () => {
    const [number, setNumber] = useState(100);
@@ -20,7 +21,27 @@ const App = () => {
       const response = await fetch("http://localhost:8080/api/thisinhs", { mode: "cors" });
       const result = await response.json();
       setData(result);
+
       console.log(data);
+
+      // fetch("https://manga-scrapper-for-asura-scans-website.p.rapidapi.com/scrape/series/solo-leveling/chapter/170", {
+      //    method: "PATCH",
+      //    headers: {
+      //       "content-type": "application/json",
+      //       "x-rapidapi-host": "manga-scrapper-for-asura-scans-website.p.rapidapi.com",
+      //       "x-rapidapi-key": "SIGN-UP-FOR-KEY",
+      //    },
+      //    body: {
+      //       key1: "value",
+      //       key2: "value",
+      //    },
+      // })
+      //    .then((response) => {
+      //       console.log(response);
+      //    })
+      //    .catch((err) => {
+      //       console.error(err);
+      //    });
    };
 
    return (
@@ -30,16 +51,13 @@ const App = () => {
             <Hello item="hello"></Hello>
             <span className="item-align">
                <button onClick={stateChange}>Click</button>
-               <button onClick={makeAPICall}>CallAPI</button>
+               {/* <button onClick={makeAPICall}>CallAPI</button> */}
             </span>
          </Temp>
          <EventHandlerEx></EventHandlerEx>
-         <Temp>
-            <Temp className="temp_display">
-               {data.map((data) => (
-                  <p>{data.maThiSinh}</p>
-               ))}
-            </Temp>
+         <Temp className="temp_display">
+            <h2>List:</h2>
+            <List items={data} />
          </Temp>
       </div>
    );
