@@ -15,13 +15,10 @@ public class CongViecEntity {
     @Column(name = "HeSoCongViec", nullable = false)
     private double heSoCongViec;
 
-    public CongViecEntity() {
-    }
+    @Column(name = "Status", columnDefinition = "integer default 1")
+    private Integer status;
 
-    public CongViecEntity(Long congViecId, String tenCongViec, double heSoCongViec) {
-        this.congViecId = congViecId;
-        this.tenCongViec = tenCongViec;
-        this.heSoCongViec = heSoCongViec;
+    public CongViecEntity() {
     }
 
     public Long getCongViecId() {
@@ -48,12 +45,21 @@ public class CongViecEntity {
         this.heSoCongViec = heSoCongViec;
     }
 
+    public Integer getStatus() {
+        return status;
+    }
+
+    public void setStatus(Integer status) {
+        this.status = status;
+    }
+
     @Override
     public String toString() {
         return "CongViecEntity{" +
                 "congViecId=" + congViecId +
                 ", tenCongViec='" + tenCongViec + '\'' +
                 ", heSoCongViec=" + heSoCongViec +
+                ", status=" + status +
                 '}';
     }
 }

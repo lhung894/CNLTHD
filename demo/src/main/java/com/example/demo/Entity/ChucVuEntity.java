@@ -14,12 +14,15 @@ public class ChucVuEntity {
     private String tenChucVu;
 
     @Column(name = "HeSoChucVu", nullable = false)
-    private double heSoChucVu;
+    private Double heSoChucVu;
+
+    @Column(name = "Status", columnDefinition = "integer default 1")
+    private Integer status;
 
     public ChucVuEntity() {
     }
 
-    public ChucVuEntity(Long chucVuId, String tenChucVu, double heSoChucVu) {
+    public ChucVuEntity(Long chucVuId, String tenChucVu, Double heSoChucVu) {
         this.chucVuId = chucVuId;
         this.tenChucVu = tenChucVu;
         this.heSoChucVu = heSoChucVu;
@@ -45,8 +48,16 @@ public class ChucVuEntity {
         return heSoChucVu;
     }
 
-    public void setHeSoChucVu(double heSoChucVu) {
+    public void setHeSoChucVu(Double heSoChucVu) {
         this.heSoChucVu = heSoChucVu;
+    }
+
+    public Integer getStatus() {
+        return status;
+    }
+
+    public void setStatus(Integer status) {
+        this.status = status;
     }
 
     @Override
@@ -55,6 +66,7 @@ public class ChucVuEntity {
                 "chucVuId=" + chucVuId +
                 ", tenChucVu='" + tenChucVu + '\'' +
                 ", heSoChucVu=" + heSoChucVu +
+                ", status=" + status +
                 '}';
     }
 }

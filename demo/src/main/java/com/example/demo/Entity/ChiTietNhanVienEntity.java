@@ -38,6 +38,9 @@ public class ChiTietNhanVienEntity {
     @JoinColumn(name = "NhanVienId", foreignKey = @ForeignKey(name = "FK_ChiTietNhanVien_NhanVien"))
     private NhanVienEntity nhanVien;
 
+    @Column(name = "Status", columnDefinition = "integer default 1")
+    private Integer status;
+
     public ChiTietNhanVienEntity() {
     }
 
@@ -121,6 +124,14 @@ public class ChiTietNhanVienEntity {
         this.nhanVien = nhanVien;
     }
 
+    public Integer getStatus() {
+        return status;
+    }
+
+    public void setStatus(Integer status) {
+        this.status = status;
+    }
+
     @Override
     public String toString() {
         return "ChiTietNhanVienEntity{" +
@@ -134,6 +145,7 @@ public class ChiTietNhanVienEntity {
                 ", canCuoc='" + canCuoc + '\'' +
                 ", ngayCap=" + ngayCap +
                 ", nhanVien=" + nhanVien +
+                ", status=" + status +
                 '}';
     }
 }

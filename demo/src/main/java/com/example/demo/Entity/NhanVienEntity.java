@@ -32,6 +32,9 @@ public class NhanVienEntity {
     @JoinColumn(name = "CongViecId", nullable = false, foreignKey = @ForeignKey(name = "FK_NhanVien_CongViec"))
     private CongViecEntity congViec;
 
+    @Column(name = "Status", columnDefinition = "integer default 1")
+    private Integer status;
+
     public Long getNhanVienId() {
         return nhanVienId;
     }
@@ -88,6 +91,14 @@ public class NhanVienEntity {
         this.congViec = congViec;
     }
 
+    public Integer getStatus() {
+        return status;
+    }
+
+    public void setStatus(Integer status) {
+        this.status = status;
+    }
+
     public NhanVienEntity() {
     }
 
@@ -101,6 +112,7 @@ public class NhanVienEntity {
                 ", phongBan=" + phongBan +
                 ", chucVu=" + chucVu +
                 ", congViec=" + congViec +
+                ", status=" + status +
                 '}';
     }
 }

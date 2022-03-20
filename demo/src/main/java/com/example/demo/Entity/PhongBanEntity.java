@@ -16,6 +16,9 @@ public class PhongBanEntity {
     @Column(name = "SdtPhongBan", nullable = false)
     private String sdtPhongBan;
 
+    @Column(name = "Status", columnDefinition = "integer default 1")
+    private Integer status;
+
     public PhongBanEntity() {
     }
 
@@ -43,12 +46,21 @@ public class PhongBanEntity {
         this.sdtPhongBan = sdtPhongBan;
     }
 
+    public Integer getStatus() {
+        return status;
+    }
+
+    public void setStatus(Integer status) {
+        this.status = status;
+    }
+
     @Override
     public String toString() {
         return "PhongBanEntity{" +
                 "phongBanId=" + phongBanId +
                 ", tenPhongBan='" + tenPhongBan + '\'' +
                 ", sdtPhongBan='" + sdtPhongBan + '\'' +
+                ", status=" + status +
                 '}';
     }
 }
