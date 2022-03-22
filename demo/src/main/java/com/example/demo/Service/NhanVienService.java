@@ -21,12 +21,12 @@ public class NhanVienService {
         return nhanVienRepository.findById(id);
     }
 
-    public void Insert(NhanVienEntity nhanVien) {
-        nhanVienRepository.save(nhanVien);
+    public NhanVienEntity Insert(NhanVienEntity nhanVien) {
+        return nhanVienRepository.save(nhanVien);
     }
 
-    public void Update(NhanVienEntity nhanVien) {
-        nhanVienRepository.save(nhanVien);
+    public NhanVienEntity Update(NhanVienEntity nhanVien) {
+        return nhanVienRepository.save(nhanVien);
     }
 
     public void Delete(Long id) {

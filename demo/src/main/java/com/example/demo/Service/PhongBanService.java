@@ -21,12 +21,12 @@ public class PhongBanService {
         return phongBanRepository.findById(id);
     }
 
-    public void Insert(PhongBanEntity phongBan) {
-        phongBanRepository.save(phongBan);
+    public PhongBanEntity Insert(PhongBanEntity phongBan) {
+        return phongBanRepository.save(phongBan);
     }
 
-    public void Update(PhongBanEntity phongBan) {
-        phongBanRepository.save(phongBan);
+    public PhongBanEntity Update(PhongBanEntity phongBan) {
+        return phongBanRepository.save(phongBan);
     }
 
     public void Delete(Long id) {

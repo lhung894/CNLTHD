@@ -21,12 +21,12 @@ public class ChucVuService {
         return chucVuRepository.findById(id);
     }
 
-    public void Insert(ChucVuEntity chucVu) {
-        chucVuRepository.save(chucVu);
+    public ChucVuEntity Insert(ChucVuEntity chucVu) {
+        return chucVuRepository.save(chucVu);
     }
 
-    public void Update(ChucVuEntity chucVu) {
-        chucVuRepository.save(chucVu);
+    public ChucVuEntity Update(ChucVuEntity chucVu) {
+        return chucVuRepository.save(chucVu);
     }
 
     public void Delete(Long id) {

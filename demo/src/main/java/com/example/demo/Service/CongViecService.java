@@ -21,12 +21,12 @@ public class CongViecService {
         return congViecRepository.findById(id);
     }
 
-    public void Insert(CongViecEntity congViec) {
-        congViecRepository.save(congViec);
+    public CongViecEntity Insert(CongViecEntity congViec) {
+        return congViecRepository.save(congViec);
     }
 
-    public void Update(CongViecEntity congViec) {
-        congViecRepository.save(congViec);
+    public CongViecEntity Update(CongViecEntity congViec) {
+        return congViecRepository.save(congViec);
     }
 
     public void Delete(Long id) {
