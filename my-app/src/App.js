@@ -1,5 +1,6 @@
 
 import './App.css';
+import Caculator from './Components/Caculator';
 import Clock from './Components/Clock';
 import Lifecycle from './Components/Lifecycle';
 import State from './Components/State';
@@ -15,6 +16,7 @@ export default function App() {
        <State></State>
        <Lifecycle />
        <Clock />
+       <Caculator />
        </div>
   )
 }
