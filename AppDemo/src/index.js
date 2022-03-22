@@ -5,12 +5,14 @@ import App from './App';
 import DemoJsx from './components/DemoJsx/DemoJsx';
 import reportWebVitals from './reportWebVitals';
 import DemoComponentAPI from './components/DemoComponentAPI/DemoComponentAPI.tsx';
+import DemoRefs from './components/DemoRefs/DemoRefs.js';
 
 ReactDOM.render(
   <React.StrictMode>
     {/* <App /> */}
     {/* <DemoJsx /> */}
-    <DemoComponentAPI/>
+    {/* <DemoComponentAPI/> */}
+    <DemoRefs/>
   </React.StrictMode>,
   document.getElementById('root')
 );
