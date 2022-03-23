@@ -43,6 +43,11 @@ public class ChucVuController {
         Optional<ChucVuEntity> e = chucVuService.FindById(id);
         return e.map(chucVuEntity -> new ResponseEntity<>(chucVuEntity, HttpStatus.OK)).orElseGet(() -> new ResponseEntity<>(HttpStatus.NOT_FOUND));
     }
+    
+    public ChucVuEntity getChucVuById (Long id){
+        Optional<ChucVuEntity> cv = chucVuService.FindById (id);
+        return cv.get ();
+    }
 
     @PostMapping("")
     public ResponseEntity<ChucVuEntity> insert(@RequestBody ChucVuEntity chucVuEntity) {
