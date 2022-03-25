@@ -1,6 +1,8 @@
 package com.example.demo.Controller;
 
+import com.example.demo.Entity.NhanVienEntity;
 import com.example.demo.Entity.PhongBanEntity;
+import com.example.demo.Service.NhanVienService;
 import com.example.demo.Service.PhongBanService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -17,6 +19,8 @@ public class PhongBanController
 {
 	 @Autowired
 	 private PhongBanService phongBanService;
+	 @Autowired
+	 private NhanVienService nhanVienService;
 	 
 	 @CrossOrigin ("http://localhost:3000")
 	 @GetMapping ("")
@@ -36,7 +40,19 @@ public class PhongBanController
 		  Optional<PhongBanEntity> pb = phongBanService.FindById (id);
 		  return pb.get ();
 	 }
-	 
+
+	@GetMapping ("/nvpb/{id}")
+	public List<NhanVienEntity> getNhanVienByPb (@PathVariable Long id)
+	{
+		Optional<PhongBanEntity> e = phongBanService.FindById (id);
+		List<NhanVienEntity> nvpb = new ArrayList<>();
+		if (e.isPresent()) {
+			nvpb = nhanVienService.GetNhanVienByPhongBan(id);
+			return nvpb;
+		}
+		return nvpb;
+	}
+
 	 @PostMapping ("")
 	 public ResponseEntity<PhongBanEntity> insert (@RequestBody PhongBanEntity phongBanEntity)
 	 {

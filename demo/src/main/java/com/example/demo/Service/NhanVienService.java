@@ -36,4 +36,8 @@ public class NhanVienService {
     public List<NhanVienEntity> GetAllActive() {
         return nhanVienRepository.GetAllActive();
     }
+
+    public List<NhanVienEntity> GetNhanVienByPhongBan(Long id) {
+        return nhanVienRepository.GetNhanVienByPhongBan(id);
+    }
 }

@@ -9,4 +9,7 @@ import java.util.List;
 public interface NhanVienRepository extends JpaRepository<NhanVienEntity, Long> {
     @Query(value = "SELECT u FROM NhanVienEntity u WHERE u.status = 1")
     List<NhanVienEntity> GetAllActive();
+
+    @Query(value = "SELECT nv FROM NhanVienEntity nv WHERE nv.phongBan.phongBanId = ?1 AND nv.status = 1")
+    List<NhanVienEntity> GetNhanVienByPhongBan(Long id);
 }
