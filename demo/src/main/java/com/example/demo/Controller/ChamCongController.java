@@ -61,6 +61,7 @@ public class ChamCongController {
     public ResponseEntity<ChamCongEntity> insert(@RequestBody ChamCongEntity chamCongEntity) {
         chamCongEntity.setNhanVien(nhanVienController.getNhanVienById(chamCongEntity.getNhanVien().getNhanVienId()));
         chamCongEntity.setTrangThaiChamCong(trangThaiChamCongController.getTrangThaiChamCongById(chamCongEntity.getTrangThaiChamCong().getTrangThaiChamCongId()));
+        chamCongEntity.setStatus(1);
         Long id = chamCongService.Insert(chamCongEntity).getChamCongId();
         Optional<ChamCongEntity> e = chamCongService.FindById(id);
         return e.map(chamCongEntity1 -> new ResponseEntity<>(chamCongEntity1, HttpStatus.OK)).orElseGet(() -> new ResponseEntity<>(HttpStatus.NOT_ACCEPTABLE));
@@ -75,6 +76,7 @@ public class ChamCongController {
             chamCongEntity.setChamCongId(id);
             chamCongEntity.setNhanVien(nhanVienController.getNhanVienById(chamCongEntity.getNhanVien().getNhanVienId()));
             chamCongEntity.setTrangThaiChamCong(trangThaiChamCongController.getTrangThaiChamCongById(chamCongEntity.getTrangThaiChamCong().getTrangThaiChamCongId()));
+            chamCongEntity.setStatus(1);
             return new ResponseEntity<>(chamCongService.Update(chamCongEntity), HttpStatus.OK);
         }
         return new ResponseEntity<>(HttpStatus.NOT_FOUND);
