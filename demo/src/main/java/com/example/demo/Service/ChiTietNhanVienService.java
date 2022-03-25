@@ -36,4 +36,8 @@ public class ChiTietNhanVienService {
     public List<ChiTietNhanVienEntity> GetAllActive() {
         return chiTietNhanVienRepository.GetAllActive();
     }
+
+    public Optional<ChiTietNhanVienEntity> GetByFK(Long id) {
+        return chiTietNhanVienRepository.GetByFK(id);
+    }
 }

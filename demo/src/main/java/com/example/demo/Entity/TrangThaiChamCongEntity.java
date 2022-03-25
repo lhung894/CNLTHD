@@ -13,7 +13,7 @@ public class TrangThaiChamCongEntity {
     @Column(name = "TenTrangThai", nullable = false, unique = true)
     private String tenTrangThai;
 
-    @Column(name = "Status", columnDefinition = "integer default 1")
+    @Column(name = "Status", columnDefinition = "int default 1", nullable = false)
     private Integer status;
 
     public TrangThaiChamCongEntity() {

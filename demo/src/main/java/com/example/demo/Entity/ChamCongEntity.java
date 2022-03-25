@@ -1,6 +1,7 @@
 package com.example.demo.Entity;
 
 import javax.persistence.*;
+import java.time.LocalDate;
 
 @Entity
 @Table (name = "ChamCong")
@@ -11,7 +12,7 @@ public class ChamCongEntity {
     private Long chamCongId;
 
     @Column(name = "NgayChamCong", nullable = false)
-    private String tenChucVu;
+    private LocalDate ngayChamCong;
 
     @ManyToOne(optional = false)
     @JoinColumn(name = "NhanVienId", foreignKey = @ForeignKey(name = "FK_ChamCong_NhanVien"))
@@ -21,7 +22,7 @@ public class ChamCongEntity {
     @JoinColumn(name = "TrangThaiChamCongId", foreignKey = @ForeignKey(name = "FK_ChamCong_TrangThaiChamCong"))
     private TrangThaiChamCongEntity trangThaiChamCong;
 
-    @Column(name = "Status", columnDefinition = "integer default 1")
+    @Column(name = "Status", columnDefinition = "int default 1", nullable = false)
     private Integer status;
 
     public ChamCongEntity() {
@@ -35,12 +36,12 @@ public class ChamCongEntity {
         this.chamCongId = chamCongId;
     }
 
-    public String getTenChucVu() {
-        return tenChucVu;
+    public LocalDate getNgayChamCong() {
+        return ngayChamCong;
     }
 
-    public void setTenChucVu(String tenChucVu) {
-        this.tenChucVu = tenChucVu;
+    public void setNgayChamCong(LocalDate ngayChamCong) {
+        this.ngayChamCong = ngayChamCong;
     }
 
     public NhanVienEntity getNhanVien() {
@@ -71,7 +72,7 @@ public class ChamCongEntity {
     public String toString() {
         return "ChamCongEntity{" +
                 "chamCongId=" + chamCongId +
-                ", tenChucVu='" + tenChucVu + '\'' +
+                ", ngayChamCong=" + ngayChamCong +
                 ", nhanVien=" + nhanVien +
                 ", trangThaiChamCong=" + trangThaiChamCong +
                 ", status=" + status +

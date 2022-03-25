@@ -37,6 +37,11 @@ public class NhanVienController {
         Optional<NhanVienEntity> e = nhanVienService.FindById(id);
         return e.map(nhanVienEntity -> new ResponseEntity<>(nhanVienEntity, HttpStatus.OK)).orElseGet(() -> new ResponseEntity<>(HttpStatus.NOT_FOUND));
     }
+
+    public NhanVienEntity getNhanVienById(Long id) {
+        Optional<NhanVienEntity> e = nhanVienService.FindById(id);
+        return e.get();
+    }
     
     @PostMapping ("")
     public ResponseEntity<NhanVienEntity> insert(@RequestBody NhanVienChiTietDTO nhanVienChiTietDTO) {
@@ -60,22 +65,33 @@ public class NhanVienController {
     }
     
     @PutMapping("/{id}")
-    public ResponseEntity<NhanVienEntity> update(@PathVariable Long id, @RequestBody NhanVienEntity nhanVienEntity) {
+    public ResponseEntity<NhanVienEntity> update(@PathVariable Long id, @RequestBody NhanVienChiTietDTO nhanVienChiTietDTO) {
         Optional<NhanVienEntity> e = nhanVienService.FindById(id);
-        if (e.isPresent()) {
-            nhanVienEntity.setNhanVienId(id);
-            return new ResponseEntity<>(nhanVienService.Update(nhanVienEntity), HttpStatus.OK);
+        Optional<ChiTietNhanVienEntity> ctnv = chiTietNhanVienController.getByFK(id);
+        if (e.isPresent() && ctnv.isPresent()) {
+            nhanVienChiTietDTO.getNhanVien().setNhanVienId(id);
+            nhanVienChiTietDTO.getChiTietNhanVien().setChiTietNhanVienId(ctnv.get().getChiTietNhanVienId());
+            if (!nhanVienChiTietDTO.getNhanVien().toString().equals(e.get().toString())) {
+                nhanVienService.Update(nhanVienChiTietDTO.getNhanVien());
+            }
+            if (!nhanVienChiTietDTO.getChiTietNhanVien().toString().equals(ctnv.get().toString())) {
+                chiTietNhanVienController.update(nhanVienChiTietDTO.getChiTietNhanVien());
+            }
+            return new ResponseEntity<>(HttpStatus.OK);
         }
         return new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
     
     @PutMapping ("/remove/{id}")
-    public ResponseEntity<NhanVienEntity> remove(@PathVariable Long id, @RequestBody NhanVienEntity nhanVienEntity) {
+    public ResponseEntity<NhanVienEntity> remove(@PathVariable Long id) {
         Optional<NhanVienEntity> e = nhanVienService.FindById(id);
-        if (e.isPresent()) {
-            nhanVienEntity.setNhanVienId(id);
-            nhanVienEntity.setStatus(0);
-            return new ResponseEntity<> (nhanVienService.Update(nhanVienEntity), HttpStatus.OK);
+        Optional<ChiTietNhanVienEntity> ctnv = chiTietNhanVienController.getByFK(id);
+        if (e.isPresent() && ctnv.isPresent()) {
+            e.get().setStatus(0);
+            ctnv.get().setStatus(0);
+            nhanVienService.Update(e.get());
+            chiTietNhanVienController.update(ctnv.get());
+            return new ResponseEntity<> (HttpStatus.OK);
         }
         return new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
@@ -83,8 +99,10 @@ public class NhanVienController {
     @DeleteMapping ("/{id}")
     public ResponseEntity<NhanVienEntity> delete(@PathVariable Long id) {
         Optional<NhanVienEntity> e = nhanVienService.FindById(id);
-        if (e.isPresent()) {
+        Optional<ChiTietNhanVienEntity> ctnv = chiTietNhanVienController.getByFK(id);
+        if (e.isPresent() && ctnv.isPresent()) {
             nhanVienService.Delete(id);
+            chiTietNhanVienController.delete(ctnv.get().getChiTietNhanVienId());
             return new ResponseEntity<>(HttpStatus.OK);
         }
         return new ResponseEntity<>(HttpStatus.NOT_FOUND);

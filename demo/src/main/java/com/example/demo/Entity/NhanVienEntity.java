@@ -32,7 +32,7 @@ public class NhanVienEntity {
     @JoinColumn(name = "CongViecId", nullable = false, foreignKey = @ForeignKey(name = "FK_NhanVien_CongViec"))
     private CongViecEntity congViec;
 
-    @Column(name = "Status", columnDefinition = "integer default 1")
+    @Column(name = "Status", columnDefinition = "int default 1", nullable = false)
     private Integer status;
 
     public Long getNhanVienId() {

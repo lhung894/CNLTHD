@@ -38,7 +38,7 @@ public class ChiTietNhanVienEntity {
     @JoinColumn(name = "NhanVienId", foreignKey = @ForeignKey(name = "FK_ChiTietNhanVien_NhanVien"))
     private NhanVienEntity nhanVien;
 
-    @Column(name = "Status", columnDefinition = "integer default 1")
+    @Column(name = "Status", columnDefinition = "int default 1", nullable = false)
     private Integer status;
 
     public ChiTietNhanVienEntity() {

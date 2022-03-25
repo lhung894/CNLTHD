@@ -16,7 +16,7 @@ public class PhongBanEntity {
     @Column(name = "SdtPhongBan", nullable = false)
     private String sdtPhongBan;
 
-    @Column(name = "Status", columnDefinition = "integer default 1")
+    @Column(name = "Status", columnDefinition = "int default 1", nullable = false)
     private Integer status;
 
     public PhongBanEntity() {

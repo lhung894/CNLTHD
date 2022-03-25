@@ -62,7 +62,7 @@ public class CongViecController
 		  Long id = congViecService.Insert (congViecEntity).getCongViecId ();
 		  Optional<CongViecEntity> e = congViecService.FindById (id);
 //        System.out.println(e);
-		  System.out.println (e.map (congViecEntity1 -> new ResponseEntity<> (congViecEntity1, HttpStatus.OK)));
+//		  System.out.println (e.map (congViecEntity1 -> new ResponseEntity<> (congViecEntity1, HttpStatus.OK)));
 		  return e.map (congViecEntity1 -> new ResponseEntity<> (congViecEntity1, HttpStatus.OK)).orElseGet (() -> new ResponseEntity<> (HttpStatus.NOT_ACCEPTABLE));
 	 }
 	 

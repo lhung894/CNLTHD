@@ -34,24 +34,22 @@ public class ChiTietNhanVienController
 		  Optional<ChiTietNhanVienEntity> e = chiTietNhanVienService.FindById(id);
 		  return e.map(chiTietNhanVienEntity -> new ResponseEntity<>(chiTietNhanVienEntity, HttpStatus.OK)).orElseGet(() -> new ResponseEntity<>(HttpStatus.NOT_FOUND));
 	 }
+
+	 public Optional<ChiTietNhanVienEntity> getByFK(Long id) {
+		 return chiTietNhanVienService.GetByFK(id);
+	 }
 	 
 	 @PostMapping ("")
 	 public ResponseEntity<ChiTietNhanVienEntity> insert(@RequestBody ChiTietNhanVienEntity chiTietNhanVienEntity) {
 		  Long id = chiTietNhanVienService.Insert(chiTietNhanVienEntity).getChiTietNhanVienId();
 		  Optional<ChiTietNhanVienEntity> e = chiTietNhanVienService.FindById(id);
 //        System.out.println(e);
-		  System.out.println(e.map(chiTietNhanVienEntity1 -> new ResponseEntity<>(chiTietNhanVienEntity1, HttpStatus.OK)));
+//		  System.out.println(e.map(chiTietNhanVienEntity1 -> new ResponseEntity<>(chiTietNhanVienEntity1, HttpStatus.OK)));
 		  return e.map(chiTietNhanVienEntity1 -> new ResponseEntity<>(chiTietNhanVienEntity1, HttpStatus.OK)).orElseGet(() -> new ResponseEntity<>(HttpStatus.NOT_ACCEPTABLE));
 	 }
-	 
-	 @PutMapping("/{id}")
-	 public ResponseEntity<ChiTietNhanVienEntity> update(@PathVariable Long id, @RequestBody ChiTietNhanVienEntity chiTietNhanVienEntity) {
-		  Optional<ChiTietNhanVienEntity> e = chiTietNhanVienService.FindById(id);
-		  if (e.isPresent()) {
-				chiTietNhanVienEntity.setChiTietNhanVienId(id);
-				return new ResponseEntity<>(chiTietNhanVienService.Update(chiTietNhanVienEntity), HttpStatus.OK);
-		  }
-		  return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+
+	 public void update(ChiTietNhanVienEntity chiTietNhanVienEntity) {
+		 chiTietNhanVienService.Update(chiTietNhanVienEntity);
 	 }
 	 
 	 @PutMapping ("/remove/{id}")

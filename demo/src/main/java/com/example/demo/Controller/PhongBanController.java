@@ -43,7 +43,7 @@ public class PhongBanController
 		  Long id = phongBanService.Insert (phongBanEntity).getPhongBanId ();
 		  Optional<PhongBanEntity> e = phongBanService.FindById (id);
 //        System.out.println(e);
-		  System.out.println (e.map (phongBanEntity1 -> new ResponseEntity<> (phongBanEntity1, HttpStatus.OK)));
+//		  System.out.println (e.map (phongBanEntity1 -> new ResponseEntity<> (phongBanEntity1, HttpStatus.OK)));
 		  return e.map (phongBanEntity1 -> new ResponseEntity<> (phongBanEntity1, HttpStatus.OK)).orElseGet (() -> new ResponseEntity<> (HttpStatus.NOT_ACCEPTABLE));
 	 }
 	 

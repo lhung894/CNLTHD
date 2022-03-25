@@ -48,7 +48,7 @@ public class ChucVuController {
         Long id = chucVuService.Insert(chucVuEntity).getChucVuId();
         Optional<ChucVuEntity> e = chucVuService.FindById(id);
 //        System.out.println(e);
-        System.out.println(e.map(chucVuEntity1 -> new ResponseEntity<>(chucVuEntity1, HttpStatus.OK)));
+//        System.out.println(e.map(chucVuEntity1 -> new ResponseEntity<>(chucVuEntity1, HttpStatus.OK)));
         return e.map(chucVuEntity1 -> new ResponseEntity<>(chucVuEntity1, HttpStatus.OK)).orElseGet(() -> new ResponseEntity<>(HttpStatus.NOT_ACCEPTABLE));
     }
 

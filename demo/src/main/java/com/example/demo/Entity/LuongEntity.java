@@ -21,7 +21,7 @@ public class LuongEntity {
     @JoinColumn(name = "NhanVienId", foreignKey = @ForeignKey(name = "FK_Luong_NhanVien"))
     private NhanVienEntity nhanVien;
 
-    @Column(name = "Status", columnDefinition = "integer default 1")
+    @Column(name = "Status", columnDefinition = "int default 1", nullable = false)
     private Integer status;
 
     public LuongEntity() {
