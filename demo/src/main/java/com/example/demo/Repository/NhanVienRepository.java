@@ -12,4 +12,10 @@ public interface NhanVienRepository extends JpaRepository<NhanVienEntity, Long> 
 
     @Query(value = "SELECT nv FROM NhanVienEntity nv WHERE nv.phongBan.phongBanId = ?1 AND nv.status = 1")
     List<NhanVienEntity> GetNhanVienByPhongBan(Long id);
+
+    @Query(value = "SELECT nv FROM NhanVienEntity nv WHERE nv.chucVu.chucVuId = ?1 AND nv.status = 1")
+    List<NhanVienEntity> GetNhanVienByChucVu(Long id);
+
+    @Query(value = "SELECT nv FROM NhanVienEntity nv WHERE nv.congViec.congViecId = ?1 AND nv.status = 1")
+    List<NhanVienEntity> GetNhanVienByCongViec(Long id);
 }

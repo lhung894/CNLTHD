@@ -1,7 +1,9 @@
 package com.example.demo.Controller;
 
 import com.example.demo.Entity.CongViecEntity;
+import com.example.demo.Entity.NhanVienEntity;
 import com.example.demo.Service.CongViecService;
+import com.example.demo.Service.NhanVienService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -17,6 +19,8 @@ public class CongViecController
 {
 	 @Autowired
 	 private CongViecService congViecService;
+	 @Autowired
+	 private NhanVienService nhanVienService;
 	 
 	 //    @GetMapping("/congviec/{id}")
 //    public ResponseEntity<List<CongViecEntity>> findByCongViecId(@PathVariable Long id) {
@@ -50,6 +54,18 @@ public class CongViecController
 		  Optional<CongViecEntity> e = congViecService.FindById (id);
 		  return e.map (congViecEntity -> new ResponseEntity<> (congViecEntity, HttpStatus.OK)).orElseGet (() -> new ResponseEntity<> (HttpStatus.NOT_FOUND));
 	 }
+
+	@GetMapping ("/nvcongviec/{id}")
+	public List<NhanVienEntity> getNhanVienByCongViec (@PathVariable Long id)
+	{
+		Optional<CongViecEntity> e = congViecService.FindById (id);
+		List<NhanVienEntity> nvcv = new ArrayList<>();
+		if (e.isPresent()) {
+			nvcv = nhanVienService.GetNhanVienByCongViec(id);
+			return nvcv;
+		}
+		return nvcv;
+	}
 	 
 	 public CongViecEntity getCongViecById (Long id){
 		  Optional<CongViecEntity> cv = congViecService.FindById (id);

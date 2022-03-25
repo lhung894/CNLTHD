@@ -1,7 +1,9 @@
 package com.example.demo.Controller;
 
 import com.example.demo.Entity.ChucVuEntity;
+import com.example.demo.Entity.NhanVienEntity;
 import com.example.demo.Service.ChucVuService;
+import com.example.demo.Service.NhanVienService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -16,6 +18,8 @@ import java.util.Optional;
 public class ChucVuController {
     @Autowired
     private ChucVuService chucVuService;
+    @Autowired
+    private NhanVienService nhanVienService;
 
 //    @GetMapping("/chucvu/{id}")
 //    public ResponseEntity<List<ChucVuEntity>> findByChucVuId(@PathVariable Long id) {
@@ -36,6 +40,18 @@ public class ChucVuController {
     public ResponseEntity<ChucVuEntity> getById(@PathVariable Long id) {
         Optional<ChucVuEntity> e = chucVuService.FindById(id);
         return e.map(chucVuEntity -> new ResponseEntity<>(chucVuEntity, HttpStatus.OK)).orElseGet(() -> new ResponseEntity<>(HttpStatus.NOT_FOUND));
+    }
+
+    @GetMapping ("/nvchucvu/{id}")
+    public List<NhanVienEntity> getNhanVienByChucVu (@PathVariable Long id)
+    {
+        Optional<ChucVuEntity> e = chucVuService.FindById (id);
+        List<NhanVienEntity> nvcv = new ArrayList<>();
+        if (e.isPresent()) {
+            nvcv = nhanVienService.GetNhanVienByChucVu(id);
+            return nvcv;
+        }
+        return nvcv;
     }
     
     public ChucVuEntity getChucVuById (Long id){

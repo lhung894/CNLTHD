@@ -40,4 +40,12 @@ public class NhanVienService {
     public List<NhanVienEntity> GetNhanVienByPhongBan(Long id) {
         return nhanVienRepository.GetNhanVienByPhongBan(id);
     }
+
+    public List<NhanVienEntity> GetNhanVienByChucVu(Long id) {
+        return nhanVienRepository.GetNhanVienByChucVu(id);
+    }
+
+    public List<NhanVienEntity> GetNhanVienByCongViec(Long id) {
+        return nhanVienRepository.GetNhanVienByCongViec(id);
+    }
 }
