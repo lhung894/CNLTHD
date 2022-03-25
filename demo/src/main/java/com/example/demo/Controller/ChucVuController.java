@@ -29,13 +29,7 @@ public class ChucVuController {
 
     @GetMapping("")
     public List<ChucVuEntity> getAll() {
-        List<ChucVuEntity> filter1 = new ArrayList<>();
-        for (ChucVuEntity cv : chucVuService.FindAll()) {
-            if (cv.getStatus() == 1) {
-                filter1.add(cv);
-            }
-        }
-        return filter1;
+        return chucVuService.GetAllActive();
     }
 
     @GetMapping("/{id}")

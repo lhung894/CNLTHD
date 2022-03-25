@@ -29,13 +29,7 @@ public class NhanVienController {
     
     @GetMapping("")
     public List<NhanVienEntity> getAll() {
-        List<NhanVienEntity> filter1 = new ArrayList<> ();
-        for (NhanVienEntity cv : nhanVienService.FindAll()) {
-            if (cv.getStatus() == 1) {
-                filter1.add(cv);
-            }
-        }
-        return filter1;
+        return nhanVienService.GetAllActive();
     }
     
     @GetMapping("/{id}")

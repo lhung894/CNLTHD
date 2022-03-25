@@ -32,4 +32,8 @@ public class CongViecService {
     public void Delete(Long id) {
         congViecRepository.deleteById(id);
     }
+
+    public List<CongViecEntity> GetAllActive() {
+        return congViecRepository.GetAllActive();
+    }
 }

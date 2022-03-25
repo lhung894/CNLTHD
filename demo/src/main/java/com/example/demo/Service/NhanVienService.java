@@ -32,4 +32,8 @@ public class NhanVienService {
     public void Delete(Long id) {
         nhanVienRepository.deleteById(id);
     }
+
+    public List<NhanVienEntity> GetAllActive() {
+        return nhanVienRepository.GetAllActive();
+    }
 }

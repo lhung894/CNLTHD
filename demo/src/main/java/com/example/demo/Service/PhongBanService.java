@@ -32,4 +32,8 @@ public class PhongBanService {
     public void Delete(Long id) {
         phongBanRepository.deleteById(id);
     }
+
+    public List<PhongBanEntity> GetAllActive() {
+        return phongBanRepository.GetAllActive();
+    }
 }

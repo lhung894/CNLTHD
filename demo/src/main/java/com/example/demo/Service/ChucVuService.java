@@ -32,4 +32,8 @@ public class ChucVuService {
     public void Delete(Long id) {
         chucVuRepository.deleteById(id);
     }
+
+    public List<ChucVuEntity> GetAllActive() {
+        return chucVuRepository.GetAllActive();
+    }
 }

@@ -32,15 +32,16 @@ public class CongViecController
 	 @GetMapping ("")
 	 public List<CongViecEntity> getAll ()
 	 {
-		  List<CongViecEntity> filter1 = new ArrayList<> ();
-		  for (CongViecEntity cv : congViecService.FindAll ())
-		  {
-				if (cv.getStatus () == 1)
-				{
-					 filter1.add (cv);
-				}
-		  }
-		  return filter1;
+//		  List<CongViecEntity> filter1 = new ArrayList<> ();
+//		  for (CongViecEntity cv : congViecService.FindAll ())
+//		  {
+//				if (cv.getStatus () == 1)
+//				{
+//					 filter1.add (cv);
+//				}
+//		  }
+//		  return filter1;
+		 return congViecService.GetAllActive();
 	 }
 	 
 	 @GetMapping ("/{id}")

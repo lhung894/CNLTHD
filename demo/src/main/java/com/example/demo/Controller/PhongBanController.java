@@ -22,15 +22,7 @@ public class PhongBanController
 	 @GetMapping ("")
 	 public List<PhongBanEntity> getAll ()
 	 {
-		  List<PhongBanEntity> filter1 = new ArrayList<> ();
-		  for (PhongBanEntity pb : phongBanService.FindAll ())
-		  {
-				if (pb.getStatus () == 1)
-				{
-					 filter1.add (pb);
-				}
-		  }
-		  return filter1;
+		  return phongBanService.GetAllActive();
 	 }
 	 
 	 @GetMapping ("/{id}")
