@@ -20,6 +20,9 @@ public class NhanVienEntity {
     @Column(name = "NgayVaoLam", nullable = false)
     private LocalDate ngayVaoLam;
 
+    @Column(name = "LuongCanBan", nullable = false)
+    private Long luongCanBan;
+
     @ManyToOne(optional = false)
     @JoinColumn(name = "PhongBanId", nullable = false, foreignKey = @ForeignKey(name = "FK_NhanVien_PhongBan"))
     private PhongBanEntity phongBan;
@@ -67,6 +70,14 @@ public class NhanVienEntity {
         this.ngayVaoLam = ngayVaoLam;
     }
 
+    public Long getLuongCanBan() {
+        return luongCanBan;
+    }
+
+    public void setLuongCanBan(Long luongCanBan) {
+        this.luongCanBan = luongCanBan;
+    }
+
     public PhongBanEntity getPhongBan() {
         return phongBan;
     }
@@ -106,9 +117,10 @@ public class NhanVienEntity {
     public String toString() {
         return "NhanVienEntity{" +
                 "nhanVienId=" + nhanVienId +
-                ", hoNhanVien='" + hoNhanVien + '\'' +
-                ", tenNhanVien='" + tenNhanVien + '\'' +
+                ", hoNhanVien='" + hoNhanVien +
+                ", tenNhanVien='" + tenNhanVien +
                 ", ngayVaoLam=" + ngayVaoLam +
+                ", luongCanBan=" + luongCanBan +
                 ", phongBan=" + phongBan +
                 ", chucVu=" + chucVu +
                 ", congViec=" + congViec +

@@ -19,6 +19,9 @@ public class ChiTietNhanVienEntity {
     @Column(name = "Mail", nullable = false)
     private String mail;
 
+    @Column(name = "GioiTinh", nullable = false)
+    private Integer gioiTinh;
+
     @Column(name = "NgaySinh", nullable = false)
     private LocalDate ngaySinh;
 
@@ -74,6 +77,14 @@ public class ChiTietNhanVienEntity {
 
     public void setMail(String mail) {
         this.mail = mail;
+    }
+
+    public Integer getGioiTinh() {
+        return gioiTinh;
+    }
+
+    public void setGioiTinh(Integer gioiTinh) {
+        this.gioiTinh = gioiTinh;
     }
 
     public LocalDate getNgaySinh() {
@@ -139,6 +150,7 @@ public class ChiTietNhanVienEntity {
                 ", hinhAnh='" + hinhAnh + '\'' +
                 ", sdt='" + sdt + '\'' +
                 ", mail='" + mail + '\'' +
+                ", gioiTinh=" + gioiTinh +
                 ", ngaySinh=" + ngaySinh +
                 ", noiSinh='" + noiSinh + '\'' +
                 ", diaChi='" + diaChi + '\'' +

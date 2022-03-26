@@ -46,20 +46,36 @@ public class ChamCongController {
         ChamCongEntity chamCong;
         TrangThaiChamCongEntity tt = trangThaiChamCongController.getTrangThaiChamCongById(1L);
         LocalDate now = LocalDate.now();
+        boolean existed = false;
         for (NhanVienEntity nv : nhanVienController.getAll()) {
-            chamCong = new ChamCongEntity();
-            chamCong.setNgayChamCong(now);
-            chamCong.setStatus(1);
-            chamCong.setNhanVien(nv);
-            chamCong.setTrangThaiChamCong(tt);
-            chamCongService.Insert(chamCong);
-            System.out.println(chamCong);
+            for (ChamCongEntity cc : chamCongService.GetChamCongByTime(now)) {
+                if (cc.getNhanVien().equals(nv)) {
+                    existed = true;
+                    break;
+                }
+            }
+            if (!existed) {
+                chamCong = new ChamCongEntity();
+                chamCong.setNgayChamCong(now);
+                chamCong.setStatus(1);
+                chamCong.setNhanVien(nv);
+                chamCong.setTrangThaiChamCong(tt);
+                chamCongService.Insert(chamCong);
+                System.out.println(chamCong);
+            } else {
+                existed = false;
+            }
         }
     }
 
     @PostMapping("")
     public ResponseEntity<ChamCongEntity> insert(@RequestBody ChamCongEntity chamCongEntity) {
         chamCongEntity.setNhanVien(nhanVienController.getNhanVienById(chamCongEntity.getNhanVien().getNhanVienId()));
+        for (ChamCongEntity cc : chamCongService.GetChamCongByTime(chamCongEntity.getNgayChamCong())) {
+            if (cc.getNhanVien().equals(chamCongEntity.getNhanVien())) {
+                return new ResponseEntity<>(HttpStatus.CONFLICT);
+            }
+        }
         chamCongEntity.setTrangThaiChamCong(trangThaiChamCongController.getTrangThaiChamCongById(chamCongEntity.getTrangThaiChamCong().getTrangThaiChamCongId()));
         chamCongEntity.setStatus(1);
         Long id = chamCongService.Insert(chamCongEntity).getChamCongId();

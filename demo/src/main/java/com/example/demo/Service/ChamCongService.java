@@ -5,6 +5,7 @@ import com.example.demo.Repository.ChamCongRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
@@ -35,5 +36,13 @@ public class ChamCongService {
 
     public List<ChamCongEntity> GetAllActive() {
         return chamCongRepository.GetAllActive();
+    }
+
+    public List<ChamCongEntity> GetChamCongByNhanVien(Long id, int month, int year) {
+        return chamCongRepository.GetChamCongByNhanVien(id, month, year);
+    }
+
+    public List<ChamCongEntity> GetChamCongByTime(LocalDate date) {
+        return chamCongRepository.GetChamCongByTime(date);
     }
 }
