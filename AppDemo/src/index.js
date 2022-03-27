@@ -6,13 +6,15 @@ import DemoJsx from './components/DemoJsx/DemoJsx';
 import reportWebVitals from './reportWebVitals';
 import DemoComponentAPI from './components/DemoComponentAPI/DemoComponentAPI.tsx';
 import DemoRefs from './components/DemoRefs/DemoRefs.js';
+import DemoHOC from './components/DemoHOC/DemoHOC';
 
 ReactDOM.render(
   <React.StrictMode>
     {/* <App /> */}
     {/* <DemoJsx /> */}
     {/* <DemoComponentAPI/> */}
-    <DemoRefs/>
+    {/* <DemoRefs/> */}
+    <DemoHOC></DemoHOC>
   </React.StrictMode>,
   document.getElementById('root')
 );
