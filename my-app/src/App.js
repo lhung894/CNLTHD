@@ -7,7 +7,9 @@ import State from './Components/State';
 import './Components/Welcomes'
 import Welcomes from './Components/Welcomes';
 import Counter from "./Components/Counter"
+
 export default function App(props) {
+  
   return (
     <Counter
       render={(data) => {

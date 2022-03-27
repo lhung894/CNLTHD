@@ -13,3 +13,9 @@
 - Ở đây chúng ta sẽ trả về giá trị của số và hàm thực hiện tăng giảm số vào props có tên render.
 
 - Tiếp theo, mình sẽ gọi component này ở bất cứ đâu, props có tên render được tryền vào sẽ có giá trị là một function và tham số của function đó sẽ là giá trị trả về.
+
+![RC3](./my-app/src/images/RC3.png)
+
+- Cuối cùng ta sẽ có kết quả sau đây :
+
+![RC4](./my-app/src/images/RC4.png)
