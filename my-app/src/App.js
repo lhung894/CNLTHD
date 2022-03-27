@@ -6,18 +6,24 @@ import Lifecycle from './Components/Lifecycle';
 import State from './Components/State';
 import './Components/Welcomes'
 import Welcomes from './Components/Welcomes';
-export default function App() {
+import Counter from "./Components/Counter"
+export default function App(props) {
   return (
-    <div>
-       <Welcomes name="Lâm" age="22" gender="boy"></Welcomes>
-       <Welcomes name="Linh" age="24" gender="girl"></Welcomes>
-       <Welcomes name="Hưng" age="18" gender="boy"></Welcomes>
-       <Welcomes name="Kiệt" age="215" gender="girl"></Welcomes>
-       <State></State>
-       <Lifecycle />
-       <Clock />
-       <Caculator />
-       </div>
-  )
+    <Counter
+      render={(data) => {
+        //Nhận giá trị trả vê từ Counter
+        //qua props render.
+        const { count, increment, decrement } = data;
+        return (
+          <>
+            <p>Giá trị {count}</p>
+            <button onClick={increment}>Tăng</button>
+            <button onClick={decrement}>Giảm</button>
+          </>
+        );
+      }}
+    />
+  );
 }
+
 
