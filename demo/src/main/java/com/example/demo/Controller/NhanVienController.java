@@ -3,6 +3,9 @@ package com.example.demo.Controller;
 import com.example.demo.Entity.ChiTietNhanVienEntity;
 import com.example.demo.Entity.NhanVienChiTietDTO;
 import com.example.demo.Entity.NhanVienEntity;
+import com.example.demo.Service.ChamCongService;
+import com.example.demo.Service.LuongService;
+import com.example.demo.Service.NhanVienDuAnService;
 import com.example.demo.Service.NhanVienService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -13,6 +16,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+@CrossOrigin ("http://localhost:3000")
 @RestController
 @RequestMapping(value = "/api/nhanvien")
 public class NhanVienController {
@@ -26,6 +30,12 @@ public class NhanVienController {
     private ChucVuController chucVuController;
     @Autowired
     private CongViecController congViecController;
+    @Autowired
+    private ChamCongService chamCongService;
+    @Autowired
+    private NhanVienDuAnService nhanVienDuAnService;
+    @Autowired
+    private LuongService luongService;
     
     @GetMapping("")
     public List<NhanVienEntity> getAll() {
@@ -91,6 +101,9 @@ public class NhanVienController {
             ctnv.get().setStatus(0);
             nhanVienService.Update(e.get());
             chiTietNhanVienController.update(ctnv.get());
+            chamCongService.RemoveChamCongByNhanVien(id);
+            nhanVienDuAnService.RemoveNVDAByNhanVien(id);
+            luongService.RemoveLuongByNhanVien(id);
             return new ResponseEntity<> (HttpStatus.OK);
         }
         return new ResponseEntity<>(HttpStatus.NOT_FOUND);

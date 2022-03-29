@@ -15,6 +15,7 @@ import java.time.LocalDate;
 import java.time.Year;
 import java.util.List;
 
+@CrossOrigin ("http://localhost:3000")
 @RestController
 @RequestMapping(value = "/api/luong")
 public class LuongController {
@@ -98,7 +99,7 @@ public class LuongController {
                 if (nvda.getDuAn().getNgayKetThuc().getMonth().equals(ngayTinhLuong.getMonth())
                         && nvda.getDuAn().getNgayKetThuc().getYear()==ngayTinhLuong.getYear()
                         && nvda.getDuAn().getNgayKetThuc().isBefore(ngayTinhLuong)) {
-                    thuongDuAn += (nvda.getDuAn().getThuongDuAn() * nvda.getPhanTramThamGia())/100;
+                    thuongDuAn += nvda.getDuAn().getThuongDuAn();
                 }
             }
             luong.setThuongDuAn(thuongDuAn);

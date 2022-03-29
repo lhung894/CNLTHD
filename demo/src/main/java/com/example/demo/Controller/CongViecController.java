@@ -13,6 +13,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+@CrossOrigin ("http://localhost:3000")
 @RestController
 @RequestMapping (value = "/api/congviec")
 public class CongViecController
@@ -47,7 +48,7 @@ public class CongViecController
 //		  return filter1;
 		 return congViecService.GetAllActive();
 	 }
-	 
+
 	 @GetMapping ("/{id}")
 	 public ResponseEntity<CongViecEntity> getById (@PathVariable Long id)
 	 {

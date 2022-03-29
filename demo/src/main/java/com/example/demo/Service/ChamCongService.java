@@ -45,4 +45,8 @@ public class ChamCongService {
     public List<ChamCongEntity> GetChamCongByTime(LocalDate date) {
         return chamCongRepository.GetChamCongByTime(date);
     }
+
+    public void RemoveChamCongByNhanVien(Long nhanVienId) {
+        chamCongRepository.RemoveChamCongByNhanVien(nhanVienId);
+    }
 }

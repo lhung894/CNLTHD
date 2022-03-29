@@ -18,9 +18,6 @@ public class NhanVienDuAnEntity {
     @JoinColumn(name = "NhanVienId", nullable = false, foreignKey = @ForeignKey(name = "FK_NhanVienDuAn_NhanVien"))
     private NhanVienEntity nhanVien;
 
-    @Column(name = "PhanTramThamGia", nullable = false)
-    private Double phanTramThamGia;
-
     @Column(name = "Status", columnDefinition = "int default 1", nullable = false)
     private Integer status;
 
@@ -51,14 +48,6 @@ public class NhanVienDuAnEntity {
         this.nhanVien = nhanVien;
     }
 
-    public Double getPhanTramThamGia() {
-        return phanTramThamGia;
-    }
-
-    public void setPhanTramThamGia(Double phanTramThamGia) {
-        this.phanTramThamGia = phanTramThamGia;
-    }
-
     public Integer getStatus() {
         return status;
     }
@@ -73,7 +62,6 @@ public class NhanVienDuAnEntity {
                 "nhanVienDuAnId=" + nhanVienDuAnId +
                 ", duAn=" + duAn +
                 ", nhanVien=" + nhanVien +
-                ", phanTramThamGia=" + phanTramThamGia +
                 ", status=" + status +
                 '}';
     }

@@ -11,13 +11,14 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+@CrossOrigin ("http://localhost:3000")
 @RestController
 @RequestMapping(value = "/api/chitietnhanvien")
 public class ChiTietNhanVienController
 {
 	 @Autowired
 	 private ChiTietNhanVienService chiTietNhanVienService;
-	 
+
 	 @GetMapping("")
 	 public List<ChiTietNhanVienEntity> getAll() {
 		  List<ChiTietNhanVienEntity> filter1 = new ArrayList<> ();
@@ -28,7 +29,7 @@ public class ChiTietNhanVienController
 		  }
 		  return filter1;
 	 }
-	 
+
 	 @GetMapping("/{id}")
 	 public ResponseEntity<ChiTietNhanVienEntity> getById(@PathVariable Long id) {
 		  Optional<ChiTietNhanVienEntity> e = chiTietNhanVienService.FindById(id);
@@ -38,7 +39,7 @@ public class ChiTietNhanVienController
 	 public Optional<ChiTietNhanVienEntity> getByFK(Long id) {
 		 return chiTietNhanVienService.GetByFK(id);
 	 }
-	 
+
 	 @PostMapping ("")
 	 public ResponseEntity<ChiTietNhanVienEntity> insert(@RequestBody ChiTietNhanVienEntity chiTietNhanVienEntity) {
 		  Long id = chiTietNhanVienService.Insert(chiTietNhanVienEntity).getChiTietNhanVienId();
@@ -51,7 +52,7 @@ public class ChiTietNhanVienController
 	 public void update(ChiTietNhanVienEntity chiTietNhanVienEntity) {
 		 chiTietNhanVienService.Update(chiTietNhanVienEntity);
 	 }
-	 
+
 	 @PutMapping ("/remove/{id}")
 	 public ResponseEntity<ChiTietNhanVienEntity> remove(@PathVariable Long id, @RequestBody ChiTietNhanVienEntity chiTietNhanVienEntity) {
 		  Optional<ChiTietNhanVienEntity> e = chiTietNhanVienService.FindById(id);
@@ -62,7 +63,7 @@ public class ChiTietNhanVienController
 		  }
 		  return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 	 }
-	 
+
 	 @DeleteMapping ("/{id}")
 	 public ResponseEntity<ChiTietNhanVienEntity> delete(@PathVariable Long id) {
 		  Optional<ChiTietNhanVienEntity> e = chiTietNhanVienService.FindById(id);

@@ -40,4 +40,8 @@ public class LuongService {
     public List<LuongEntity> GetLuongByTime(int month, int year) {
         return luongRepository.GetLuongByTime(month, year);
     }
+
+    public void RemoveLuongByNhanVien(Long nhanVienId) {
+        luongRepository.RemoveLuongByNhanVien(nhanVienId);
+    }
 }

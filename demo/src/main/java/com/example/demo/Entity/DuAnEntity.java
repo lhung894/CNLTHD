@@ -19,9 +19,6 @@ public class DuAnEntity {
     @Column(name = "ThuongDuAn", nullable = false)
     private Long thuongDuAn;
 
-    @Column(name = "PhanTramDuAn", nullable = false)
-    private Double phanTramDuAn;
-
     @Column(name = "NgayBatDau", nullable = false)
     private LocalDate ngayBatDau;
 
@@ -58,14 +55,6 @@ public class DuAnEntity {
         this.thuongDuAn = thuongDuAn;
     }
 
-    public double getPhanTramDuAn() {
-        return phanTramDuAn;
-    }
-
-    public void setPhanTramDuAn(Double phanTramDuAn) {
-        this.phanTramDuAn = phanTramDuAn;
-    }
-
     public LocalDate getNgayBatDau() {
         return ngayBatDau;
     }
@@ -96,7 +85,6 @@ public class DuAnEntity {
                 "duAnId=" + duAnId +
                 ", tenDuAn='" + tenDuAn + '\'' +
                 ", thuongDuAn=" + thuongDuAn +
-                ", phanTramDuAn=" + phanTramDuAn +
                 ", ngayBatDau=" + ngayBatDau +
                 ", ngayKetThuc=" + ngayKetThuc +
                 ", status=" + status +

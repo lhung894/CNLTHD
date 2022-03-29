@@ -40,4 +40,8 @@ public class NhanVienDuAnService {
     public List<NhanVienDuAnEntity> GetNVDAByNhanVien(Long id) {
         return nhanVienDuAnRepository.GetNVDAByNhanVien(id);
     }
+
+    public void RemoveNVDAByNhanVien(Long nhanVienId) {
+        nhanVienDuAnRepository.RemoveNVDAByNhanVien(nhanVienId);
+    }
 }

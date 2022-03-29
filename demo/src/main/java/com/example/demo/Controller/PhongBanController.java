@@ -13,6 +13,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+@CrossOrigin ("http://localhost:3000")
 @RestController
 @RequestMapping (value = "/api/phongban")
 public class PhongBanController

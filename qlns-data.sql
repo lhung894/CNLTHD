@@ -13,9 +13,9 @@ insert into phong_ban (ten_phong_ban, sdt_phong_ban)
 values ('phong ban 1', '0909090909'),
 ('phong ban 2', '0909040404');
 
-insert into du_an (ten_du_an, ngay_bat_dau, ngay_ket_thuc, phan_tram_du_an, thuong_du_an)
-values ('du an 1', '2021-12-01', '2021-12-31', 100.0, 6000000),
-('du an 2', '2022-02-14', '2022-05-24', 100.0, 8000000);
+insert into du_an (ten_du_an, ngay_bat_dau, ngay_ket_thuc, thuong_du_an)
+values ('du an 1', '2021-12-01', '2021-12-31', 5000000),
+('du an 2', '2022-02-14', '2022-05-24', 4000000);
 
 insert into trang_thai_cham_cong (ten_trang_thai)
 values ('1'),
