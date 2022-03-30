@@ -5,9 +5,11 @@ import axios from 'axios';
 import Button from '@mui/material/Button';
 import {Link} from 'react-router-dom'
 import NhanVienNew from "../../pages/new/NhanVienNew";
+import CongViecNew from "../../pages/new/CongViecNew";
 // import CongViecNew from "../../pages/new/CongViecNew";
 
-const NhanVienTable = () => {
+const NhanVienTable = () =>
+{
     const [value, setValue] = useState({
         flag: false,
         chitietnhanvien: {}
@@ -15,9 +17,10 @@ const NhanVienTable = () => {
     const [rows, setRows] = useState([]);
     const [chucNang, setChucNang] = useState(0);
 
-    const resetFlag = (value) => {
-        setValue(value);
-    }
+    // const resetFlag = (value) =>
+    // {
+    //     setValue(value);
+    // }
     console.log("ban đàu", value, rows);
 
 
@@ -57,7 +60,8 @@ const NhanVienTable = () => {
         {
             field: 'control', headerName: 'Chức Năng', width: 300, headerAlign: 'center',
             align: 'center',
-            renderCell: (params) => {
+            renderCell: (params) =>
+            {
                 return (
                     <div className="cellAction">
                         <Link to={`/nhanvien/${params.row.nhanVien.nhanVienId}`}
@@ -96,7 +100,8 @@ const NhanVienTable = () => {
                         </Link>
 
 
-                        <Button className="delete" onClick={() => {
+                        <Button className="delete" onClick={() =>
+                        {
                             return xoaNhanVien(params.row)
                         }}>Xóa</Button>
                     </div>
@@ -106,20 +111,25 @@ const NhanVienTable = () => {
     ];
 
 
-    useEffect(async () => {
+    useEffect(async () =>
+    {
         const result = await axios('http://localhost:8080/api/chitietnhanvien');
 
-        let rowData = result.data.map(items => {
+        let rowData = result.data.map(items =>
+        {
             return {
                 id: items.nhanVien.nhanVienId,
                 nhanVienId: items.nhanVien.nhanVienId,
                 hoNhanVien: items.nhanVien.hoNhanVien,
                 tenNhanVien: items.nhanVien.tenNhanVien,
-                tenPhongBan: items.nhanVien.phongBan.tenPhongBan,
-                tenChucVu: items.nhanVien.chucVu.tenChucVu,
-                tenCongViec: items.nhanVien.congViec.tenCongViec,
                 ngayVaoLam: items.nhanVien.ngayVaoLam,
                 luongCanBan: items.nhanVien.luongCanBan,
+                phongBanId: items.nhanVien.phongBan.phongBanId,
+                tenPhongBan: items.nhanVien.phongBan.tenPhongBan,
+                chucVuId: items.nhanVien.chucVu.chucVuId,
+                tenChucVu: items.nhanVien.chucVu.tenChucVu,
+                congViecId: items.nhanVien.congViec.congViecId,
+                tenCongViec: items.nhanVien.congViec.tenCongViec,
                 ...items
             }
         });
@@ -129,14 +139,17 @@ const NhanVienTable = () => {
     }, []);
 
 ///////Thêm Nhân Viên
-    const themNhanVien = () => {
-        setChucNang(2);
-        setValue({...value, flag: true});
-        console.log("Dl cần thêm ", value);
+    const themNhanVien = () =>
+    {
+        setChucNang(1);
+        // setValue({...value, flag: true});
+        console.log("Dl cần thêm ", chucNang);
     }
 
-    const themData = (dlMoi) => {
-        setRows((previous) => {
+    const themData = (dlMoi) =>
+    {
+        setRows((previous) =>
+        {
             return [...previous, {
                 ...dlMoi,
                 id: dlMoi.congViecId,
@@ -146,28 +159,9 @@ const NhanVienTable = () => {
     }
 
 
-/////Sửa Công Việc
-    const suaNhanVien = (nv) => {
-        console.log("dl lấy đc", nv);
-
-        setChucNang(1);
-        setValue({
-            flag: true, ...nv
-        });
-    }
-
-    const resetData = (dlmoi) => {
-        let temp = rows.findIndex((obj => obj.congViecId === dlmoi.congViecId));
-        console.log("Trước update!!: ", rows[temp]);
-        rows[temp].tenCongViec = dlmoi.tenCongViec;
-        rows[temp].heSoCongViec = dlmoi.heSoCongViec;
-        console.log("SAu update: ", rows[temp])
-        setRows(rows);
-    }
-
-
 ///////////////Xóa Nhân Viên
-    const xoaNhanVien = (nv) => {
+    const xoaNhanVien = (nv) =>
+    {
         console.log("Lấy đc idNv là ", nv.nhanVien.nhanVienId);
 
         axios.put(`http://localhost:8080/api/nhanvien/remove/${nv.nhanVien.nhanVienId}`)
@@ -182,7 +176,8 @@ const NhanVienTable = () => {
         // });
         // console.log("Dl mới là ", newRows);
         // setRows(newRows);
-        setTimeout(() => {
+        setTimeout(() =>
+        {
             setRows((prevRows) => prevRows.filter((row) => row.nhanVien.nhanVienId !== nv.nhanVien.nhanVienId));
         })
     }
@@ -193,7 +188,18 @@ const NhanVienTable = () => {
             <div className="addNew">
                 {/*<Link to="/congviec/new" style={{textDecoration: "none"}}>*/}
                 {/*</Link>*/}
-                <Button className="link" onClick={themNhanVien}>Thêm</Button>
+                <Link to={`/nhanvien/new`}
+                      state={
+                          {
+                              chiTiet: {},
+                              chucNang: 1
+                          }
+                      }
+                      thuoctinh={100}
+                      style={{textDecoration: "none"}}>
+                    <Button className="link">Thêm</Button>
+                </Link>
+
             </div>
 
             <DataGrid className="chinhmau"
@@ -234,7 +240,6 @@ const NhanVienTable = () => {
                       }}
             />
 
-            {/*{console.log("ban đàu dã render", value)}*/}
 
         </div>
     );

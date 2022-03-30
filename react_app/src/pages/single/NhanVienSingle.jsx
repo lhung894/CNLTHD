@@ -8,7 +8,8 @@ import {Link, useLocation} from "react-router-dom";
 // import axios from "axios";
 // import Nhanvien_NhanVien_Table from "../../components/datatable/Nhanvien_NhanVien_Table";
 
-const NhanVienSingle = (props) => {
+const NhanVienSingle = () =>
+{
     const location = useLocation();
     console.log("dsdsdsd", location.state.chiTiet);
 
@@ -28,8 +29,8 @@ const NhanVienSingle = (props) => {
 
                         <div className="item">
                             <img
-                                src={require('../images/nv.jpg')}
-                                alt="Công việc" className="itemImg"/>
+                                src={location.state.chiTiet.hinhAnh}
+                                alt="Nhân viên " className="itemImg"/>
                             <div className="details">
                                 <div className="itemTitle">
                                     <li>ID Nhân Viên</li>

@@ -81,6 +81,12 @@ public class NhanVienController {
         if (e.isPresent() && ctnv.isPresent()) {
             nhanVienChiTietDTO.getNhanVien().setNhanVienId(id);
             nhanVienChiTietDTO.getChiTietNhanVien().setChiTietNhanVienId(ctnv.get().getChiTietNhanVienId());
+            nhanVienChiTietDTO.getNhanVien ().setPhongBan (phongBanController.getPhongBanById (nhanVienChiTietDTO.getPhongBanId ()));
+            nhanVienChiTietDTO.getNhanVien ().setChucVu (chucVuController.getChucVuById (nhanVienChiTietDTO.getChucVuId ()));
+            nhanVienChiTietDTO.getNhanVien ().setCongViec (congViecController.getCongViecById (nhanVienChiTietDTO.getCongViecId ()));
+            nhanVienChiTietDTO.getNhanVien ().setStatus (1);
+            nhanVienChiTietDTO.getChiTietNhanVien ().setNhanVien (nhanVienChiTietDTO.getNhanVien ());
+            nhanVienChiTietDTO.getChiTietNhanVien ().setStatus (1);
             if (!nhanVienChiTietDTO.getNhanVien().toString().equals(e.get().toString())) {
                 nhanVienService.Update(nhanVienChiTietDTO.getNhanVien());
             }
