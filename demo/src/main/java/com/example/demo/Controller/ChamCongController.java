@@ -10,6 +10,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
@@ -43,11 +44,12 @@ public class ChamCongController {
     }
 
     @PostMapping("/capphat")
-    public void capPhat() {
+    public List<ChamCongEntity> capPhat() {
         ChamCongEntity chamCong;
         TrangThaiChamCongEntity tt = trangThaiChamCongController.getTrangThaiChamCongById(1L);
         LocalDate now = LocalDate.now();
         boolean existed = false;
+        List<ChamCongEntity> chamCongEntities = new ArrayList<>();
         for (NhanVienEntity nv : nhanVienController.getAll()) {
             for (ChamCongEntity cc : chamCongService.GetChamCongByTime(now)) {
                 if (cc.getNhanVien().equals(nv)) {
@@ -55,6 +57,7 @@ public class ChamCongController {
                     break;
                 }
             }
+            System.out.println("======================");
             if (!existed) {
                 chamCong = new ChamCongEntity();
                 chamCong.setNgayChamCong(now);
@@ -62,11 +65,13 @@ public class ChamCongController {
                 chamCong.setNhanVien(nv);
                 chamCong.setTrangThaiChamCong(tt);
                 chamCongService.Insert(chamCong);
+                chamCongEntities.add(chamCong);
                 System.out.println(chamCong);
             } else {
                 existed = false;
             }
         }
+        return chamCongEntities;
     }
 
     @PostMapping("")
