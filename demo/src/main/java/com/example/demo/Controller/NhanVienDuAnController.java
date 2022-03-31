@@ -33,6 +33,13 @@ public class NhanVienDuAnController
 //		  return e.map (nhanVienDuAnEntity -> new ResponseEntity<> (nhanVienDuAnEntity, HttpStatus.OK)).orElseGet (() -> new ResponseEntity<> (HttpStatus.NOT_FOUND));
 //	 }
 
+	@GetMapping ("/them/{id}")// info 1 phần tử trong danh sách
+	public ResponseEntity<List<NhanVienEntity>> getNVNotExits (@PathVariable Long id)
+	{
+		Optional<List<NhanVienEntity>> e = nhanVienDuAnService.GetNVNotExits(id);
+		return e.map (nhanVienDuAnEntity -> new ResponseEntity<> (nhanVienDuAnEntity, HttpStatus.OK)).orElseGet (() -> new ResponseEntity<> (HttpStatus.NOT_FOUND));
+	}
+
 	@GetMapping ("/{id}")// info 1 phần tử trong danh sách
 	public ResponseEntity<List<NhanVienEntity>> getNVByDA (@PathVariable Long id)
 	{

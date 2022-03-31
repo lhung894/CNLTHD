@@ -49,4 +49,8 @@ public class NhanVienDuAnService {
     public Optional<List<NhanVienEntity>> GetNVByDuAn(Long duAnId){
         return nhanVienDuAnRepository.GetNVByDuAn(duAnId);
     };
+
+    public Optional<List<NhanVienEntity>> GetNVNotExits(Long id){
+        return nhanVienDuAnRepository.GetNVNotExits(id);
+    }
 }
