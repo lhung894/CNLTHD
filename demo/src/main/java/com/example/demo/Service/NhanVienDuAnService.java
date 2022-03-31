@@ -46,7 +46,7 @@ public class NhanVienDuAnService {
         nhanVienDuAnRepository.RemoveNVDAByNhanVien(nhanVienId);
     }
 
-    public List<NhanVienEntity> GetNVByDuAn(Long duAnId){
+    public Optional<List<NhanVienEntity>> GetNVByDuAn(Long duAnId){
         return nhanVienDuAnRepository.GetNVByDuAn(duAnId);
     };
 }

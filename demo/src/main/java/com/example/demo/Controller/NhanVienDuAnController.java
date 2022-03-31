@@ -1,6 +1,7 @@
 package com.example.demo.Controller;
 
 import com.example.demo.Entity.NhanVienDuAnEntity;
+import com.example.demo.Entity.NhanVienEntity;
 import com.example.demo.Service.NhanVienDuAnService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -18,18 +19,26 @@ public class NhanVienDuAnController
 	 @Autowired
 	 private NhanVienDuAnService nhanVienDuAnService;
 
+	@CrossOrigin ("http://localhost:3000")
 	 @GetMapping ("")// Get danh sách
 	 public List<NhanVienDuAnEntity> getAll ()
 	 {
 		  return nhanVienDuAnService.GetAllActive();
 	 }
 	 
-	 @GetMapping ("/{id}")// info 1 phần tử trong danh sách
-	 public ResponseEntity<NhanVienDuAnEntity> getById (@PathVariable Long id)
-	 {
-		  Optional<NhanVienDuAnEntity> e = nhanVienDuAnService.FindById (id);
-		  return e.map (nhanVienDuAnEntity -> new ResponseEntity<> (nhanVienDuAnEntity, HttpStatus.OK)).orElseGet (() -> new ResponseEntity<> (HttpStatus.NOT_FOUND));
-	 }
+//	 @GetMapping ("/{id}")// info 1 phần tử trong danh sách
+//	 public ResponseEntity<NhanVienDuAnEntity> getById (@PathVariable Long id)
+//	 {
+//		  Optional<NhanVienDuAnEntity> e = nhanVienDuAnService.FindById (id);
+//		  return e.map (nhanVienDuAnEntity -> new ResponseEntity<> (nhanVienDuAnEntity, HttpStatus.OK)).orElseGet (() -> new ResponseEntity<> (HttpStatus.NOT_FOUND));
+//	 }
+
+	@GetMapping ("/{id}")// info 1 phần tử trong danh sách
+	public ResponseEntity<List<NhanVienEntity>> getNVByDA (@PathVariable Long id)
+	{
+		Optional<List<NhanVienEntity>> e = nhanVienDuAnService.GetNVByDuAn(id);
+		return e.map (nhanVienDuAnEntity -> new ResponseEntity<> (nhanVienDuAnEntity, HttpStatus.OK)).orElseGet (() -> new ResponseEntity<> (HttpStatus.NOT_FOUND));
+	}
 	 
 	 @PostMapping ("")// Thêm
 	 public ResponseEntity<NhanVienDuAnEntity> insert (@RequestBody NhanVienDuAnEntity nhanVienDuAnEntity)
