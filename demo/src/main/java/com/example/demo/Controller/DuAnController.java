@@ -32,11 +32,6 @@ public class DuAnController
 		  return e.map (duAnEntity -> new ResponseEntity<> (duAnEntity, HttpStatus.OK)).orElseGet (() -> new ResponseEntity<> (HttpStatus.NOT_FOUND));
 	 }
 	 
-	 public DuAnEntity getPhongBanById (Long id){
-		  Optional<DuAnEntity> pb = duAnService.FindById (id);
-		  return pb.get ();
-	 }
-	 
 	 @PostMapping ("")// Thêm
 	 public ResponseEntity<DuAnEntity> insert (@RequestBody DuAnEntity duAnEntity)
 	 {
@@ -59,14 +54,13 @@ public class DuAnController
 	 }
 	 
 	 @PutMapping ("/remove/{id}")// Cập nhật lại status của phần tử
-	 public ResponseEntity<DuAnEntity> remove (@PathVariable Long id, @RequestBody DuAnEntity duAnEntity)
+	 public ResponseEntity<DuAnEntity> remove (@PathVariable Long id)
 	 {
 		  Optional<DuAnEntity> e = duAnService.FindById (id);
 		  if (e.isPresent ())
 		  {
-				duAnEntity.setDuAnId (id);
-				duAnEntity.setStatus (0);
-				return new ResponseEntity<> (duAnService.Update (duAnEntity), HttpStatus.OK);
+			  	e.get().setStatus (0);
+				return new ResponseEntity<> (duAnService.Update (e.get()), HttpStatus.OK);
 		  }
 		  return new ResponseEntity<> (HttpStatus.NOT_FOUND);
 	 }
