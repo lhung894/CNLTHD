@@ -5,26 +5,30 @@ import axios from 'axios';
 import Button from '@mui/material/Button';
 import {Link} from 'react-router-dom'
 import CongViecNew from "../../pages/new/CongViecNew";
+import ChamCongNew from "../../pages/new/ChamCongNew";
 
-const ChamCongTable = () => {
-    const [value, setValue] = useState({
-        flag: false,
-        dlCV: {
-            id: 0,
-            idCv: '',
-            tenCv: '',
-            hsCv: '',
-            statusCV: 1
-        }
-    });
+const ChamCongTable = () =>
+{
+    // const [value, setValue] = useState({
+    //     flag: false,
+    //     dlCV: {
+    //         id: 0,
+    //         idCv: '',
+    //         tenCv: '',
+    //         hsCv: '',
+    //         statusCV: 1
+    //     }
+    // });
+    // const [chucNang, setChucNang] = useState(0);
+
+    const [flag, setFlag] = useState(false);
     const [rows, setRows] = useState([]);
-    const [chucNang, setChucNang] = useState(0);
+    console.log("ban đàu", flag, rows);
 
-    const resetFlag = (value) => {
-        setValue(value);
+    const resetFlag = (value) =>
+    {
+        setFlag(value);
     }
-    console.log("ban đàu", value, rows);
-
 
     const columns = [
         {
@@ -54,14 +58,17 @@ const ChamCongTable = () => {
         {
             field: 'control', headerName: 'Chức năng', width: 250, headerAlign: 'center',
             align: 'center',
-            renderCell: (params) => {
+            renderCell: (params) =>
+            {
                 return (
                     <div className="cellAction">
-                        <Button className="update" onClick={() => {
+                        <Button className="update" onClick={() =>
+                        {
                             // return suaCongViec(params.row)
                         }}>Sửa</Button>
 
-                        <Button className="delete" onClick={() => {
+                        <Button className="delete" onClick={() =>
+                        {
                             // return xoaCongViec(params.row)
                         }}>Xóa</Button>
                     </div>
@@ -71,10 +78,12 @@ const ChamCongTable = () => {
     ];
 
 
-    useEffect(async () => {
+    useEffect(async () =>
+    {
         const result = await axios('http://localhost:8080/api/chamcong');
 
-        let rowData = result.data.map(items => {
+        let rowData = result.data.map(items =>
+        {
             return {
                 id: items.chamCongId,
                 chamCongId: items.chamCongId,
@@ -82,31 +91,36 @@ const ChamCongTable = () => {
                 hoNhanVien: items.nhanVien.hoNhanVien,
                 tenNhanVien: items.nhanVien.tenNhanVien,
                 ngayChamCong: items.ngayChamCong,
-                tenTrangThai: matchTenTrangThai(items.trangThaiChamCong.trangThaiChamCongId),
+                tenTrangThai: matchTenTrangThai(items.trangThaiChamCong.tenTrangThai),
                 ...items
             }
         });
         console.log("Lấy đc từ API ", rowData);
-        // rowData.push({id: 26, congViecId: 26, tenCongViec: 'g', heSoCongViec: 0.36, status: 1});
+
         setRows(rowData);
     }, []);
 
-    const matchTenTrangThai = (id) => {
+    const matchTenTrangThai = (id) =>
+    {
         // let tentt;
-        switch (id) {
-            case 1:
+        switch (id)
+        {
+            case '1':
                 return "Đi làm";
-            case 2:
+            case '2':
                 return "Nghỉ có phép";
-            case 3:
+            case '3':
                 return "Nghỉ không phép";
         }
     }
 
     //// Cấp phát
-    const capPhatCC = () => {
-        axios.post("http://localhost:8080/api/chamcong/capphat").then(res => {
-            let rowData = res.data.map(items => {
+    const capPhatCC = () =>
+    {
+        axios.post("http://localhost:8080/api/chamcong/capphat").then(res =>
+        {
+            let rowData = res.data.map(items =>
+            {
                 return {
                     id: items.chamCongId,
                     chamCongId: items.chamCongId,
@@ -114,39 +128,40 @@ const ChamCongTable = () => {
                     hoNhanVien: items.nhanVien.hoNhanVien,
                     tenNhanVien: items.nhanVien.tenNhanVien,
                     ngayChamCong: items.ngayChamCong,
-                    tenTrangThai: matchTenTrangThai(items.trangThaiChamCong.trangThaiChamCongId),
+                    tenTrangThai: matchTenTrangThai(items.trangThaiChamCong.tenTrangThai),
                     ...items
                 }
             });
-            for (let item of rowData) {
-                setRows((previous) =>
-                {
-                    return [...previous, item]
-                })
-            }
+            // for (let item of rowData)
+            // {
+            //     setRows((previous) =>
+            //     {
+            //         return [...previous, item]
+            //     })
+            // }
+            setRows((preState) => [...preState, ...rowData])
         }).then(`OK`).catch(err => alert(`Thêm thất bài r huhu1!! ${err}`))
         console.log("------------->", rows);
     }
 
-///////Thêm Công Việc
-//     const themCongViec = () =>
-//     {
-//         setChucNang(2);
-//         setValue({...value, flag: true});
-//         console.log("Dl cần thêm ", value);
-//     }
-//
-//     const themData = (dlMoi) =>
-//     {
-//         setRowData((previous) =>
-//         {
-//             return [...previous,{
-//                 ...dlMoi,
-//                 id: dlMoi.congViecId,
-//             }]
-//         });
-//         console.log("------------->",rows);
-//     }
+/////Thêm Chấm Công
+    const themChamCong = () =>
+    {
+        setFlag(true);
+        console.log("Cờ sau đổi ", flag);
+    }
+
+    const themData = (dlMoi) =>
+    {
+        // setRowData((previous) =>
+        // {
+        //     return [...previous,{
+        //         ...dlMoi,
+        //         id: dlMoi.congViecId,
+        //     }]
+        // });
+        // console.log("------------->",rows);
+    }
 
 
 /////Sửa Công Việc
@@ -226,7 +241,7 @@ const ChamCongTable = () => {
                 {/*<Link to="/congviec/new" style={{textDecoration: "none"}}>*/}
                 {/*</Link>*/}
                 <Button className="link" style={{marginRight: '10px'}} onClick={capPhatCC}>Cấp phát</Button>
-                <Button className="link">Thêm</Button>
+                <Button className="link" onClick={themChamCong}>Thêm</Button>
             </div>
 
             <DataGrid className="chinhmauCC"
@@ -268,8 +283,7 @@ const ChamCongTable = () => {
             />
 
             {/*{console.log("ban đàu dã render", value)}*/}
-            {/*<CongViecNew giatri={value} resetFlag={resetFlag} resetData={resetData} chucNang={chucNang}*/}
-            {/*             themData={themData}/>*/}
+            <ChamCongNew flag={flag} resetFlag={resetFlag}/>
 
         </div>
     );

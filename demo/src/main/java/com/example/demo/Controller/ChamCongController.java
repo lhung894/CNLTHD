@@ -17,111 +17,131 @@ import java.util.Optional;
 
 @CrossOrigin ("http://localhost:3000")
 @RestController
-@RequestMapping(value = "/api/chamcong")
-public class ChamCongController {
-    @Autowired
-    private ChamCongService chamCongService;
-    @Autowired
-    private NhanVienController nhanVienController;
-    @Autowired
-    private TrangThaiChamCongController trangThaiChamCongController;
-
-    @CrossOrigin("http://localhost:3000")
-    @GetMapping("")
-    public List<ChamCongEntity> getAll() {
-        return chamCongService.GetAllActive();
-    }
-
-    @GetMapping("/{id}")
-    public ResponseEntity<ChamCongEntity> getById(@PathVariable Long id) {
-        Optional<ChamCongEntity> e = chamCongService.FindById(id);
-        return e.map(chamCongEntity -> new ResponseEntity<>(chamCongEntity, HttpStatus.OK)).orElseGet(() -> new ResponseEntity<>(HttpStatus.NOT_FOUND));
-    }
-
-    public ChamCongEntity getChamCongById(Long id) {
-        Optional<ChamCongEntity> cc = chamCongService.FindById(id);
-        return cc.get();
-    }
-
-    @PostMapping("/capphat")
-    public List<ChamCongEntity> capPhat() {
-        ChamCongEntity chamCong;
-        TrangThaiChamCongEntity tt = trangThaiChamCongController.getTrangThaiChamCongById(1L);
-        LocalDate now = LocalDate.now();
-        boolean existed = false;
-        List<ChamCongEntity> chamCongEntities = new ArrayList<>();
-        for (NhanVienEntity nv : nhanVienController.getAll()) {
-            for (ChamCongEntity cc : chamCongService.GetChamCongByTime(now)) {
-                if (cc.getNhanVien().equals(nv)) {
-                    existed = true;
-                    break;
-                }
-            }
-            System.out.println("======================");
-            if (!existed) {
-                chamCong = new ChamCongEntity();
-                chamCong.setNgayChamCong(now);
-                chamCong.setStatus(1);
-                chamCong.setNhanVien(nv);
-                chamCong.setTrangThaiChamCong(tt);
-                chamCongService.Insert(chamCong);
-                chamCongEntities.add(chamCong);
-                System.out.println(chamCong);
-            } else {
-                existed = false;
-            }
-        }
-        return chamCongEntities;
-    }
-
-    @PostMapping("")
-    public ResponseEntity<ChamCongEntity> insert(@RequestBody ChamCongEntity chamCongEntity) {
-        chamCongEntity.setNhanVien(nhanVienController.getNhanVienById(chamCongEntity.getNhanVien().getNhanVienId()));
-        for (ChamCongEntity cc : chamCongService.GetChamCongByTime(chamCongEntity.getNgayChamCong())) {
-            if (cc.getNhanVien().equals(chamCongEntity.getNhanVien())) {
-                return new ResponseEntity<>(HttpStatus.CONFLICT);
-            }
-        }
-        chamCongEntity.setTrangThaiChamCong(trangThaiChamCongController.getTrangThaiChamCongById(chamCongEntity.getTrangThaiChamCong().getTrangThaiChamCongId()));
-        chamCongEntity.setStatus(1);
-        Long id = chamCongService.Insert(chamCongEntity).getChamCongId();
-        Optional<ChamCongEntity> e = chamCongService.FindById(id);
-        return e.map(chamCongEntity1 -> new ResponseEntity<>(chamCongEntity1, HttpStatus.OK)).orElseGet(() -> new ResponseEntity<>(HttpStatus.NOT_ACCEPTABLE));
+@RequestMapping (value = "/api/chamcong")
+public class ChamCongController
+{
+	 @Autowired
+	 private ChamCongService chamCongService;
+	 @Autowired
+	 private NhanVienController nhanVienController;
+	 @Autowired
+	 private TrangThaiChamCongController trangThaiChamCongController;
+	 
+	 @CrossOrigin ("http://localhost:3000")
+	 @GetMapping ("")
+	 public List<ChamCongEntity> getAll ()
+	 {
+		  return chamCongService.GetAllActive ();
+	 }
+	 
+	 @GetMapping ("/{id}")
+	 public ResponseEntity<ChamCongEntity> getById (@PathVariable Long id)
+	 {
+		  Optional<ChamCongEntity> e = chamCongService.FindById (id);
+		  return e.map (chamCongEntity -> new ResponseEntity<> (chamCongEntity, HttpStatus.OK)).orElseGet (() -> new ResponseEntity<> (HttpStatus.NOT_FOUND));
+	 }
+	 
+	 public ChamCongEntity getChamCongById (Long id)
+	 {
+		  Optional<ChamCongEntity> cc = chamCongService.FindById (id);
+		  return cc.get ();
+	 }
+	 
+	 @PostMapping ("/capphat")
+	 public List<ChamCongEntity> capPhat ()
+	 {
+		  ChamCongEntity chamCong;
+		  TrangThaiChamCongEntity tt = trangThaiChamCongController.getTrangThaiChamCongById (1L);
+		  LocalDate now = LocalDate.now ();
+		  boolean existed = false;
+		  List<ChamCongEntity> chamCongEntities = new ArrayList<> ();
+		  for (NhanVienEntity nv : nhanVienController.getAll ())
+		  {
+				for (ChamCongEntity cc : chamCongService.GetChamCongByTime (now))
+				{
+					 if (cc.getNhanVien ().equals (nv))
+					 {
+						  existed = true;
+						  break;
+					 }
+				}
+				System.out.println ("======================");
+				if (! existed)
+				{
+					 chamCong = new ChamCongEntity ();
+					 chamCong.setNgayChamCong (now);
+					 chamCong.setStatus (1);
+					 chamCong.setNhanVien (nv);
+					 chamCong.setTrangThaiChamCong (tt);
+					 chamCongService.Insert (chamCong);
+					 chamCongEntities.add (chamCong);
+					 System.out.println (chamCong);
+				}
+				else
+				{
+					 existed = false;
+				}
+		  }
+		  return chamCongEntities;
+	 }
+	 
+	 @PostMapping ("")
+	 public ResponseEntity<ChamCongEntity> insert (@RequestBody ChamCongEntity chamCongEntity)
+	 {
+		  chamCongEntity.setNhanVien (nhanVienController.getNhanVienById (chamCongEntity.getNhanVien ().getNhanVienId ()));
+		  for (ChamCongEntity cc : chamCongService.GetChamCongByTime (chamCongEntity.getNgayChamCong ()))
+		  {
+				if (cc.getNhanVien ().equals (chamCongEntity.getNhanVien ()))
+				{
+					 return new ResponseEntity<> (HttpStatus.CONFLICT);
+				}
+		  }
+		  chamCongEntity.setTrangThaiChamCong (trangThaiChamCongController.getTrangThaiChamCongById (chamCongEntity.getTrangThaiChamCong ().getTrangThaiChamCongId ()));
+		  chamCongEntity.setStatus (1);
+		  Long id = chamCongService.Insert (chamCongEntity).getChamCongId ();
+		  Optional<ChamCongEntity> e = chamCongService.FindById (id);
+		  return e.map (chamCongEntity1 -> new ResponseEntity<> (chamCongEntity1, HttpStatus.OK)).orElseGet (() -> new ResponseEntity<> (HttpStatus.NOT_ACCEPTABLE));
 //        return new ResponseEntity<>(chamCongEntity, HttpStatus.OK);
-    }
-
-    //
-    @PutMapping("/{id}")
-    public ResponseEntity<ChamCongEntity> update(@PathVariable Long id, @RequestBody ChamCongEntity chamCongEntity) {
-        Optional<ChamCongEntity> e = chamCongService.FindById(id);
-        if (e.isPresent()) {
-            chamCongEntity.setChamCongId(id);
-            chamCongEntity.setNhanVien(nhanVienController.getNhanVienById(chamCongEntity.getNhanVien().getNhanVienId()));
-            chamCongEntity.setTrangThaiChamCong(trangThaiChamCongController.getTrangThaiChamCongById(chamCongEntity.getTrangThaiChamCong().getTrangThaiChamCongId()));
-            chamCongEntity.setStatus(1);
-            return new ResponseEntity<>(chamCongService.Update(chamCongEntity), HttpStatus.OK);
-        }
-        return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-    }
-
-    @PutMapping("/remove/{id}")
-    public ResponseEntity<ChamCongEntity> remove(@PathVariable Long id, @RequestBody ChamCongEntity chamCongEntity) {
-        Optional<ChamCongEntity> e = chamCongService.FindById(id);
-        if (e.isPresent()) {
-            chamCongEntity.setChamCongId(id);
-            chamCongEntity.setStatus(0);
-            return new ResponseEntity<>(chamCongService.Update(chamCongEntity), HttpStatus.OK);
-        }
-        return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-    }
-
-    @DeleteMapping("/{id}")
-    public ResponseEntity<ChamCongEntity> delete(@PathVariable Long id) {
-        Optional<ChamCongEntity> e = chamCongService.FindById(id);
-        if (e.isPresent()) {
-            chamCongService.Delete(id);
-            return new ResponseEntity<>(HttpStatus.OK);
-        }
-        return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-    }
+	 }
+	 
+	 //
+	 @PutMapping ("/{id}")
+	 public ResponseEntity<ChamCongEntity> update (@PathVariable Long id, @RequestBody ChamCongEntity chamCongEntity)
+	 {
+		  Optional<ChamCongEntity> e = chamCongService.FindById (id);
+		  if (e.isPresent ())
+		  {
+				chamCongEntity.setChamCongId (id);
+				chamCongEntity.setNhanVien (nhanVienController.getNhanVienById (chamCongEntity.getNhanVien ().getNhanVienId ()));
+				chamCongEntity.setTrangThaiChamCong (trangThaiChamCongController.getTrangThaiChamCongById (chamCongEntity.getTrangThaiChamCong ().getTrangThaiChamCongId ()));
+				chamCongEntity.setStatus (1);
+				return new ResponseEntity<> (chamCongService.Update (chamCongEntity), HttpStatus.OK);
+		  }
+		  return new ResponseEntity<> (HttpStatus.NOT_FOUND);
+	 }
+	 
+	 @PutMapping ("/remove/{id}")
+	 public ResponseEntity<ChamCongEntity> remove (@PathVariable Long id, @RequestBody ChamCongEntity chamCongEntity)
+	 {
+		  Optional<ChamCongEntity> e = chamCongService.FindById (id);
+		  if (e.isPresent ())
+		  {
+				chamCongEntity.setChamCongId (id);
+				chamCongEntity.setStatus (0);
+				return new ResponseEntity<> (chamCongService.Update (chamCongEntity), HttpStatus.OK);
+		  }
+		  return new ResponseEntity<> (HttpStatus.NOT_FOUND);
+	 }
+	 
+	 @DeleteMapping ("/{id}")
+	 public ResponseEntity<ChamCongEntity> delete (@PathVariable Long id)
+	 {
+		  Optional<ChamCongEntity> e = chamCongService.FindById (id);
+		  if (e.isPresent ())
+		  {
+				chamCongService.Delete (id);
+				return new ResponseEntity<> (HttpStatus.OK);
+		  }
+		  return new ResponseEntity<> (HttpStatus.NOT_FOUND);
+	 }
 }
