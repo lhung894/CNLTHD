@@ -203,7 +203,7 @@ const CongviecTable = () =>
                       columns={columns}
                       pageSize={8}
                       rowsPerPageOptions={[100]}
-                      isRowSelectable={() => false}
+                      isRowSelectable={() => true}
                       sx={{
                           boxShadow: 2,
 
