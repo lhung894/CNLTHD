@@ -85,24 +85,61 @@ public class ChamCongController
 		  return chamCongEntities;
 	 }
 	 
-	 @PostMapping ("")
-	 public ResponseEntity<ChamCongEntity> insert (@RequestBody ChamCongEntity chamCongEntity)
-	 {
-		  chamCongEntity.setNhanVien (nhanVienController.getNhanVienById (chamCongEntity.getNhanVien ().getNhanVienId ()));
-		  for (ChamCongEntity cc : chamCongService.GetChamCongByTime (chamCongEntity.getNgayChamCong ()))
-		  {
-				if (cc.getNhanVien ().equals (chamCongEntity.getNhanVien ()))
-				{
-					 return new ResponseEntity<> (HttpStatus.CONFLICT);
-				}
-		  }
-		  chamCongEntity.setTrangThaiChamCong (trangThaiChamCongController.getTrangThaiChamCongById (chamCongEntity.getTrangThaiChamCong ().getTrangThaiChamCongId ()));
-		  chamCongEntity.setStatus (1);
-		  Long id = chamCongService.Insert (chamCongEntity).getChamCongId ();
-		  Optional<ChamCongEntity> e = chamCongService.FindById (id);
-		  return e.map (chamCongEntity1 -> new ResponseEntity<> (chamCongEntity1, HttpStatus.OK)).orElseGet (() -> new ResponseEntity<> (HttpStatus.NOT_ACCEPTABLE));
+//	 @PostMapping ("")
+//	 public ResponseEntity<ChamCongEntity> insert (@RequestBody ChamCongEntity chamCongEntity)
+//	 {
+//		  chamCongEntity.setNhanVien (nhanVienController.getNhanVienById (chamCongEntity.getNhanVien ().getNhanVienId ()));
+//		  for (ChamCongEntity cc : chamCongService.GetChamCongByTime (chamCongEntity.getNgayChamCong ()))
+//		  {
+//				if (cc.getNhanVien ().equals (chamCongEntity.getNhanVien ()))
+//				{
+//					 return new ResponseEntity<> (HttpStatus.CONFLICT);
+//				}
+//		  }
+//		  chamCongEntity.setTrangThaiChamCong (trangThaiChamCongController.getTrangThaiChamCongById (chamCongEntity.getTrangThaiChamCong ().getTrangThaiChamCongId ()));
+//		  chamCongEntity.setStatus (1);
+//		  Long id = chamCongService.Insert (chamCongEntity).getChamCongId ();
+//		  Optional<ChamCongEntity> e = chamCongService.FindById (id);
+//		  return e.map (chamCongEntity1 -> new ResponseEntity<> (chamCongEntity1, HttpStatus.OK)).orElseGet (() -> new ResponseEntity<> (HttpStatus.NOT_ACCEPTABLE));
+//	 }
+
+	public boolean insert (ChamCongEntity chamCongEntity, List<ChamCongEntity> chamCongsByTime) {
+//		chamCongEntity.setNhanVien (nhanVienController.getNhanVienById (chamCongEntity.getNhanVien ().getNhanVienId ()));
+		chamCongEntity.setStatus(1);
+		for (ChamCongEntity cc : chamCongsByTime)
+		{
+			if (cc.getNhanVien ().toString().equals (chamCongEntity.getNhanVien ().toString()) && cc.getStatus() == 0)
+			{
+				chamCongEntity.setChamCongId(cc.getChamCongId());
+				chamCongService.Update(chamCongEntity);
+				System.out.println("=== Update: " + chamCongEntity);
+				return true;
+			} else if (cc.getNhanVien ().toString().equals (chamCongEntity.getNhanVien ().toString()) && cc.getStatus() == 1){
+				System.out.println("=== Fail!");
+				return false;
+			}
+		}
+		System.out.println("=== Insert: " + chamCongEntity);
+		chamCongService.Insert (chamCongEntity);
+		System.out.println("=== Inserted: " + chamCongEntity);
+		return true;
+	}
+
+	@PostMapping ("")
+	public List<ChamCongEntity> insertMulti (@RequestBody List<ChamCongEntity> chamCongEntities)
+	{
+		List<ChamCongEntity> chamCongsSuccess = new ArrayList<> ();
+		List<ChamCongEntity> chamCongsByTime = chamCongService.GetChamCongByTime (chamCongEntities.get(1).getNgayChamCong ());
+		System.out.println("=== Nhan vien da cham cong " + chamCongEntities.get(1).getNgayChamCong () + ": " + chamCongsByTime);
+		for (ChamCongEntity cc : chamCongEntities) {
+			if (insert(cc, chamCongsByTime)) {
+				chamCongsSuccess.add(cc);
+			}
+		}
+		System.out.println("=== Success: " + chamCongsSuccess);
+		return chamCongsSuccess;
 //        return new ResponseEntity<>(chamCongEntity, HttpStatus.OK);
-	 }
+	}
 	 
 	 //
 	 @PutMapping ("/{id}")

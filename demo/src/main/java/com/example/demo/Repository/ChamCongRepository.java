@@ -18,8 +18,7 @@ public interface ChamCongRepository extends JpaRepository<ChamCongEntity, Long> 
             "AND FUNCTION('MONTH',cc.ngayChamCong) = ?2 AND FUNCTION('YEAR',cc.ngayChamCong) = ?3")
     List<ChamCongEntity> GetChamCongByNhanVien(Long id, int month, int year);
 
-    @Query(value = "SELECT cc FROM ChamCongEntity cc WHERE cc.status = 1 " +
-            "AND cc.ngayChamCong = ?1")
+    @Query(value = "SELECT cc FROM ChamCongEntity cc WHERE cc.ngayChamCong = ?1")
     List<ChamCongEntity> GetChamCongByTime(LocalDate time);
 
     @Transactional

@@ -89,6 +89,6 @@ public class ChamCongEntity
 					", nhanVien=" + nhanVien +
 					", trangThaiChamCong=" + trangThaiChamCong +
 					", status=" + status +
-					'}';
+					"}\n";
 	 }
 }
