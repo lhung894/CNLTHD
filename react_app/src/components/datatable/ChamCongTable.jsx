@@ -153,14 +153,21 @@ const ChamCongTable = () =>
 
     const themData = (dlMoi) =>
     {
-        // setRowData((previous) =>
-        // {
-        //     return [...previous,{
-        //         ...dlMoi,
-        //         id: dlMoi.congViecId,
-        //     }]
-        // });
-        // console.log("------------->",rows);
+        let rowData = dlMoi.map(items =>
+        {
+            return {
+                id: items.chamCongId,
+                chamCongId: items.chamCongId,
+                nhanVienId: items.nhanVien.nhanVienId,
+                hoNhanVien: items.nhanVien.hoNhanVien,
+                tenNhanVien: items.nhanVien.tenNhanVien,
+                ngayChamCong: items.ngayChamCong,
+                tenTrangThai: matchTenTrangThai(items.trangThaiChamCong.tenTrangThai),
+                ...items
+            }
+        });
+        setRows((preState) => [...preState, ...rowData])
+        console.log("------------->",rows);
     }
 
 
@@ -283,7 +290,7 @@ const ChamCongTable = () =>
             />
 
             {/*{console.log("ban đàu dã render", value)}*/}
-            <ChamCongNew flag={flag} resetFlag={resetFlag}/>
+            <ChamCongNew flag={flag} resetFlag={resetFlag} themData={themData}/>
 
         </div>
     );

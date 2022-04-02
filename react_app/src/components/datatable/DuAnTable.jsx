@@ -31,27 +31,27 @@ const CongviecTable = () =>
 
     const columns = [
         {
-            field: 'duAnId', headerName: 'Dự Án ID', flex: 1, headerAlign: 'center',
+            field: 'duAnId', headerName: 'Dự Án ID', minWidth: 150, headerAlign: 'center',
             align: 'center'
         },
         {
-            field: 'tenDuAn', headerName: 'Tên Dự Án', flex: 1, headerAlign: 'center',
+            field: 'tenDuAn', headerName: 'Tên Dự Án', minWidth: 150, flex: 1, headerAlign: 'center',
             align: 'center'
         },
         {
-            field: 'thuongDuAn', headerName: 'Thưởng Dự Án', flex: 1, headerAlign: 'center',
+            field: 'thuongDuAn', headerName: 'Thưởng Dự Án', minWidth: 150, flex: 1, headerAlign: 'center',
             align: 'center'
         },
         {
-            field: 'ngayBatDau', headerName: 'Ngày Bắt Đầu', flex: 1, headerAlign: 'center',
+            field: 'ngayBatDau', headerName: 'Ngày Bắt Đầu', minWidth: 150, flex: 1, headerAlign: 'center',
             align: 'center'
         },
         {
-            field: 'ngayKetThuc', headerName: 'Ngày Kết Thúc', flex: 1, headerAlign: 'center',
+            field: 'ngayKetThuc', headerName: 'Ngày Kết Thúc', minWidth: 150, flex: 1, headerAlign: 'center',
             align: 'center'
         },
         {
-            field: 'control', headerName: 'Chức năng', flex: 1, headerAlign: 'center',
+            field: 'control', headerName: 'Chức năng', minWidth: 250, headerAlign: 'center',
             align: 'center',
             renderCell: (params) =>
             {

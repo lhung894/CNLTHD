@@ -23,6 +23,7 @@ const ChamCongNew = (props) =>
         ngayChamCong: ''
     });
 
+
     useEffect(async () =>
     {
         const listTT = await axios('http://localhost:8080/api/trangthaichamcong');
@@ -62,6 +63,14 @@ const ChamCongNew = (props) =>
         setRes(temp);
     }
 
+    const addChamCong = (a) =>
+    {
+        axios.post("http://localhost:8080/api/chamcong", a).then(res =>
+        {
+            // a = Object.assign(res.data);
+            props.themData(res.data);
+        }).then({}).catch(err => alert(`Thêm thất bài r huhu1!! ${err}`))
+    }
 
     const thucthi = () =>
     {
@@ -74,19 +83,19 @@ const ChamCongNew = (props) =>
             {
                 a = res.map(nhanVien => ({
                     nhanVien,
-                    trangThaiChamCong: {trangThaiChamCongId: dlBD.trangThaiChamCongId},
+                    trangThaiChamCong: {trangThaiChamCongId: dlBD.trangThaiChamCongId,
+                    tenTrangThai:ttcc.filter(item=>item.trangThaiChamCongId===dlBD.trangThaiChamCongId)[0].tenTrangThai},
                     ngayChamCong: dlBD.ngayChamCong
                 }))
+                addChamCong(a);
             } else
             {
                 alert('Hãy chọn nhân viên chấm công!!😏😏')
             }
-
         } else
         {
             alert('Hãy chọn ngày chấm công 😭😭');
         }
-
         console.log("Kêt quả cúi cùng là ", a);
     }
 

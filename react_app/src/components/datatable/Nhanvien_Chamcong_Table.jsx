@@ -18,36 +18,28 @@ const Nhanvien_CongViec_Table = (props) =>
         {
             field: 'nhanVienId',
             headerName: 'Nhân Viên ID',
-            width: 120,
+            minWidth: 120,
             headerAlign: 'center',
             align: 'center'
         },
         {
-            field: 'hoNhanVien', headerName: 'Họ Nhân Viên', width: 150, headerAlign: 'center', rowAlign: 'center',
+            field: 'hoNhanVien', headerName: 'Họ Nhân Viên', minWidth: 150, flex: 1, headerAlign: 'center', rowAlign: 'center',
             align: 'center'
         },
         {
-            field: 'tenNhanVien', headerName: 'Tên Nhân Viên', width: 150, headerAlign: 'center',
+            field: 'tenNhanVien', headerName: 'Tên Nhân Viên', minWidth: 150, flex: 1, headerAlign: 'center',
             align: 'center'
         },
         {
-            field: 'ngayVaoLam', headerName: 'Ngày Vào Làm', width: 180, headerAlign: 'center',
+            field: 'tenPhongBan', headerName: 'Phòng Ban', minWidth: 180, flex: 1, headerAlign: 'center',
             align: 'center'
         },
         {
-            field: 'luongCanBan', headerName: 'Lương Căn Bản', width: 180, headerAlign: 'center',
+            field: 'tenChucVu', headerName: 'Chức Vụ ', minWidth: 180, flex: 1, headerAlign: 'center',
             align: 'center'
         },
         {
-            field: 'tenPhongBan', headerName: 'Phòng Ban', width: 180, headerAlign: 'center',
-            align: 'center'
-        },
-        {
-            field: 'tenChucVu', headerName: 'Chức Vụ ', width: 180, headerAlign: 'center',
-            align: 'center'
-        },
-        {
-            field: 'tenCongViec', headerName: 'Công Việc ', width: 180, headerAlign: 'center',
+            field: 'tenCongViec', headerName: 'Công Việc ', minWidth: 180, headerAlign: 'center',
             align: 'center'
         },
     ];
@@ -67,8 +59,6 @@ const Nhanvien_CongViec_Table = (props) =>
                 nhanVienId: items.nhanVienId,
                 hoNhanVien: items.hoNhanVien,
                 tenNhanVien: items.tenNhanVien,
-                ngayVaoLam: items.ngayVaoLam,
-                luongCanBan: items.luongCanBan,
                 tenPhongBan: items.phongBan.tenPhongBan,
                 tenChucVu: items.chucVu.tenChucVu,
                 tenCongViec: items.congViec.tenCongViec,

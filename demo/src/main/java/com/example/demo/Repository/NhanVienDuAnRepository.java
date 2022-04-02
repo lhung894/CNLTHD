@@ -24,7 +24,9 @@ public interface NhanVienDuAnRepository extends JpaRepository<NhanVienDuAnEntity
     @Query(value = "select u.nhanVien from NhanVienDuAnEntity u where u.duAn.duAnId=?1 and u.nhanVien.status=1")
     Optional<List<NhanVienEntity>> GetNVByDuAn(Long id);
 
-    @Query(value="select u from NhanVienEntity u where not exists (select x from NhanVienDuAnEntity x where x.duAn.duAnId=?1)")
+    @Query(value="select nv from NhanVienEntity nv " +
+           "where not exists " +
+           "(select nvda.nhanVien from NhanVienDuAnEntity nvda where nv = nvda.nhanVien and nvda.duAn.duAnId=?1)")
     Optional<List<NhanVienEntity>> GetNVNotExits(Long id);
 
     @Transactional
