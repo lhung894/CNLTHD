@@ -1,6 +1,7 @@
 package com.example.demo.Service;
 
 import com.example.demo.Entity.NhanVienDuAnEntity;
+import com.example.demo.Entity.NhanVienEntity;
 import com.example.demo.Repository.NhanVienDuAnRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -43,5 +44,13 @@ public class NhanVienDuAnService {
 
     public void RemoveNVDAByNhanVien(Long nhanVienId) {
         nhanVienDuAnRepository.RemoveNVDAByNhanVien(nhanVienId);
+    }
+
+    public Optional<List<NhanVienEntity>> GetNVByDuAn(Long duAnId){
+        return nhanVienDuAnRepository.GetNVByDuAn(duAnId);
+    };
+
+    public Optional<List<NhanVienEntity>> GetNVNotExits(Long id){
+        return nhanVienDuAnRepository.GetNVNotExits(id);
     }
 }

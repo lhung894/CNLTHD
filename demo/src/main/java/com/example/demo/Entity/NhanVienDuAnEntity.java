@@ -19,7 +19,7 @@ public class NhanVienDuAnEntity {
     private NhanVienEntity nhanVien;
 
     @Column(name = "Status", columnDefinition = "int default 1", nullable = false)
-    private Integer status;
+    private Integer status=1;
 
     public NhanVienDuAnEntity() {
     }
@@ -65,4 +65,6 @@ public class NhanVienDuAnEntity {
                 ", status=" + status +
                 '}';
     }
+
+
 }

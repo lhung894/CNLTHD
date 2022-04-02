@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 import java.util.Optional;
 
+
 @CrossOrigin ("http://localhost:3000")
 @RestController
 @RequestMapping (value = "/api/duan")
@@ -17,7 +18,7 @@ public class DuAnController
 {
 	 @Autowired
 	 private DuAnService duAnService;
-	 
+
 	 @CrossOrigin ("http://localhost:3000")
 	 @GetMapping ("")// Get danh sách
 	 public List<DuAnEntity> getAll ()
@@ -30,11 +31,6 @@ public class DuAnController
 	 {
 		  Optional<DuAnEntity> e = duAnService.FindById (id);
 		  return e.map (duAnEntity -> new ResponseEntity<> (duAnEntity, HttpStatus.OK)).orElseGet (() -> new ResponseEntity<> (HttpStatus.NOT_FOUND));
-	 }
-	 
-	 public DuAnEntity getPhongBanById (Long id){
-		  Optional<DuAnEntity> pb = duAnService.FindById (id);
-		  return pb.get ();
 	 }
 	 
 	 @PostMapping ("")// Thêm
@@ -59,14 +55,13 @@ public class DuAnController
 	 }
 	 
 	 @PutMapping ("/remove/{id}")// Cập nhật lại status của phần tử
-	 public ResponseEntity<DuAnEntity> remove (@PathVariable Long id, @RequestBody DuAnEntity duAnEntity)
+	 public ResponseEntity<DuAnEntity> remove (@PathVariable Long id)
 	 {
 		  Optional<DuAnEntity> e = duAnService.FindById (id);
 		  if (e.isPresent ())
 		  {
-				duAnEntity.setDuAnId (id);
-				duAnEntity.setStatus (0);
-				return new ResponseEntity<> (duAnService.Update (duAnEntity), HttpStatus.OK);
+			  	e.get().setStatus (0);
+				return new ResponseEntity<> (duAnService.Update (e.get()), HttpStatus.OK);
 		  }
 		  return new ResponseEntity<> (HttpStatus.NOT_FOUND);
 	 }
