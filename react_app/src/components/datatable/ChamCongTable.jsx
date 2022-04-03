@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState, useEffect, createContext} from 'react';
 import "./chamcongtable.scss"
 import {DataGrid, gridClasses} from '@mui/x-data-grid';
 import axios from 'axios';
@@ -7,27 +7,21 @@ import {Link} from 'react-router-dom'
 import CongViecNew from "../../pages/new/CongViecNew";
 import ChamCongNew from "../../pages/new/ChamCongNew";
 
+export const ChucNangContext = createContext(); // Object gồm Provider và Consumer
+
 const ChamCongTable = () =>
 {
-    // const [value, setValue] = useState({
-    //     flag: false,
-    //     dlCV: {
-    //         id: 0,
-    //         idCv: '',
-    //         tenCv: '',
-    //         hsCv: '',
-    //         statusCV: 1
-    //     }
-    // });
-    // const [chucNang, setChucNang] = useState(0);
-
-    const [flag, setFlag] = useState(false);
     const [rows, setRows] = useState([]);
-    console.log("ban đàu", flag, rows);
+    const [dk, setDk] = useState({
+        flag: false,
+        chucnang: 0,
+        dlCC: {}
+    })
+    console.log("ban đàu", dk.flag, dk.chucnang, dk.dlCC);
 
     const resetFlag = (value) =>
     {
-        setFlag(value);
+        setDk({...dk, flag: value});
     }
 
     const columns = [
@@ -64,12 +58,13 @@ const ChamCongTable = () =>
                     <div className="cellAction">
                         <Button className="update" onClick={() =>
                         {
-                            // return suaCongViec(params.row)
+                            return suaCongViec(params.row)
                         }}>Sửa</Button>
 
-                        <Button className="delete" onClick={() =>
+                        <Button className="delete" onClick={(e) =>
                         {
-                            // return xoaCongViec(params.row)
+                            e.stopPropagation();
+                            xoaChamCong(params.row)
                         }}>Xóa</Button>
                     </div>
                 );
@@ -147,8 +142,11 @@ const ChamCongTable = () =>
 /////Thêm Chấm Công
     const themChamCong = () =>
     {
-        setFlag(true);
-        console.log("Cờ sau đổi ", flag);
+        setDk({
+            ...dk,
+            flag: true,
+            chucnang: 1
+        })
     }
 
     const themData = (dlMoi) =>
@@ -167,82 +165,47 @@ const ChamCongTable = () =>
             }
         });
         setRows((preState) => [...preState, ...rowData])
-        console.log("------------->",rows);
+        console.log("------------->", rows);
     }
 
 
-/////Sửa Công Việc
-//     const suaCongViec = (cv) =>
-//     {
-//         console.log("dl lấy đc", cv);
-//         setChucNang(1);
-//         setValue({
-//             flag: true, ...cv
-//         });
-//     }
-//
-//     const resetData = (dlmoi) =>
-//     {
-//         let temp = rows.findIndex((obj => obj.congViecId === dlmoi.congViecId));
-//         console.log("Trước update!!: ", rows[temp]);
-//         rows[temp].tenCongViec = dlmoi.tenCongViec;
-//         rows[temp].heSoCongViec = dlmoi.heSoCongViec;
-//         console.log("SAu update: ", rows[temp])
-//         setRowData(rows);
-//     }
+///Sửa Chấm Công
+    const suaCongViec = (cc) =>
+    {
+        console.log("dl lấy đc", cc);
+        setDk({
+            flag: true,
+            chucnang: 2,
+            dlCC: cc
+        })
+    }
+
+    const resetData = (dlmoi) =>
+    {
+        let temp = rows.findIndex((obj => obj.chamCongId === dlmoi.chamCongId));
+        console.log("Trước update!!: ", rows[temp]);
+        rows[temp].tenTrangThai = matchTenTrangThai(dlmoi.trangThaiChamCong.tenTrangThai);
+        console.log("SAu update: ", rows[temp])
+        setRows(rows);
+    }
 
 
-///////////////Xóa Công Việc
-//     const xoaCongViec = (cv) =>
-//     {
-//         console.log("Lấy đc idCV là ", cv);
-//         ktraCV(cv);
-//     }
-//
-//     const ktraCV = async (cv) =>
-//     {
-//         const result = await axios.get(
-//             `http://localhost:8080/api/congviec/nvcongviec/${cv.congViecId}`);
-//         const rowData = result.data.map(items =>
-//         {
-//             return {
-//                 id: items.nhanVienId,
-//                 nhanVienId: items.nhanVienId,
-//                 hoNhanVien: items.hoNhanVien,
-//                 tenNhanVien: items.tenNhanVien,
-//                 ngayVaoLam: items.ngayVaoLam,
-//                 tenPhongBan: items.phongBan.tenPhongBan,
-//                 tenChucVu: items.chucVu.tenChucVu,
-//                 status: items.status
-//             }
-//         });
-//         // console.log(rowData.length);
-//         {
-//             rowData.length > 0 ? alert("Bạn không thể xóa công việc có nhân viên đang làm!!") : xoaCV(cv)
-//         }
-//     }
-//
-//     const xoaCV = (cv) =>
-//     {
-//         // event.preventDefault();
-//         // const newCv = {...cv, status: 0};
-//         axios.put(`http://localhost:8080/api/congviec/remove/${cv.congViecId}`, cv)
-//             .then(res => alert("Đã xóa công việc này!!"))
-//             .catch(err => alert(`Xóa thất bai!! ${err}`))
-//         const newRows = rows.filter((a) =>
-//         {
-//             if (a.congViecId === cv.congViecId)
-//             {
-//                 return false;
-//             }
-//             return true;
-//         });
-//         console.log("Dl mới là ", newRows);
-//         setRowData(newRows);
-//     }
+////Xóa Chấm Công
 
+    const xoaChamCong = (cc) =>
+    {
+        axios.put(`http://localhost:8080/api/chamcong/remove/${cc.chamCongId}`, cc)
+            .then(res =>
+                {
+                    alert("Đã xóa chấm công này!!")
+                }
+            )
+            .catch(err => alert(`Xóa thất bai!! ${err}`))
+        setRows(rows.filter((a) => a.chamCongId !== cc.chamCongId));
+    }
 
     return (
+
         <div className="datatable">
             <div className="addNew">
                 {/*<Link to="/congviec/new" style={{textDecoration: "none"}}>*/}
@@ -288,9 +251,10 @@ const ChamCongTable = () =>
                           }
                       }}
             />
-
-            {/*{console.log("ban đàu dã render", value)}*/}
-            <ChamCongNew flag={flag} resetFlag={resetFlag} themData={themData}/>
+            {console.log("Sau mỗi làn  thây đôi đk", dk)}
+            <ChucNangContext.Provider value={dk}>
+                <ChamCongNew resetFlag={resetFlag} themData={themData} resetData={resetData}/>
+            </ChucNangContext.Provider>
 
         </div>
     );

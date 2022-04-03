@@ -15,6 +15,8 @@
       <change beforePath="$PROJECT_DIR$/src/pages/list/ChamCongList.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/list/ChamCongList.jsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/pages/list/DuAnList.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/list/DuAnList.jsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/pages/list/congvieclist.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/list/congvieclist.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/login/Login.jsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/login/login.scss" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/pages/new/NhanVienNew.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/new/NhanVienNew.jsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/pages/new/nhanviennew.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/new/nhanviennew.scss" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/pages/single/NhanVienSingle.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/single/NhanVienSingle.jsx" afterDir="false" />
@@ -98,7 +100,8 @@
       <workItem from="1648734251578" duration="5023000" />
       <workItem from="1648780845607" duration="26294000" />
       <workItem from="1648825138274" duration="1016000" />
-      <workItem from="1648880906184" duration="6285000" />
+      <workItem from="1648880906184" duration="6769000" />
+      <workItem from="1648953469480" duration="26254000" />
     </task>
     <task id="LOCAL-00001" summary="thử">
       <created>1648569834848</created>
