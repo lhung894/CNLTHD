@@ -13,7 +13,8 @@ import ChamCongList from "./pages/list/ChamCongList";
 import LuongList from "./pages/list/LuongList";
 import NhanVienSingle from "./pages/single/NhanVienSingle";
 import NhanVienNew from "./pages/new/NhanVienNew";
-
+import PhongBanNew from "./pages/new/PhongBanNew";
+import PhongBanSingle from "./pages/single/PhongBanSingle";
 function App()
 {
     return (
@@ -34,8 +35,8 @@ function App()
 
                         <Route path="phongban">
                             <Route index element={<PhongBanList/>}/>
-                            <Route path=":phongbanID" element={<CongViecSingle/>}/>
-                            <Route path="new" element={<CongViecNew/>}/>
+                            <Route path=":phongbanID" element={<PhongBanSingle/>}/>
+                            <Route path="new" element={<PhongBanNew/>}/>
                         </Route>
 
                         <Route path="duan">
