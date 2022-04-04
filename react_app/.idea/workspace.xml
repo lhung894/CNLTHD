@@ -2,24 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="b6083fd2-eb01-452c-b4dc-3b2ee01992da" name="Changes" comment="thử">
-      <change afterPath="$PROJECT_DIR$/src/components/datatable/Nhanvien_Chamcong_Table.jsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/datatable/nhanvien_chamcong.scss" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/pages/new/chamcongnew.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/public/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/App.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/App.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/datatable/CongViecTable.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/datatable/CongViecTable.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/datatable/NhanVienTable.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/datatable/NhanVienTable.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/datatable/nhanvien_congviec.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/datatable/nhanvien_congviec.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/list/ChamCongList.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/list/ChamCongList.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/list/DuAnList.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/list/DuAnList.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/list/congvieclist.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/list/congvieclist.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/login/Login.jsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/login/login.scss" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/new/NhanVienNew.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/new/NhanVienNew.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/new/nhanviennew.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/new/nhanviennew.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/single/NhanVienSingle.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/single/NhanVienSingle.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../demo/src/main/java/com/example/demo/Controller/LuongController.java" beforeDir="false" afterPath="$PROJECT_DIR$/../demo/src/main/java/com/example/demo/Controller/LuongController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../demo/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/../demo/src/main/resources/application.properties" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -37,7 +21,7 @@
     </option>
   </component>
   <component name="Git.Settings">
-    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
   </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
@@ -102,6 +86,7 @@
       <workItem from="1648825138274" duration="1016000" />
       <workItem from="1648880906184" duration="6769000" />
       <workItem from="1648953469480" duration="26254000" />
+      <workItem from="1649049730923" duration="7724000" />
     </task>
     <task id="LOCAL-00001" summary="thử">
       <created>1648569834848</created>

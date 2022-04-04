@@ -3,8 +3,6 @@ import "./chamcongtable.scss"
 import {DataGrid, gridClasses} from '@mui/x-data-grid';
 import axios from 'axios';
 import Button from '@mui/material/Button';
-import {Link} from 'react-router-dom'
-import CongViecNew from "../../pages/new/CongViecNew";
 import ChamCongNew from "../../pages/new/ChamCongNew";
 
 export const ChucNangContext = createContext(); // Object gồm Provider và Consumer
@@ -26,31 +24,31 @@ const ChamCongTable = () =>
 
     const columns = [
         {
-            field: 'chamCongId', headerName: 'Chấm Công ID', width: 150, headerAlign: 'center',
+            field: 'chamCongId', headerName: 'Chấm Công ID', minWidth: 150, flex: 1, headerAlign: 'center',
             align: 'center'
         },
         {
-            field: 'nhanVienId', headerName: 'Nhân Viên ID', width: 150, headerAlign: 'center',
+            field: 'nhanVienId', headerName: 'Nhân Viên ID', minWidth: 150, flex: 1, headerAlign: 'center',
             align: 'center'
         },
         {
-            field: 'hoNhanVien', headerName: 'Họ Nhân Viên', width: 150, headerAlign: 'center',
+            field: 'hoNhanVien', headerName: 'Họ Nhân Viên', minWidth: 150, flex: 1, headerAlign: 'center',
             align: 'center'
         },
         {
-            field: 'tenNhanVien', headerName: 'Tên Nhân Viên', width: 200, headerAlign: 'center',
+            field: 'tenNhanVien', headerName: 'Tên Nhân Viên', minWidth: 200, flex: 1, headerAlign: 'center',
             align: 'center'
         },
         {
-            field: 'ngayChamCong', headerName: 'Ngày Chấm Công', width: 200, headerAlign: 'center',
+            field: 'ngayChamCong', headerName: 'Ngày Chấm Công', minWidth: 200, flex: 1, headerAlign: 'center',
             align: 'center'
         },
         {
-            field: 'tenTrangThai', headerName: 'Trạng Thái', width: 200, headerAlign: 'center',
+            field: 'tenTrangThai', headerName: 'Trạng Thái', minWidth: 200, flex: 1, headerAlign: 'center',
             align: 'center'
         },
         {
-            field: 'control', headerName: 'Chức năng', width: 250, headerAlign: 'center',
+            field: 'control', headerName: 'Chức năng', minWidth: 200, flex: 1, headerAlign: 'center',
             align: 'center',
             renderCell: (params) =>
             {
@@ -95,10 +93,10 @@ const ChamCongTable = () =>
         setRows(rowData);
     }, []);
 
-    const matchTenTrangThai = (id) =>
+    const matchTenTrangThai = (tentt) =>
     {
         // let tentt;
-        switch (id)
+        switch (tentt)
         {
             case '1':
                 return "Đi làm";

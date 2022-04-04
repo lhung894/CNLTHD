@@ -9,10 +9,13 @@ import com.example.demo.Service.LuongService;
 import com.example.demo.Service.NhanVienDuAnService;
 import com.example.demo.Service.NhanVienService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
 import java.time.Year;
+import java.util.ArrayList;
 import java.util.List;
 
 @CrossOrigin ("http://localhost:3000")
@@ -35,12 +38,13 @@ public class LuongController {
     }
 
     @PostMapping("/tinhluong")
-    public void calculatorLuong() {
+    public ResponseEntity<?> calculatorLuong() {
+        List<LuongEntity> luongCal = new ArrayList<>();
         // check list NV
         List<NhanVienEntity> nvLuong = nhanVienService.GetAllActive();
         if (nvLuong.size()==0 || nvLuong.isEmpty()) {
             System.out.println("Không thể tính lương! Danh sách nhân viên rỗng.");
-            return;
+            return new ResponseEntity<String>("Fail", HttpStatus.OK);
         }
         // TÍNH LƯƠNG CỦA THÁNG TRƯỚC NẾU NGÀY HÔM NAY LÀ NGÀY ĐẦU TIÊN CỦA THÁNG MỚI
         LocalDate now = LocalDate.now();
@@ -57,7 +61,7 @@ public class LuongController {
         // Nếu tháng trước đã tính thì không tính nữa
         if (luongService.GetLuongByTime(ngayTinhLuong.getMonthValue(), ngayTinhLuong.getYear()).size() > 0){
             System.out.println("Đã tính lương tháng trước!");
-            return;
+            return new ResponseEntity<String>("Conflict", HttpStatus.OK);
         }
 
         LuongEntity luong;
@@ -106,13 +110,17 @@ public class LuongController {
             // lương ngày theo hệ số công việc/ chức vụ
             luongNgay = (luong.getLuongCanBan() / 26) * (1 + luong.getHeSoChucVu() + luong.getHeSoCongViec());
             // lương thực lãnh
+            // tổng số ngày làm/nghỉ CP/nghỉ KP
+            int totalDays = luong.getSoNgayLam() + luong.getSoNgayNghiCP() + luong.getSoNgayNghiKP();
             // lương theo ngày làm = (lương ngày * 26 ngày) - (lương ngày * số ngày nghỉ CP * hệ số CP) - (lương ngày * số ngày nghỉ KP * hệ số KP)
-            luongThucLanh = (luongNgay * 26) - (luongNgay * luong.getSoNgayNghiCP() * 1.0) - (luongNgay * luong.getSoNgayNghiKP() * 1.5);
+            luongThucLanh = (luongNgay * totalDays) - (luongNgay * luong.getSoNgayNghiCP() * 1.0) - (luongNgay * luong.getSoNgayNghiKP() * 1.5);
             // cộng tiền thưởng dự án kết thúc trong tháng đó
             luongThucLanh += luong.getThuongDuAn();
             luong.setLuongThucLanh((long) luongThucLanh);
             luongService.Insert(luong);
             System.out.println(luong);
+            luongCal.add(luong);
         }
+        return new ResponseEntity<>(luongCal, HttpStatus.OK);
     }
 }
