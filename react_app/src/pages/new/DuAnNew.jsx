@@ -1,5 +1,6 @@
 import React, {useState, useEffect} from 'react';
 import "./duannew.scss"
+import "./nhanviennew.scss"
 import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
 import Dialog from '@mui/material/Dialog';
@@ -62,10 +63,10 @@ const CongViecNew = (props) => {
         } else {
             alert("Them nè");
             const dlmoi = {
-                tenDuAn: dlBD.tenCongViec,
-                thuongDuAn: parseFloat(dlBD.heSoCongViec),
-                ngayBatDau:"2000-03-03",
-                ngayKetThuc:"2000-03-03",
+                tenDuAn: dlBD.tenDuAn,
+                thuongDuAn: parseFloat(dlBD.thuongDuAn),
+                ngayBatDau:dlBD.ngayBatDau,
+                ngayKetThuc:dlBD.ngayKetThuc,
                 status: 1
             }
             console.log("Dl vừa thêm", dlmoi);
@@ -86,6 +87,7 @@ const CongViecNew = (props) => {
     const addCV = (cv) => {
         axios.post("http://localhost:8080/api/duan", cv).then(res => {
             // a = Object.assign(res.data);
+
             props.themData(res.data);
         }).then({}).catch(err => alert(`Thêm thất bài r huhu1!! ${err}`))
     }
@@ -115,7 +117,7 @@ const CongViecNew = (props) => {
                         />
                     </div>
 
-                    <div className="div3">
+                    <div className="div3da">
                         <TextField id="outlined-basi2c" label="Thưởng Dự Án" variant="outlined"
                                    InputProps={{
                                        startAdornment: (
@@ -130,19 +132,17 @@ const CongViecNew = (props) => {
                         />
                     </div>
 
-                    <div >
-                    <p style={{marginTop: '-15px'}}
-                                       className="ngaysinha"> Ngày Bắt Đầu</p>
-                                    <input className="ngaySinh"
+                    <div className="div3da">
+                    <p style={{marginTop: '-18px'}}> Ngày Bắt Đầu</p>
+                                    <input className="ngaySinhda"
                                            type="date"
                                            onChange={handleInputChange}
                                            value={dlBD.ngayBatDau} name='ngayBatDau'/>
 
                     </div>
-                    <div>
-                    <p style={{marginTop: '-15px'}}
-                                       className="ngaysinha"> Ngày Kết Thúc</p>
-                                    <input className="ngaySinh"
+                    <div className="div3da">
+                    <p style={{marginTop: '-18px'}}> Ngày Kết Thúc</p>
+                                    <input className="ngaySinhda"
                                            type="date"
                                            onChange={handleInputChange}
                                            value={dlBD.ngayKetThuc} name='ngayKetThuc'/>
