@@ -19,7 +19,7 @@ public class DuAnController
 	 @Autowired
 	 private DuAnService duAnService;
 
-	 @CrossOrigin ("http://localhost:3000")
+	@CrossOrigin(origins = "http://localhost:3000")
 	 @GetMapping ("")// Get danh sách
 	 public List<DuAnEntity> getAll ()
 	 {
@@ -49,11 +49,13 @@ public class DuAnController
 		  if (e.isPresent ())
 		  {
 				duAnEntity.setDuAnId (id);
+			  System.out.println("data:"+duAnEntity);
 				return new ResponseEntity<> (duAnService.Update (duAnEntity), HttpStatus.OK);
 		  }
 		  return new ResponseEntity<> (HttpStatus.NOT_FOUND);
 	 }
-	 
+
+	 @CrossOrigin ("http://localhost:3000")
 	 @PutMapping ("/remove/{id}")// Cập nhật lại status của phần tử
 	 public ResponseEntity<DuAnEntity> remove (@PathVariable Long id)
 	 {

@@ -26,7 +26,7 @@ public class DuAnEntity {
     private LocalDate ngayKetThuc;
 
     @Column(name = "Status", columnDefinition = "int default 1", nullable = false)
-    private Integer status;
+    private Integer status=1;
 
     public DuAnEntity() {
     }

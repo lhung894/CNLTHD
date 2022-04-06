@@ -53,4 +53,8 @@ public class NhanVienDuAnService {
     public Optional<List<NhanVienEntity>> GetNVNotExits(Long id){
         return nhanVienDuAnRepository.GetNVNotExits(id);
     }
+
+    public Optional<NhanVienDuAnEntity> CheckNVDA(Long id,Long nvid){
+        return nhanVienDuAnRepository.CheckNVDA(id,nvid);
+    }
 }

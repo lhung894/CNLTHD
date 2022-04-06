@@ -4,7 +4,7 @@ import {DataGrid, gridClasses} from '@mui/x-data-grid';
 import axios from 'axios';
 import Button from '@mui/material/Button';
 import {Link} from 'react-router-dom'
-import CongViecNew from "../../pages/new/CongViecNew";
+import DuAnNew from "../../pages/new/DuAnNew";
 
 const CongviecTable = () =>
 {
@@ -13,10 +13,11 @@ const CongviecTable = () =>
         flag: false,
         dlCV: {
             id: 0,
-            idCv: '',
-            tenCv: '',
-            hsCv: '',
-            statusCV: 1
+            tenDuAn: '',
+            thuongDuAn: '',
+            ngayBatDau: '',
+            ngayKetThuc:'',
+            status: 1
         }
     });
     const [rows, setRowData] = useState([]);
@@ -77,12 +78,12 @@ const CongviecTable = () =>
 
                         <Button className="update" onClick={() =>
                         {
-                            return suaCongViec(params.row)
+                            return suaDuAn(params.row)
                         }}>Sửa</Button>
 
                         <Button className="delete" onClick={() =>
                         {
-                            return xoaCongViec(params.row)
+                            return xoaDuAn(params.row)
                         }}>Xóa</Button>
                     </div>
                 );
@@ -108,7 +109,7 @@ const CongviecTable = () =>
     }, []);
 
 ///////Thêm Công Việc
-    const themCongViec = () =>
+    const themDuAn = () =>
     {
         setChucNang(2);
         setValue({...value, flag: true});
@@ -121,7 +122,7 @@ const CongviecTable = () =>
         {
           return [...previous,{
               ...dlMoi,
-              id: dlMoi.congViecId,
+              id: dlMoi.duAnId,
           }]
         });
         console.log("------------->",rows);
@@ -129,7 +130,7 @@ const CongviecTable = () =>
 
 
 /////Sửa Công Việc
-    const suaCongViec = (cv) =>
+    const suaDuAn = (cv) =>
     {
         console.log("dl lấy đc", cv);
         setChucNang(1);
@@ -140,55 +141,47 @@ const CongviecTable = () =>
 
     const resetData = (dlmoi) =>
     {
-        let temp = rows.findIndex((obj => obj.congViecId === dlmoi.congViecId));
+        let temp = rows.findIndex((obj => obj.duAnId === dlmoi.duAnId));
         console.log("Trước update!!: ", rows[temp]);
-        rows[temp].tenCongViec = dlmoi.tenCongViec;
-        rows[temp].heSoCongViec = dlmoi.heSoCongViec;
+        rows[temp].tenDuAn = dlmoi.tenDuAn;
+        rows[temp].ngayBatDau = dlmoi.ngayBatDau;
+        rows[temp].ngayKetThuc = dlmoi.ngayKetThuc;
+        rows[temp].thuongDuAn = dlmoi.thuongDuAn;
         console.log("SAu update: ", rows[temp])
         setRowData(rows);
     }
 
 
 ///////////////Xóa Công Việc
-    const xoaCongViec = (cv) =>
+    const xoaDuAn = (cv) =>
     {
         console.log("Lấy đc idCV là ", cv);
-        ktraCV(cv);
+        ktraDA(cv);
     }
 
-    const ktraCV = async (cv) =>
+    const ktraDA = async (cv) =>
     {
         const result = await axios.get(
-            `http://localhost:8080/api/congviec/nvcongviec/${cv.congViecId}`);
-        const rowData = result.data.map(items =>
-        {
-            return {
-                id: items.nhanVienId,
-                nhanVienId: items.nhanVienId,
-                hoNhanVien: items.hoNhanVien,
-                tenNhanVien: items.tenNhanVien,
-                ngayVaoLam: items.ngayVaoLam,
-                tenPhongBan: items.phongBan.tenPhongBan,
-                tenChucVu: items.chucVu.tenChucVu,
-                status: items.status
-            }
-        });
-        // console.log(rowData.length);
-        {
-            rowData.length > 0 ? alert("Bạn không thể xóa công việc có nhân viên đang làm!!") : xoaCV(cv)
+            `http://localhost:8080/api/nhanvienduan/${cv.duAnId}`);
+        if(result.data.length > 0){
+            console.log(result.data);
+            alert("Bạn không thể xóa dự án có nhân viên đang làm!!");
+        }else{
+            xoaDA(cv);
         }
+        
     }
 
-    const xoaCV = (cv) =>
+    const xoaDA = (cv) =>
     {
         // event.preventDefault();
         // const newCv = {...cv, status: 0};
-        axios.put(`http://localhost:8080/api/congviec/remove/${cv.congViecId}`, cv)
+        axios.put(`http://localhost:8080/api/duan/remove/${cv.duAnId}`)
             .then(res => alert("Đã xóa công việc này!!"))
             .catch(err => alert(`Xóa thất bai!! ${err}`))
         const newRows = rows.filter((a) =>
         {
-            if (a.congViecId === cv.congViecId)
+            if (a.duAnId === cv.duAnId)
             {
                 return false;
             }
@@ -205,7 +198,7 @@ const CongviecTable = () =>
             <div className="addNew">
                 <Link to="/duan/new" style={{textDecoration: "none"}}>
                 </Link>
-                <Button className="link" onClick={themCongViec}>Thêm</Button>
+                <Button className="link" onClick={themDuAn}>Thêm</Button>
             </div>
 
             <DataGrid className="chinhmau"
@@ -247,7 +240,7 @@ const CongviecTable = () =>
             />
 
             {/*{console.log("ban đàu dã render", value)}*/}
-            <CongViecNew giatri={value} resetFlag={resetFlag} resetData={resetData} chucNang={chucNang}
+            <DuAnNew giatri={value} resetFlag={resetFlag} resetData={resetData} chucNang={chucNang}
                          themData={themData}/>
 
         </div>
