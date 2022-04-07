@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from 'react';
-import "./congviecnew.scss"
+import "./chucvunew.scss"
 import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
 import Dialog from '@mui/material/Dialog';
@@ -11,11 +11,11 @@ import {InputAdornment} from "@material-ui/core";
 import ArrowRightIcon from '@mui/icons-material/ArrowRight';
 import axios from "axios";
 
-const CongViecNew = (props) => {
+const ChucVuNew = (props) => {
     console.log("Dl của props", props.giatri, props.chucNang);
     let open = props.giatri.flag;
     let tenForm;
-    props.chucNang === 1 ? tenForm = "Cập Nhật Công Việc" : tenForm = "Thêm Công Việc";
+    props.chucNang === 1 ? tenForm = "Cập Nhật Chức Vụ" : tenForm = "Thêm Chức Vụ";
 
     const [dlBD, setDlBd] = useState(props.giatri);
     // if (props.giatri === 1)
@@ -48,9 +48,9 @@ const CongViecNew = (props) => {
         event.preventDefault();
         if (props.chucNang === 1) {
             const dlmoi = {
-                congViecId: dlBD.congViecId,
-                tenCongViec: dlBD.tenCongViec,
-                heSoCongViec: dlBD.heSoCongViec,
+                chucVuId: dlBD.chucVuId,
+                tenChucVu: dlBD.tenChucVu,
+                heSoChucVu: dlBD.heSoChucVu,
                 status: dlBD.status
             }
             console.log("Dl sau câp nhật", dlmoi);
@@ -60,8 +60,8 @@ const CongViecNew = (props) => {
         } else {
             alert("Them nè");
             const dlmoi = {
-                tenCongViec: dlBD.tenCongViec,
-                heSoCongViec: parseFloat(dlBD.heSoCongViec),
+                tenChucVu: dlBD.tenChucVu,
+                heSoChucVu: parseFloat(dlBD.heSoChucVu),
                 status: 1
             }
             console.log("Dl vừa thêm", dlmoi);
@@ -73,16 +73,16 @@ const CongViecNew = (props) => {
     const updateCV = (cv) => {
         // event.preventDefault();
         // const newCv = {...cv, status: 0};
-        axios.put(`http://localhost:8080/api/congviec/${cv.congViecId}`, cv)
+        axios.put(`http://localhost:8080/api/chucvu/${cv.chucVuId}`, cv)
             .then(res => alert("Đã cập nhật công việc này!!"))
             .catch(err => alert(`Cập nhật  thất bai!! ${err}`))
     }
 
     const addCV = (cv) => {
-        axios.post("http://localhost:8080/api/congviec", cv).then(res => {
+        axios.post("http://localhost:8080/api/chucvu", cv).then(res => {
             // a = Object.assign(res.data);
             props.themData(res.data);
-        }).then({}).catch(err => alert(`Thêm thất bài r huhu1!! ${err}`))
+        }).then({}).catch(err => alert(`Thêm thất bại! ${err}`))
     }
 
     return (
@@ -96,7 +96,7 @@ const CongViecNew = (props) => {
                     <div className="div1" hidden={props.chucNang === 1 ? false : true}>
                         <TextField
                             id="outlined-read-only-input"
-                            label="ID Công Việc"
+                            label="ID Chức Vụ"
                             InputProps={{
                                 readOnly: true,
                                 startAdornment: (
@@ -105,14 +105,14 @@ const CongViecNew = (props) => {
                                     </InputAdornment>
                                 ),
                             }}
-                            value={dlBD.congViecId}
-                            name="congViecId"
+                            value={dlBD.chucVuId}
+                            name="chucVuId"
                             onChange={handleInputChange}
                         />
                     </div>
 
                     <div className="div2" style={props.chucNang === 1 ? {} : {marginTop: 20}}>
-                        <TextField id="outlined-basi112c" label="Tên Công Việc" variant="outlined"
+                        <TextField id="outlined-basi112c" label="Tên Chức Vụ" variant="outlined"
                                    InputProps={{
                                        startAdornment: (
                                            <InputAdornment position="start">
@@ -120,14 +120,14 @@ const CongViecNew = (props) => {
                                            </InputAdornment>
                                        ),
                                    }}
-                                   value={dlBD.tenCongViec}
-                                   name="tenCongViec"
+                                   value={dlBD.tenChucVu}
+                                   name="tenChucVu"
                                    onChange={handleInputChange}
                         />
                     </div>
 
                     <div className="div3">
-                        <TextField id="outlined-basi2c" label="Hệ Số Công Việc" variant="outlined"
+                        <TextField id="outlined-basi2c" label="Hệ Số Chức Vụ" variant="outlined"
                                    InputProps={{
                                        startAdornment: (
                                            <InputAdornment position="start">
@@ -135,9 +135,9 @@ const CongViecNew = (props) => {
                                            </InputAdornment>
                                        ),
                                    }}
-                                   name="heSoCongViec"
-                                   value={dlBD.heSoCongViec}
-                                //    name="heSoCongViec"
+                                   name="heSoChucVu"
+                                   value={dlBD.heSoChucVu}
+                                //    name="heSoChucVu"
                                    onChange={handleInputChange}
                         />
                     </div>
@@ -157,4 +157,4 @@ const CongViecNew = (props) => {
 
 };
 
-export default CongViecNew;
+export default ChucVuNew;

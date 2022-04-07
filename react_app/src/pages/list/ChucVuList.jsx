@@ -1,21 +1,20 @@
 import React from 'react';
 import "./congvieclist.scss";
 import Sidebar from "../../components/sidebar/Sidebar";
-// import Navbar from "../../components/navbar/Navbar";
-// import CongviecDataTable from "../../components/datatable/CongViecTable";
+import Navbar from "../../components/navbar/Navbar";
+import ChucVuTable from "../../components/datatable/ChucVuTable";
 
 const ChucVuList = () =>
 {
     return (
         <div className="list">
             <Sidebar/>
-            ChucVuLissst
-            {/*<div className="listContainer">*/}
-            {/*    <Navbar/>*/}
+            <div className="listContainer">
+                <Navbar/>
 
-            {/*    <CongviecDataTable/>*/}
+                <ChucVuTable/>
 
-            {/*</div>*/}
+            </div>
         </div>
     );
 };

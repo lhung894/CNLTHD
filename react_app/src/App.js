@@ -9,6 +9,8 @@ import DuAnList from "./pages/list/DuAnList";
 import DuAnSingle from "./pages/single/DuAnSingle";
 import DuAnNew from "./pages/new/DuAnNew";
 import ChucVuList from "./pages/list/ChucVuList";
+import ChucVuSingle from "./pages/single/ChucVuSingle";
+import ChucVuNew from "./pages/new/ChucVuNew";
 import ChamCongList from "./pages/list/ChamCongList";
 import LuongList from "./pages/list/LuongList";
 import NhanVienSingle from "./pages/single/NhanVienSingle";
@@ -52,8 +54,8 @@ function App()
 
                         <Route path="chucvu">
                             <Route index element={<ChucVuList/>}/>
-                            <Route path=":chucvuID" element={<CongViecSingle/>}/>
-                            <Route path="new" element={<CongViecNew/>}/>
+                            <Route path=":chucvuID" element={<ChucVuSingle/>}/>
+                            <Route path="new" element={<ChucVuNew/>}/>
                         </Route>
 
                         <Route path="chamcong">
