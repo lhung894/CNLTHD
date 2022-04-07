@@ -29,9 +29,30 @@
         margin-bottom: 20px;
       }
   
-      .div3 {
-        //margin-top: 20px;
-        margin-bottom: 20px;
+      .div3da {
+        margin-top: 20px;
+        margin-bottom: 30px;
+        .ngaysinhada {
+          //color: rgba(73, 89, 101, 0.76);
+          font-size: 14px;
+          margin-left: 14px;
+          margin-top: -10px;
+          margin-bottom: -25px;
+          font-weight: normal;
+          //border-bottom: 1px solid gray;
+          //width: fit-content;
+        }
+
+        .ngaySinhda {
+          color: #335371;
+          font-weight: 500;
+          height: 50px;
+          font-size: 17px;
+          text-align: center;
+          border-radius: 5px;
+          border: 1px solid silver;
+          width: 242px;
+        }
       }
     }
   

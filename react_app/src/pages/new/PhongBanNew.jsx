@@ -1,22 +1,21 @@
 import React, {useState, useEffect} from 'react';
-import "./duannew.scss"
-import "./nhanviennew.scss"
+import "./congviecnew.scss"
 import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
 import Dialog from '@mui/material/Dialog';
 import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
-// import DialogContentText from '@mui/material/DialogContentText';
+import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
 import {InputAdornment} from "@material-ui/core";
 import ArrowRightIcon from '@mui/icons-material/ArrowRight';
 import axios from "axios";
 
-const CongViecNew = (props) => {
+const PhongBanNew = (props) => {
     console.log("Dl của props", props.giatri, props.chucNang);
     let open = props.giatri.flag;
     let tenForm;
-    props.chucNang === 1 ? tenForm = "Cập Nhật Dự Án" : tenForm = "Thêm Dự Án";
+    props.chucNang === 1 ? tenForm = "Cập Nhật Phòng Ban" : tenForm = "Thêm Phòng Ban";
 
     const [dlBD, setDlBd] = useState(props.giatri);
     // if (props.giatri === 1)
@@ -42,19 +41,17 @@ const CongViecNew = (props) => {
             {
                 ...dlBD, [name]: value,
             });
-        
+
     };
 
     const thucthi = (event) => {
         event.preventDefault();
         if (props.chucNang === 1) {
             const dlmoi = {
-                duAnId: props.giatri.duAnId,
-                tenDuAn: dlBD.tenDuAn,
-                ngayBatDau:dlBD.ngayBatDau,
-                ngayKetThuc:dlBD.ngayKetThuc,
-                thuongDuAn: dlBD.thuongDuAn,
-                
+                phongBanId: dlBD.phongBanId,
+                tenPhongBan: dlBD.tenPhongBan,
+                sdtPhongBan: dlBD.sdtPhongBan,
+                status: dlBD.status
             }
             console.log("Dl sau câp nhật", dlmoi);
             updateCV(dlmoi);
@@ -63,10 +60,8 @@ const CongViecNew = (props) => {
         } else {
             alert("Them nè");
             const dlmoi = {
-                tenDuAn: dlBD.tenDuAn,
-                thuongDuAn: parseFloat(dlBD.thuongDuAn),
-                ngayBatDau:dlBD.ngayBatDau,
-                ngayKetThuc:dlBD.ngayKetThuc,
+                tenPhongBan: dlBD.tenPhongBan,
+                sdtPhongBan: parseFloat(dlBD.sdtPhongBan),
                 status: 1
             }
             console.log("Dl vừa thêm", dlmoi);
@@ -75,21 +70,19 @@ const CongViecNew = (props) => {
         }
     }
 
-    function updateCV(cv) {
+    const updateCV = (cv) => {
         // event.preventDefault();
         // const newCv = {...cv, status: 0};
-        console.log(cv);
-        axios.put(`http://localhost:8080/api/duan/${cv.duAnId}`, cv)
-            .then(res => alert("Đã cập nhật công việc này!!"))
-            .catch(err => alert(`Cập nhật  thất bai!! ${err}`));
+        axios.put(`http://localhost:8080/api/phongban/${cv.phongBanId}`, cv)
+            .then(res => alert("Đã cập nhật phòng ban này!!"))
+            .catch(err => alert(`Cập nhật  thất bai!! ${err}`))
     }
 
     const addCV = (cv) => {
-        axios.post("http://localhost:8080/api/duan", cv).then(res => {
+        axios.post("http://localhost:8080/api/phongban", cv).then(res => {
             // a = Object.assign(res.data);
-
             props.themData(res.data);
-        }).then({}).catch(err => alert(`Thêm thất bài r huhu1!! ${err}`))
+        }).then({}).catch(err => alert(`Thêm thất bài r huhu!! ${err}`))
     }
 
     return (
@@ -100,10 +93,26 @@ const CongViecNew = (props) => {
             <DialogContent className="dialogContent">
 
                 <form onSubmit={thucthi}>
-                    
+                    <div className="div1" hidden={props.chucNang === 1 ? false : true}>
+                        <TextField
+                            id="outlined-read-only-input"
+                            label="ID Phòng Ban"
+                            InputProps={{
+                                readOnly: true,
+                                startAdornment: (
+                                    <InputAdornment position="start">
+                                        <ArrowRightIcon style={{color: '#3D5E7C', marginLeft: '-10'}}/>
+                                    </InputAdornment>
+                                ),
+                            }}
+                            value={dlBD.phongBanId}
+                            name="phongBanId"
+                            onChange={handleInputChange}
+                        />
+                    </div>
 
                     <div className="div2" style={props.chucNang === 1 ? {} : {marginTop: 20}}>
-                        <TextField id="outlined-basi112c" label="Tên Dự Án" variant="outlined"
+                        <TextField id="outlined-basi112c" label="Tên Phòng Ban" variant="outlined"
                                    InputProps={{
                                        startAdornment: (
                                            <InputAdornment position="start">
@@ -111,14 +120,14 @@ const CongViecNew = (props) => {
                                            </InputAdornment>
                                        ),
                                    }}
-                                   value={dlBD.tenDuAn}
-                                   name="tenDuAn"
+                                   value={dlBD.tenPhongBan}
+                                   name="tenPhongBan"
                                    onChange={handleInputChange}
                         />
                     </div>
 
-                    <div className="div3da">
-                        <TextField id="outlined-basi2c" label="Thưởng Dự Án" variant="outlined"
+                    <div className="div3">
+                        <TextField id="outlined-basi2c" label="SDT Phòng Ban" variant="outlined"
                                    InputProps={{
                                        startAdornment: (
                                            <InputAdornment position="start">
@@ -126,27 +135,11 @@ const CongViecNew = (props) => {
                                            </InputAdornment>
                                        ),
                                    }}
-                                   value={dlBD.thuongDuAn}
-                                   name="thuongDuAn"
+                                   name="sdtPhongBan"
+                                   value={dlBD.sdtPhongBan}
+                                   name="sdtPhongBan"
                                    onChange={handleInputChange}
                         />
-                    </div>
-
-                    <div className="div3da">
-                    <p style={{marginTop: '-18px'}}> Ngày Bắt Đầu</p>
-                                    <input className="ngaySinhda"
-                                           type="date"
-                                           onChange={handleInputChange}
-                                           value={dlBD.ngayBatDau} name='ngayBatDau'/>
-
-                    </div>
-                    <div className="div3da">
-                    <p style={{marginTop: '-18px'}}> Ngày Kết Thúc</p>
-                                    <input className="ngaySinhda"
-                                           type="date"
-                                           onChange={handleInputChange}
-                                           value={dlBD.ngayKetThuc} name='ngayKetThuc'/>
-
                     </div>
                 </form>
             </DialogContent>
@@ -164,4 +157,4 @@ const CongViecNew = (props) => {
 
 };
 
-export default CongViecNew;
+export default PhongBanNew;

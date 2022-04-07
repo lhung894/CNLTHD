@@ -1,25 +1,33 @@
 package com.example.demo.Controller;
 
+import com.example.demo.Entity.DuAnEntity;
 import com.example.demo.Entity.NhanVienDuAnEntity;
 import com.example.demo.Entity.NhanVienEntity;
+import com.example.demo.Service.DuAnService;
 import com.example.demo.Service.NhanVienDuAnService;
+import com.example.demo.Service.NhanVienService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-@CrossOrigin ("http://localhost:3000")
+
 @RestController
 @RequestMapping (value = "/api/nhanvienduan")
+@CrossOrigin(origins= "http://localhost:3000")
 public class NhanVienDuAnController
 {
 	 @Autowired
 	 private NhanVienDuAnService nhanVienDuAnService;
+	 @Autowired
+	 private DuAnService duAnService;
+	 @Autowired
+	 private NhanVienService nhanVienService;
 
-	@CrossOrigin ("http://localhost:3000")
 	 @GetMapping ("")// Get danh sách
 	 public List<NhanVienDuAnEntity> getAll ()
 	 {
@@ -46,17 +54,34 @@ public class NhanVienDuAnController
 		Optional<List<NhanVienEntity>> e = nhanVienDuAnService.GetNVByDuAn(id);
 		return e.map (nhanVienDuAnEntity -> new ResponseEntity<> (nhanVienDuAnEntity, HttpStatus.OK)).orElseGet (() -> new ResponseEntity<> (HttpStatus.NOT_FOUND));
 	}
-	 
-	 @PostMapping ("")// Thêm
-	 public ResponseEntity<NhanVienDuAnEntity> insert (@RequestBody NhanVienDuAnEntity nhanVienDuAnEntity)
+
+	 @PostMapping ("/add/{id}")// Thêm
+	 public List<NhanVienEntity> insert (@PathVariable Long id, @RequestBody List<NhanVienEntity> nhanVienEntity)
 	 {
-		 nhanVienDuAnEntity.setStatus(1);
-		  Long id = nhanVienDuAnService.Insert (nhanVienDuAnEntity).getNhanVienDuAnId();
-		  Optional<NhanVienDuAnEntity> e = nhanVienDuAnService.FindById (id);
-		  return e.map (Entity -> new ResponseEntity<> (Entity, HttpStatus.OK)).orElseGet (() -> new ResponseEntity<> (HttpStatus.NOT_ACCEPTABLE));
+		 List<NhanVienEntity> reponse = new ArrayList<>();
+		 Optional<DuAnEntity> nvda = duAnService.FindById(id);
+		 if(nvda.isPresent()){
+			 for(NhanVienEntity a : nhanVienEntity){
+				 Optional<NhanVienDuAnEntity> e = nhanVienDuAnService.CheckNVDA (id,a.getNhanVienId());
+				 if(!e.isPresent()){
+					 NhanVienDuAnEntity nvdaTemp = new NhanVienDuAnEntity();
+					 nvdaTemp.setNhanVien(new NhanVienEntity());
+					 nvdaTemp.getNhanVien().setNhanVienId(a.getNhanVienId());
+					 nvdaTemp.setDuAn(new DuAnEntity());
+					 nvdaTemp.getDuAn().setDuAnId(id);
+
+					 NhanVienDuAnEntity temp = nhanVienDuAnService.Insert(nvdaTemp);
+					 Optional<NhanVienEntity> nvTemp = nhanVienService.FindById(a.getNhanVienId());
+					 reponse.add( nvTemp.get());
+				 }
+			 }
+		 }
+//		  Long id = nhanVienDuAnService.Insert (nhanVienDuAnEntity).getNhanVienDuAnId();
+		 System.out.println("Hello OUTSIDE");
+		  return reponse;
 	 }
-	 
-	 //
+
+
 	 @PutMapping ("/{id}")// Cập nhật thông tin phần tử
 	 public ResponseEntity<NhanVienDuAnEntity> update (@PathVariable Long id, @RequestBody NhanVienDuAnEntity nhanVienDuAnEntity)
 	 {
@@ -68,11 +93,13 @@ public class NhanVienDuAnController
 		  }
 		  return new ResponseEntity<> (HttpStatus.NOT_FOUND);
 	 }
-	 
+
 	 @PutMapping ("/remove/{id}")// Cập nhật lại status của phần tử
-	 public ResponseEntity<NhanVienDuAnEntity> remove (@PathVariable Long id)
+	 public ResponseEntity<NhanVienDuAnEntity> remove (@PathVariable Long id,@RequestBody NhanVienEntity nhanVienEntity)
 	 {
-		  Optional<NhanVienDuAnEntity> e = nhanVienDuAnService.FindById (id);
+		 System.out.println("Nhân viên: "+ nhanVienEntity);
+		  Optional<NhanVienDuAnEntity> e = nhanVienDuAnService.CheckNVDA (id,nhanVienEntity.getNhanVienId());
+		 System.out.println(e.get());
 		  if (e.isPresent ())
 		  {
 			  e.get().setStatus(0);

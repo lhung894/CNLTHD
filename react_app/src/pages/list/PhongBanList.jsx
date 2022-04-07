@@ -1,21 +1,22 @@
 import React from 'react';
 import "./congvieclist.scss";
 import Sidebar from "../../components/sidebar/Sidebar";
-// import Navbar from "../../components/navbar/Navbar";
-// import CongviecDataTable from "../../components/datatable/CongViecTable";
+import Navbar from "../../components/navbar/Navbar";
+import PhongBanTable from "../../components/datatable/PhongBanTable";
+import PhongBanNew from "../new/PhongBanNew";
 
 const PhongBanList = () =>
 {
     return (
         <div className="list">
             <Sidebar/>
-            PhongbanLissst
-            {/*<div className="listContainer">*/}
-            {/*    <Navbar/>*/}
 
-            {/*    <CongviecDataTable/>*/}
+            <div className="listContainer">
+                <Navbar/>
 
-            {/*</div>*/}
+                    <PhongBanTable/>
+
+            </div>
         </div>
     );
 };

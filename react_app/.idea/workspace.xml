@@ -1,10 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="b6083fd2-eb01-452c-b4dc-3b2ee01992da" name="Changes" comment="thử">
-      <change beforePath="$PROJECT_DIR$/../demo/src/main/java/com/example/demo/Controller/LuongController.java" beforeDir="false" afterPath="$PROJECT_DIR$/../demo/src/main/java/com/example/demo/Controller/LuongController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../demo/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/../demo/src/main/resources/application.properties" afterDir="false" />
-    </list>
+    <list default="true" id="b6083fd2-eb01-452c-b4dc-3b2ee01992da" name="Changes" comment="thử" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -40,7 +37,7 @@
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/pages/list" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.selected.package.eslint" value="(autodetect)" />
     <property name="nodejs_interpreter_path" value="node" />
@@ -51,6 +48,10 @@
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="D:\CNLTHD\CNLTHD\react_app\src\pages\list" />
+      <recent name="D:\CNLTHD\CNLTHD\react_app\src\pages\single" />
+      <recent name="D:\CNLTHD\CNLTHD\react_app\src\pages\new" />
+      <recent name="D:\CNLTHD\CNLTHD\react_app\src\components\datatable" />
       <recent name="C:\Users\Hung\Desktop\doan\src" />
     </key>
   </component>
@@ -87,6 +88,7 @@
       <workItem from="1648880906184" duration="6769000" />
       <workItem from="1648953469480" duration="26254000" />
       <workItem from="1649049730923" duration="7724000" />
+      <workItem from="1649085253211" duration="948000" />
     </task>
     <task id="LOCAL-00001" summary="thử">
       <created>1648569834848</created>
@@ -111,7 +113,6 @@
         </entry>
       </map>
     </option>
-    <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="thử" />

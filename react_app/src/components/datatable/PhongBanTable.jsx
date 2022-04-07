@@ -4,20 +4,19 @@ import {DataGrid, gridClasses} from '@mui/x-data-grid';
 import axios from 'axios';
 import Button from '@mui/material/Button';
 import {Link} from 'react-router-dom'
-import DuAnNew from "../../pages/new/DuAnNew";
+import PhongBanNew from "../../pages/new/PhongBanNew";
 
-const CongviecTable = () =>
+const PhongbanTable = () =>
 {
     const [item, setItem] = useState([]);
     const [value, setValue] = useState({
         flag: false,
-        dlCV: {
+        dlPB: {
             id: 0,
-            tenDuAn: '',
-            thuongDuAn: '',
-            ngayBatDau: '',
-            ngayKetThuc:'',
-            status: 1
+            idPb: '',
+            tenPb: '',
+            sdtPb: '',
+            statusPB: 1
         }
     });
     const [rows, setRowData] = useState([]);
@@ -32,42 +31,32 @@ const CongviecTable = () =>
 
     const columns = [
         {
-            field: 'duAnId', headerName: 'Dự Án ID', minWidth: 150, headerAlign: 'center',
+            field: 'phongBanId', headerName: 'Phòng Ban ID', flex: 1, headerAlign: 'center',
             align: 'center'
         },
         {
-            field: 'tenDuAn', headerName: 'Tên Dự Án', minWidth: 150, flex: 1, headerAlign: 'center',
+            field: 'tenPhongBan', headerName: 'Tên Phòng Ban', flex: 1, headerAlign: 'center',
             align: 'center'
         },
         {
-            field: 'thuongDuAn', headerName: 'Thưởng Dự Án', minWidth: 150, flex: 1, headerAlign: 'center',
+            field: 'sdtPhongBan', headerName: 'SDT Phòng Ban', flex: 1, headerAlign: 'center',
             align: 'center'
         },
         {
-            field: 'ngayBatDau', headerName: 'Ngày Bắt Đầu', minWidth: 150, flex: 1, headerAlign: 'center',
-            align: 'center'
-        },
-        {
-            field: 'ngayKetThuc', headerName: 'Ngày Kết Thúc', minWidth: 150, flex: 1, headerAlign: 'center',
-            align: 'center'
-        },
-        {
-            field: 'control', headerName: 'Chức năng', minWidth: 250, headerAlign: 'center',
+            field: 'control', headerName: 'Chức năng', flex: 1, headerAlign: 'center',
             align: 'center',
             renderCell: (params) =>
             {
                 return (
                     <div className="cellAction">
-                        <Link to={`/duan/${params.row.duAnId}`}
+                        <Link to={`/phongban/${params.row.phongBanId}`}
                               state={
                                   {
 
-                                      daID: `${params.row.duAnId}`,
-                                      daName: `${params.row.tenDuAn}`,
-                                      daThuong: `${params.row.thuongDuAn}`,
-                                      daStart: `${params.row.ngayBatDau}`,
-                                      daEnd: `${params.row.ngayKetThuc}`,
-                                      daStatus: `${params.row.status}`
+                                      pbID: `${params.row.phongBanId}`,
+                                      pbName: `${params.row.tenPhongBan}`,
+                                      pbSDT: `${params.row.sdtPhongBan}`,
+                                      pbStatus: `${params.row.status}`
                                   }
                               }
                               thuoctinh={100}
@@ -78,12 +67,12 @@ const CongviecTable = () =>
 
                         <Button className="update" onClick={() =>
                         {
-                            return suaDuAn(params.row)
+                            return suaPhongBan(params.row)
                         }}>Sửa</Button>
 
                         <Button className="delete" onClick={() =>
                         {
-                            return xoaDuAn(params.row)
+                            return xoaPhongBan(params.row)
                         }}>Xóa</Button>
                     </div>
                 );
@@ -94,12 +83,12 @@ const CongviecTable = () =>
 
     useEffect(async () =>
     {
-        const result = await axios('http://localhost:8080/api/duan');
+        const result = await axios('http://localhost:8080/api/phongban');
 
         let rowData = result.data.map(items =>
         {
             return {
-                id: items.duAnId,
+                id: items.phongBanId,
                 ...items
             }
         });
@@ -109,7 +98,7 @@ const CongviecTable = () =>
     }, []);
 
 ///////Thêm Công Việc
-    const themDuAn = () =>
+    const themPhongBan = () =>
     {
         setChucNang(2);
         setValue({...value, flag: true});
@@ -120,68 +109,76 @@ const CongviecTable = () =>
     {
         setRowData((previous) =>
         {
-          return [...previous,{
-              ...dlMoi,
-              id: dlMoi.duAnId,
-          }]
+            return [...previous,{
+                ...dlMoi,
+                id: dlMoi.phongBanId,
+            }]
         });
         console.log("------------->",rows);
     }
 
 
 /////Sửa Công Việc
-    const suaDuAn = (cv) =>
+    const suaPhongBan = (pb) =>
     {
-        console.log("dl lấy đc", cv);
+        console.log("dl lấy đc", pb);
         setChucNang(1);
         setValue({
-            flag: true, ...cv
+            flag: true, ...pb
         });
     }
 
     const resetData = (dlmoi) =>
     {
-        let temp = rows.findIndex((obj => obj.duAnId === dlmoi.duAnId));
+        let temp = rows.findIndex((obj => obj.phongBanId === dlmoi.phongBanId));
         console.log("Trước update!!: ", rows[temp]);
-        rows[temp].tenDuAn = dlmoi.tenDuAn;
-        rows[temp].ngayBatDau = dlmoi.ngayBatDau;
-        rows[temp].ngayKetThuc = dlmoi.ngayKetThuc;
-        rows[temp].thuongDuAn = dlmoi.thuongDuAn;
-        console.log("SAu update: ", rows[temp])
+        rows[temp].tenPhongBan = dlmoi.tenPhongBan;
+        rows[temp].sdtPhongBan = dlmoi.sdtPhongBan;
+        console.log("Sau update: ", rows[temp])
         setRowData(rows);
     }
 
 
 ///////////////Xóa Công Việc
-    const xoaDuAn = (cv) =>
+    const xoaPhongBan = (pb) =>
     {
-        console.log("Lấy đc idCV là ", cv);
-        ktraDA(cv);
+        console.log("Lấy đc idCV là ", pb);
+        ktraPB(pb);
     }
 
-    const ktraDA = async (cv) =>
+    const ktraPB = async (pb) =>
     {
         const result = await axios.get(
-            `http://localhost:8080/api/nhanvienduan/${cv.duAnId}`);
-        if(result.data.length > 0){
-            console.log(result.data);
-            alert("Bạn không thể xóa dự án có nhân viên đang làm!!");
-        }else{
-            xoaDA(cv);
+            `http://localhost:8080/api/phongban/nvpb/${pb.phongBanId}`);
+        const rowData = result.data.map(items =>
+        {
+            return {
+                id: items.phongBanId,
+                nhanVienId: items.nhanVienId,
+                hoNhanVien: items.hoNhanVien,
+                tenNhanVien: items.tenNhanVien,
+                ngayVaoLam: items.ngayVaoLam,
+                tenPhongBan: items.phongBan.tenPhongBan,
+                tenChucVu: items.chucVu.tenChucVu,
+                status: items.status
+            }
+        });
+        // console.log(rowData.length);
+        {
+            rowData.length > 0 ? alert("Bạn không thể xóa phòng ban có nhân viên đang làm!!") : xoaPB(pb)
         }
-        
     }
 
-    const xoaDA = (cv) =>
+    const xoaPB = (pb) =>
     {
         // event.preventDefault();
         // const newCv = {...cv, status: 0};
-        axios.put(`http://localhost:8080/api/duan/remove/${cv.duAnId}`)
-            .then(res => alert("Đã xóa công việc này!!"))
+        axios.put(`http://localhost:8080/api/phongban/remove/${pb.phongBanId}`, pb)
+            .then(res => alert("Đã xóa phòng ban này!!"))
             .catch(err => alert(`Xóa thất bai!! ${err}`))
         const newRows = rows.filter((a) =>
         {
-            if (a.duAnId === cv.duAnId)
+            if (a.phongBanId === pb.phongBanId)
             {
                 return false;
             }
@@ -196,9 +193,9 @@ const CongviecTable = () =>
         <div className="datatable">
 
             <div className="addNew">
-                <Link to="/duan/new" style={{textDecoration: "none"}}>
-                </Link>
-                <Button className="link" onClick={themDuAn}>Thêm</Button>
+                {/*<Link to="/congviec/new" style={{textDecoration: "none"}}>*/}
+                {/*</Link>*/}
+                <Button className="link" onClick={themPhongBan}>Thêm</Button>
             </div>
 
             <DataGrid className="chinhmau"
@@ -240,11 +237,11 @@ const CongviecTable = () =>
             />
 
             {/*{console.log("ban đàu dã render", value)}*/}
-            <DuAnNew giatri={value} resetFlag={resetFlag} resetData={resetData} chucNang={chucNang}
+            <PhongBanNew giatri={value} resetFlag={resetFlag} resetData={resetData} chucNang={chucNang}
                          themData={themData}/>
 
         </div>
     );
 };
 
-export default CongviecTable;
+export default PhongbanTable;
