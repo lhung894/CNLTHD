@@ -49,4 +49,8 @@ public class ChamCongService {
     public void RemoveChamCongByNhanVien(Long nhanVienId) {
         chamCongRepository.RemoveChamCongByNhanVien(nhanVienId);
     }
+    
+    public List<ChamCongEntity> GetChamCongByYear (int year) {
+        return chamCongRepository.GetChamCongByYear (year);
+    }
 }

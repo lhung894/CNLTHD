@@ -5,6 +5,7 @@ import Navbar from "../../components/navbar/Navbar";
 // import ModeEditOutlineIcon from '@mui/icons-material/ModeEditOutline';
 // import Button from "@mui/material/Button";
 import {Link, useLocation} from "react-router-dom";
+import DanhSachNhanVienDuan from "../../components/datatable/DanhSachNhanVienDuan";
 // import axios from "axios";
 // import Nhanvien_NhanVien_Table from "../../components/datatable/Nhanvien_NhanVien_Table";
 
@@ -78,7 +79,7 @@ const NhanVienSingle = () =>
 
                 <div className="bottom">
                     <h1 className="title">Danh Sách Dự Án Tham Gia</h1>
-                    {/*<Nhanvien_NhanVien_Table id={location.state.cvID}/>*/}
+                    <DanhSachNhanVienDuan id={location.state.chiTiet.nhanVien.nhanVienId}/>
                 </div>
 
             </div>

@@ -35,10 +35,10 @@ const CongViecSingle = (props) =>
                 daStart: location.state.daStart,
                 daEnd: location.state.daEnd,
                 daStatus: location.state.daStatus
-                
+
             }
         });
-        console.log("Dữ liệu đc truyền",newData);
+        console.log("Dữ liệu đc truyền", newData);
     }, []);
 
 
@@ -49,7 +49,9 @@ const CongViecSingle = (props) =>
                 <Navbar/>
                 <div className="top">
 
-                    <div className="left">
+                    <div className="left" style={{
+                        width: 'fit-content'
+                    }}>
                         <h1 className="title">Thông tin chi tiết</h1>
 
                         {/*<Button variant="text" className="editBtn"*/}
@@ -76,12 +78,18 @@ const CongViecSingle = (props) =>
                                     <li>{newData.daID}</li>
                                     <li>{newData.daName}</li>
                                     <li>{newData.daThuong}</li>
-                                    <li>{newData.daStart}</li>
-                                    <li>{newData.daEnd}</li>
                                     <li style={{
                                         color: "green",
                                         fontWeight: "bold"
-                                    }}>{newData.cvStatus == 1 && "Đang hiện hành"}</li>
+                                    }}>{newData.daStart}</li>
+                                    <li style={{
+                                        color: "green",
+                                        fontWeight: "bold"
+                                    }}>{newData.daEnd}</li>
+                                    {/*<li style={{*/}
+                                    {/*    color: "green",*/}
+                                    {/*    fontWeight: "bold"*/}
+                                    {/*}}>{newData.cvStatus == 1 && "Đang hiện hành"}</li>*/}
                                 </div>
 
                             </div>
@@ -90,7 +98,7 @@ const CongViecSingle = (props) =>
                 </div>
 
                 <div className="bottom">
-                    <h1 className="title">Danh Sách Nhân Viên</h1>
+                    <h1 className="title" style={{fontSize: '18px'}}>Danh Sách Nhân Viên</h1>
                     <NhanVienDuAnTable id={location.state.daID}/>
                 </div>
 

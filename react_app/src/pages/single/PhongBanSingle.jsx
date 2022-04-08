@@ -43,7 +43,9 @@ const PhongBanSingle = (props) =>
                 <Navbar/>
                 <div className="top">
 
-                    <div className="left">
+                    <div className="left" style={{
+                        width: 'fit-content'
+                    }}>
                         <h1 className="title">Thông tin chi tiết</h1>
 
                         {/*<Button variant="text" className="editBtn"*/}

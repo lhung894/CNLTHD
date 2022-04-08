@@ -40,11 +40,11 @@ const ChamCongTable = () =>
             align: 'center'
         },
         {
-            field: 'ngayChamCong', headerName: 'Ngày Chấm Công', minWidth: 200, flex: 1, headerAlign: 'center',
+            field: 'ngayChamCong', headerName: 'Ngày Chấm Công', minWidth: 180, flex: 1, headerAlign: 'center',
             align: 'center'
         },
         {
-            field: 'tenTrangThai', headerName: 'Trạng Thái', minWidth: 200, flex: 1, headerAlign: 'center',
+            field: 'tenTrangThai', headerName: 'Trạng Thái', minWidth: 180, flex: 1, headerAlign: 'center',
             align: 'center'
         },
         {

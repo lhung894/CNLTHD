@@ -1,4 +1,4 @@
-import React, {useState, useEffect,createContext} from 'react';
+import React, {useState, useEffect, createContext} from 'react';
 import "./nhanvien_congviec.scss"
 import {DataGrid} from '@mui/x-data-grid';
 import axios from 'axios';
@@ -10,7 +10,7 @@ import NhanVienDuAnNew from "../../pages/new/NhanVienDuAnNew";
 // import {Link} from 'react-router-dom'
 export const ChucNangContext = createContext();
 
-const Nhanvien_CongViec_Table = (props) =>
+const NhanVienDuAnTable = (props) =>
 {
     const [rows, setRows] = useState([]);
     // const [rows, setRows] = useState([]);
@@ -26,25 +26,28 @@ const Nhanvien_CongViec_Table = (props) =>
         setDk({...dk, flag: value});
     }
 
-    const xoaNVDuAn = (da) =>{
+    const xoaNVDuAn = (da) =>
+    {
         delete da.id;
         console.log(da);
-        
+
         const result = axios.put(
-            `http://localhost:8080/api/nhanvienduan/remove/${props.id}`,da).then(res => {
-                const newRows = rows.filter((a) =>
+            `http://localhost:8080/api/nhanvienduan/remove/${props.id}`, da).then(res =>
+        {
+            const newRows = rows.filter((a) =>
+            {
+                if (a.nhanVienId === da.nhanVienId)
                 {
-                    if (a.nhanVienId === da.nhanVienId)
-                    {
-                        return false;
-                    }
-                    return true;
-                });
-                console.log("Dl mới là ", newRows);
-                setRows(newRows);
-            alert("Xóa nhân viên thành công")}).catch(err => alert("Xóa nhân viên thất bại"))
-        
-        
+                    return false;
+                }
+                return true;
+            });
+            console.log("Dl mới là ", newRows);
+            setRows(newRows);
+            alert("Xóa nhân viên thành công")
+        }).catch(err => alert("Xóa nhân viên thất bại"))
+
+
     }
 
     const columns = [
@@ -74,14 +77,15 @@ const Nhanvien_CongViec_Table = (props) =>
         {
             field: 'tenChucVu', headerName: 'Chức Vụ ', width: 180, headerAlign: 'center',
             align: 'center'
-        },{
-            field: 'control', headerName: 'Chức năng', minWidth: 250, headerAlign: 'center',
+        }, {
+            field: 'control', headerName: 'Chức năng', minWidth: 150, flex: 1, headerAlign: 'center',
             align: 'center',
             renderCell: (params) =>
             {
                 return (
                     <div className="cellAction">
-                        <Button className="delete" onClick={() =>     {
+                        <Button className="delete" onClick={() =>
+                        {
                             return xoaNVDuAn(params.row)
                         }}>Xóa</Button>
                     </div>
@@ -94,7 +98,6 @@ const Nhanvien_CongViec_Table = (props) =>
         // },
     ];
 
-    
 
     useEffect(async () =>
     {
@@ -117,18 +120,18 @@ const Nhanvien_CongViec_Table = (props) =>
         // });
         // console.log("ban dàu", rowData);
         setRows(result.data.map(items =>
-            {
-                return {
-                    id: items.nhanVienId,
-                    nhanVienId: items.nhanVienId,
-                    hoNhanVien: items.hoNhanVien,
-                    tenNhanVien: items.tenNhanVien,
-                    ngayVaoLam: items.ngayVaoLam,
-                    tenPhongBan: items.phongBan.tenPhongBan,
-                    tenChucVu: items.chucVu.tenChucVu,
-                    // status: items.status
-                }
-            }));
+        {
+            return {
+                id: items.nhanVienId,
+                nhanVienId: items.nhanVienId,
+                hoNhanVien: items.hoNhanVien,
+                tenNhanVien: items.tenNhanVien,
+                ngayVaoLam: items.ngayVaoLam,
+                tenPhongBan: items.phongBan.tenPhongBan,
+                tenChucVu: items.chucVu.tenChucVu,
+                // status: items.status
+            }
+        }));
         console.log("sau khi chỉnh", rows);
     }, []);
 
@@ -169,7 +172,7 @@ const Nhanvien_CongViec_Table = (props) =>
     }
 
     return (
-        <div className="datatable">
+        <div className="datatable" style={{backgroundColor: 'inherit'}}>
             <div className="addNew">
                 {/*<Link to="/congviec/new" style={{textDecoration: "none"}}>*/}
                 {/*</Link>*/}
@@ -220,4 +223,4 @@ const Nhanvien_CongViec_Table = (props) =>
     );
 };
 
-export default Nhanvien_CongViec_Table;
+export default NhanVienDuAnTable;

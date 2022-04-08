@@ -8,14 +8,15 @@ import SearchOutlinedIcon from '@mui/icons-material/SearchOutlined';
 // import ChatBubbleOutlineOutlinedIcon from '@mui/icons-material/ChatBubbleOutlineOutlined';
 // import ListAltOutlinedIcon from '@mui/icons-material/ListAltOutlined';
 
-const Navbar = () => {
+const Navbar = () =>
+{
     return (
         <div className="navbar">
             <div className="wrapper">
 
                 <div className="search">
-                    <input type="text" placeholder="Search..."/>
-                    <SearchOutlinedIcon/>
+                    {/*<input/>*/}
+                    {/*<SearchOutlinedIcon/>*/}
                 </div>
 
                 <div className="items">
@@ -41,7 +42,7 @@ const Navbar = () => {
                     {/*        2*/}
                     {/*    </div>*/}
                     {/*</div>*/}
-                    <div className="item" style={{color:"#537895",fontWeight:"bold",fontSize:"15px"}}>
+                    <div className="item" style={{color: "#537895", fontWeight: "bold", fontSize: "15px"}}>
                         Xin Chào, Admin
                     </div>
                     <div className="item">

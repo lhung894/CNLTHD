@@ -4,7 +4,8 @@ import {DataGrid, gridClasses} from '@mui/x-data-grid';
 import axios from 'axios';
 import Button from '@mui/material/Button';
 
-const LuongTable = () => {
+const LuongTable = () =>
+{
     const [rows, setRows] = useState([]);
 
     const columns = [
@@ -75,10 +76,17 @@ const LuongTable = () => {
         },
     ];
 
+    function numberWithCommas(x)
+    {
+        return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+    }
 
-    useEffect(async () => {
+
+    useEffect(async () =>
+    {
         const result = await axios('http://localhost:8080/api/luong');
-        let rowData = result.data.map(items => {
+        let rowData = result.data.map(items =>
+        {
             return {
                 id: items.luongId,
                 luongId: items.luongId,
@@ -95,8 +103,8 @@ const LuongTable = () => {
                 soNgayNghiCP: items.soNgayNghiCP,
                 soNgayNghiKP: items.soNgayNghiKP,
                 thuongDuAn: items.thuongDuAn,
-                luongCanBan: items.nhanVien.luongCanBan,
-                luongThucLanh: items.luongThucLanh,
+                luongCanBan: numberWithCommas(items.nhanVien.luongCanBan),
+                luongThucLanh: numberWithCommas(items.luongThucLanh),
                 ...items
             }
         });
@@ -105,15 +113,21 @@ const LuongTable = () => {
     }, []);
 
     //// Tính Lương
-    const tinhLuong = () => {
-        axios.post("http://localhost:8080/api/luong/tinhluong").then(res => {
+    const tinhLuong = () =>
+    {
+        axios.post("http://localhost:8080/api/luong/tinhluong").then(res =>
+        {
             console.log("res: ", res)
-            if (res.data === "Fail") {
+            if (res.data === "Fail")
+            {
                 alert("Tính lương thất bại! Không tồn tại nhân viên.")
-            } else if (res.data === "Conflict") {
+            } else if (res.data === "Conflict")
+            {
                 alert("Tính lương thất bại! Đã tính lương tháng trước.")
-            } else {
-                let rowData = res.data.map(items => {
+            } else
+            {
+                let rowData = res.data.map(items =>
+                {
                     return {
                         id: items.luongId,
                         luongId: items.luongId,
@@ -130,8 +144,8 @@ const LuongTable = () => {
                         soNgayNghiCP: items.soNgayNghiCP,
                         soNgayNghiKP: items.soNgayNghiKP,
                         thuongDuAn: items.thuongDuAn,
-                        luongCanBan: items.nhanVien.luongCanBan,
-                        luongThucLanh: items.luongThucLanh
+                        luongCanBan: numberWithCommas(items.nhanVien.luongCanBan),
+                        luongThucLanh: numberWithCommas(items.luongThucLanh)
                     }
                 });
                 setRows((preState) => [...preState, ...rowData])

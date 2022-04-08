@@ -3,9 +3,10 @@ import "./home.scss";
 import Sidebar from "../../components/sidebar/Sidebar";
 import Navbar from "../../components/navbar/Navbar";
 import Widget from "../../components/widget/Widget";
-import ThuongThangAreaChart from "../../components/chart/ThuongThangAreaChart";
+import ChamCongAreaChart from "../../components/chart/ChamCongAreaChart";
 
-const Home = () => {
+const Home = () =>
+{
 
     return (
         <div className="home">
@@ -17,12 +18,13 @@ const Home = () => {
                     <Widget type="nhansu"/>
                     <Widget type="phongban"/>
                     <Widget type="duan"/>
-                    <Widget type="chamcong"/>
                     <Widget type="luong"/>
+                    {/*<Widget type="chamcong"/>*/}
+
                 </div>
 
                 <div className="charts">
-                    <ThuongThangAreaChart aspect={2}/>
+                    <ChamCongAreaChart aspect={3}/>
                 </div>
             </div>
         </div>

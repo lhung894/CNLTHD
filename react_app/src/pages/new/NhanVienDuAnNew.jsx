@@ -13,7 +13,7 @@ import {ChucNangContext} from "../../components/datatable/NhanVienDuAnTable";
 import {InputAdornment} from "@material-ui/core";
 import ArrowRightIcon from "@mui/icons-material/ArrowRight";
 
-const ChamCongNew = (props) =>
+const NhanVienDuAnNew = (props) =>
 {
     let dk = useContext(ChucNangContext);
     console.log("Diều kiên là ", dk);
@@ -86,7 +86,7 @@ const ChamCongNew = (props) =>
                 return element.nhanVienId === el.nhanVienId;
             });
         });
-        console.log("Đây là dữ liệu được cập nhật mỗi khi chọn:",temp);
+        console.log("Đây là dữ liệu được cập nhật mỗi khi chọn:", temp);
         setRes(temp);
     }
 
@@ -95,7 +95,7 @@ const ChamCongNew = (props) =>
     const addNVDA = () =>
     {
 
-        console.log("Đây là dữ liệu đc chọn",res);
+        console.log("Đây là dữ liệu đc chọn", res);
         axios.post(`http://localhost:8080/api/nhanvienduan/add/${props.duAnId}`, res).then(res =>
         {
             // a = Object.assign(res.data);
@@ -240,7 +240,7 @@ const ChamCongNew = (props) =>
                 </DialogActions>
             </Dialog>
         );
-    } 
+    }
     // else
     // {
     //     return (
@@ -329,4 +329,4 @@ const ChamCongNew = (props) =>
 
 };
 
-export default ChamCongNew;
+export default NhanVienDuAnNew;

@@ -20,29 +20,25 @@ const Nhanvien_CongViec_Table = (props) =>
             align: 'center'
         },
         {
-            field: 'hoNhanVien', headerName: 'Họ Nhân Viên', width: 150, headerAlign: 'center', rowAlign: 'center',
+            field: 'hoNhanVien', headerName: 'Họ Nhân Viên', width: 200, headerAlign: 'center', rowAlign: 'center',
             align: 'center'
         },
         {
-            field: 'tenNhanVien', headerName: 'Tên Nhân Viên', width: 150, headerAlign: 'center',
+            field: 'tenNhanVien', headerName: 'Tên Nhân Viên', width: 200, headerAlign: 'center',
             align: 'center'
         },
         {
-            field: 'ngayVaoLam', headerName: 'Ngày Vào Làm', width: 180, headerAlign: 'center',
+            field: 'ngayVaoLam', headerName: 'Ngày Vào Làm', width: 200, headerAlign: 'center',
             align: 'center'
         },
         {
-            field: 'tenPhongBan', headerName: 'Phòng Ban', width: 180, headerAlign: 'center',
+            field: 'tenPhongBan', headerName: 'Phòng Ban', width: 200, headerAlign: 'center',
             align: 'center'
         },
         {
-            field: 'tenChucVu', headerName: 'Chức Vụ ', width: 180, headerAlign: 'center',
+            field: 'tenChucVu', headerName: 'Chức Vụ ', minWidth: 180, flex: 1, headerAlign: 'center',
             align: 'center'
         },
-        // {
-        //     field: 'status', headerName: 'Trạng Thái', width: 180, headerAlign: 'center',
-        //     align: 'center'
-        // },
     ];
 
     const [rows, setRowData] = useState([]);
@@ -73,7 +69,7 @@ const Nhanvien_CongViec_Table = (props) =>
 
 
     return (
-        <div className="datatable">
+        <div className="datatable" style={{backgroundColor: 'inherit'}}>
             <DataGrid className="chinhmau"
                       rows={rows}
                       columns={columns}

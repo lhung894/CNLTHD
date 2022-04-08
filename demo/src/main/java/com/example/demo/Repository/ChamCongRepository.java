@@ -25,4 +25,7 @@ public interface ChamCongRepository extends JpaRepository<ChamCongEntity, Long> 
     @Modifying
     @Query(value = "UPDATE ChamCongEntity cc SET cc.status = 0 WHERE cc.nhanVien.nhanVienId = ?1")
     void RemoveChamCongByNhanVien(Long nhanVienId);
+    
+    @Query(value = "SELECT cc FROM ChamCongEntity cc WHERE cc.status = 1 AND FUNCTION('YEAR', cc.ngayChamCong) = ?1")
+    List<ChamCongEntity> GetChamCongByYear(int year);
 }

@@ -94,7 +94,6 @@ const NhanVienTable = () =>
                                       chiTiet: params.row, chucNang: chucNang
                                   }
                               }
-                              thuoctinh={100}
                               style={{textDecoration: "none"}}>
                             <Button className="update">Sửa</Button>
                         </Link>

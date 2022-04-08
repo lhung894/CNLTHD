@@ -1,85 +1,77 @@
 import React, {useState, useEffect} from 'react';
-import "./nhanvien_congviec.scss"
+import "./nhanvien_chamcong.scss"
 import {DataGrid} from '@mui/x-data-grid';
 import axios from 'axios';
-import Button from '@mui/material/Button';
-import clsx from "clsx";
 // import VisibilityOutlinedIcon from '@mui/icons-material/VisibilityOutlined';
 // import DeleteIcon from '@mui/icons-material/Delete';
 // import {Link} from 'react-router-dom'
 
 
-const Nhanvien_PhongBan_Table = (props) =>
+const DanhSachNhanVienDuan = (props) =>
 {
+    // const [listAPI, setListAPI] = useState([]);
+    const [rows, setRowData] = useState([]);
     const columns = [
-        // {
-        //     field: 'phongBanId',
-        //     headerName: 'Phòng Ban ID',
-        //     width: 120,
-        //     headerAlign: 'center',
-        //     align: 'center'
-        // },
         {
-            field: 'nhanVienId', headerName: 'Nhân Viên ID', flex: 1, headerAlign: 'center', rowAlign: 'center',
+            field: 'duAnId',
+            headerName: 'Dự Án ID',
+            minWidth: 120,
+            headerAlign: 'center',
             align: 'center'
         },
         {
-            field: 'hoNhanVien', headerName: 'Họ Nhân Viên', flex: 1, headerAlign: 'center', rowAlign: 'center',
+            field: 'tenDuAn',
+            headerName: 'Tên Dự Án',
+            minWidth: 180,
+            flex: 1,
+            headerAlign: 'center',
+            rowAlign: 'center',
             align: 'center'
         },
         {
-            field: 'tenNhanVien', headerName: 'Tên Nhân Viên', flex: 1, headerAlign: 'center',
+            field: 'thuongDuAn', headerName: 'Thưởng Dự Án', minWidth: 150, flex: 1, headerAlign: 'center',
             align: 'center'
         },
         {
-            field: 'ngayVaoLam', headerName: 'Ngày Vào Làm', flex: 1, headerAlign: 'center',
+            field: 'ngayBatDau', headerName: 'Ngày Bắt Đầu', minWidth: 150, flex: 1, headerAlign: 'center',
             align: 'center'
         },
         {
-            field: 'tenCongViec', headerName: 'Công Việc', flex: 1, headerAlign: 'center',
-            align: 'center'
-        },
-        {
-            field: 'tenChucVu', headerName: 'Chức Vụ ', flex: 1, headerAlign: 'center',
+            field: 'ngayKetThuc', headerName: 'Ngày Kết Thúc', minWidth: 180, flex: 1, headerAlign: 'center',
             align: 'center'
         },
     ];
 
-    const [rows, setRowData] = useState([]);
+    console.log("DS ", rows);
 
     useEffect(async () =>
     {
         // console.log("id nhân đc là ", props.id);
 
         const result = await axios(
-            `http://localhost:8080/api/phongban/nvpb/${props.id}`);
-        const rowData = result.data.map(items =>
+            `http://localhost:8080/api/nhanvienduan`);
+        const rowData = result.data.filter((item) => item.nhanVien.nhanVienId === props.id).map(items =>
         {
             return {
-                id: items.nhanVienId,
-                nhanVienId: items.nhanVienId,
-                hoNhanVien: items.hoNhanVien,
-                tenNhanVien: items.tenNhanVien,
-                ngayVaoLam: items.ngayVaoLam,
-                tenCongViec: items.congViec.tenCongViec,
-                tenChucVu: items.chucVu.tenChucVu,
-                // status: items.status
+                id: items.duAn.duAnId,
+                duAnId: items.duAn.duAnId,
+                tenDuAn: items.duAn.tenDuAn,
+                thuongDuAn: items.duAn.thuongDuAn,
+                ngayBatDau: items.duAn.ngayBatDau,
+                ngayKetThuc: items.duAn.ngayKetThuc,
             }
         });
-        console.log("ban dàu", rowData);
         setRowData(rowData);
-        console.log("sau khi chỉnh", rows);
     }, []);
 
 
     return (
-        <div className="datatable" style={{backgroundColor: 'inherit'}}>
-            <DataGrid className="chinhmau"
+        <div className="datatableCC">
+            <DataGrid className="chinhmauCCNV" style={{marginTop: '30px'}}
                       rows={rows}
                       columns={columns}
-                      pageSize={9}
+                      pageSize={4}
                       rowsPerPageOptions={[100]}
-                      isRowSelectable={() => false}
                       disableSelectionOnClick={true}
                       sx={{
                           boxShadow: 2,
@@ -116,4 +108,4 @@ const Nhanvien_PhongBan_Table = (props) =>
     );
 };
 
-export default Nhanvien_PhongBan_Table;
+export default DanhSachNhanVienDuan;

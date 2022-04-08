@@ -1,6 +1,7 @@
 package com.example.demo.Controller;
 
 import com.example.demo.Entity.ChamCongEntity;
+import com.example.demo.Entity.ChamCongThongKeDTO;
 import com.example.demo.Entity.NhanVienEntity;
 import com.example.demo.Entity.TrangThaiChamCongEntity;
 import com.example.demo.Service.ChamCongService;
@@ -47,6 +48,48 @@ public class ChamCongController
 		  return cc.get ();
 	 }
 	 
+	 @GetMapping ("/thongke/{year}")
+	 public List<?> getChamCongByYear (@PathVariable int year)
+	 {
+//		  LocalDate now = LocalDate.now ();
+//		  int year = now.getYear ();
+		  List<ChamCongEntity> ccs = chamCongService.GetChamCongByYear (year);
+//		  System.out.println (ccs);
+		  List<ChamCongThongKeDTO> ccThongKes = new ArrayList<> ();
+		  int month = 1, soNgayLam, soNgayNghiCP, soNgayNghiKP;
+		  ChamCongThongKeDTO ccThongKe;
+		  while (month <= 12)
+		  {
+				soNgayLam = 0;
+				soNgayNghiCP = 0;
+				soNgayNghiKP = 0;
+				for (ChamCongEntity cc : ccs)
+				{
+					 if (cc.getNgayChamCong ().getMonthValue () == month)
+					 {
+						  if (cc.getTrangThaiChamCong ().getTenTrangThai ().equals ("1"))
+						  {
+								soNgayLam++;
+						  }
+						  else if (cc.getTrangThaiChamCong ().getTenTrangThai ().equals ("2"))
+						  {
+								soNgayNghiCP++;
+						  }
+						  else if (cc.getTrangThaiChamCong ().getTenTrangThai ().equals ("3"))
+						  {
+								soNgayNghiKP++;
+						  }
+						  
+					 }
+				}
+				ccThongKe = new ChamCongThongKeDTO ("Tháng " + month, soNgayLam, soNgayNghiCP, soNgayNghiKP);
+				ccThongKes.add (ccThongKe);
+				month++;
+		  }
+		  System.out.println (ccThongKes);
+		  return ccThongKes;
+	 }
+	 
 	 @PostMapping ("/capphat")
 	 public List<ChamCongEntity> capPhat ()
 	 {
@@ -62,7 +105,8 @@ public class ChamCongController
 					 if (cc.getNhanVien ().equals (nv))
 					 {
 						  existed = true;
-						  if (cc.getStatus () == 0){
+						  if (cc.getStatus () == 0)
+						  {
 								cc.setTrangThaiChamCong (tt);
 								cc.setStatus (1);
 								chamCongService.Update (cc);
