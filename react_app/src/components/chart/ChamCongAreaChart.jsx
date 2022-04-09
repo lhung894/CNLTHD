@@ -13,7 +13,7 @@ const ChamCongAreaChart = () =>
 {
     const [data, setData] = useState([]);
     const [year, setYear] = useState(2022);
-    console.log("Năm là ", year);
+    console.log("Năm là ", year, data);
 
     useEffect(async () =>
     {
