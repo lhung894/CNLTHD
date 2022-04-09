@@ -63,10 +63,10 @@ const ChucvuTable = () =>
                             >Xem</Button>
                         </Link>
 
-                        <Button className="update" onClick={() =>
-                        {
-                            return suaChucVu(params.row)
-                        }}>Sửa</Button>
+                        {/*<Button className="update" onClick={() =>*/}
+                        {/*{*/}
+                        {/*    return suaChucVu(params.row)*/}
+                        {/*}}>Sửa</Button>*/}
 
                         <Button className="delete" onClick={() =>
                         {
@@ -189,11 +189,11 @@ const ChucvuTable = () =>
     return (
         <div className="datatable">
 
-            <div className="addNew">
-                {/*<Link to="/chucvu/new" style={{textDecoration: "none"}}>*/}
-                {/*</Link>*/}
-                <Button className="link" onClick={themChucVu}>Thêm</Button>
-            </div>
+            {/*<div className="addNew">*/}
+            {/*    /!*<Link to="/chucvu/new" style={{textDecoration: "none"}}>*!/*/}
+            {/*    /!*</Link>*!/*/}
+            {/*    <Button className="link" onClick={themChucVu}>Thêm</Button>*/}
+            {/*</div>*/}
 
             <DataGrid className="chinhmau"
                       rows={rows}

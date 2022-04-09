@@ -62,7 +62,7 @@ const CongViecSingle = (props) =>
                         <div className="item">
                             <img
                                 src={require('../images/work.png')}
-                                alt="Công việc" className="itemImg"/>
+                                alt="Dự Án" className="itemImg"/>
 
                             <div className="details">
 

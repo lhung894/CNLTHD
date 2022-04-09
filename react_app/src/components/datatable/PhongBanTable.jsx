@@ -65,10 +65,10 @@ const PhongbanTable = () =>
                             >Xem</Button>
                         </Link>
 
-                        <Button className="update" onClick={() =>
-                        {
-                            return suaPhongBan(params.row)
-                        }}>Sửa</Button>
+                        {/*<Button className="update" onClick={() =>*/}
+                        {/*{*/}
+                        {/*    return suaPhongBan(params.row)*/}
+                        {/*}}>Sửa</Button>*/}
 
                         <Button className="delete" onClick={() =>
                         {
@@ -192,11 +192,11 @@ const PhongbanTable = () =>
     return (
         <div className="datatable">
 
-            <div className="addNew">
-                {/*<Link to="/congviec/new" style={{textDecoration: "none"}}>*/}
-                {/*</Link>*/}
-                <Button className="link" onClick={themPhongBan}>Thêm</Button>
-            </div>
+            {/*<div className="addNew">*/}
+            {/*    /!*<Link to="/congviec/new" style={{textDecoration: "none"}}>*!/*/}
+            {/*    /!*</Link>*!/*/}
+            {/*    <Button className="link" onClick={themPhongBan}>Thêm</Button>*/}
+            {/*</div>*/}
 
             <DataGrid className="chinhmau"
                       rows={rows}

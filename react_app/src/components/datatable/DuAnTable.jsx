@@ -76,10 +76,10 @@ const CongviecTable = () =>
                             >Xem</Button>
                         </Link>
 
-                        <Button className="update" onClick={() =>
-                        {
-                            return suaDuAn(params.row)
-                        }}>Sửa</Button>
+                        {/*<Button className="update" onClick={() =>*/}
+                        {/*{*/}
+                        {/*    return suaDuAn(params.row)*/}
+                        {/*}}>Sửa</Button>*/}
 
                         <Button className="delete" onClick={() =>
                         {
@@ -195,11 +195,11 @@ const CongviecTable = () =>
     return (
         <div className="datatable">
 
-            <div className="addNew">
-                <Link to="/duan/new" style={{textDecoration: "none"}}>
-                </Link>
-                <Button className="link" onClick={themDuAn}>Thêm</Button>
-            </div>
+            {/*<div className="addNew">*/}
+            {/*    <Link to="/duan/new" style={{textDecoration: "none"}}>*/}
+            {/*    </Link>*/}
+            {/*    <Button className="link" onClick={themDuAn}>Thêm</Button>*/}
+            {/*</div>*/}
 
             <DataGrid className="chinhmau"
                       rows={rows}

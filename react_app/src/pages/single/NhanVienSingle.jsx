@@ -2,18 +2,21 @@ import React, {useEffect, useState} from 'react';
 import "./nhanviensingle.scss";
 import Sidebar from "../../components/sidebar/Sidebar";
 import Navbar from "../../components/navbar/Navbar";
-// import ModeEditOutlineIcon from '@mui/icons-material/ModeEditOutline';
-// import Button from "@mui/material/Button";
 import {Link, useLocation} from "react-router-dom";
 import DanhSachNhanVienDuan from "../../components/datatable/DanhSachNhanVienDuan";
-// import axios from "axios";
-// import Nhanvien_NhanVien_Table from "../../components/datatable/Nhanvien_NhanVien_Table";
+import nv from '../images/nv.jpg';
+import nv1 from '../images/nv1.jpg';
+import nv2 from '../images/nv2.jpg';
+import nv3 from '../images/nv3.jpg';
+import nv4 from '../images/nv4.jpg';
+
+const lisstImg = [nv, nv1, nv2, nv3, nv4];
 
 const NhanVienSingle = () =>
 {
     const location = useLocation();
     console.log("dsdsdsd", location.state.chiTiet);
-
+    let item = lisstImg[Math.floor(Math.random() * lisstImg.length)];
     return (
         <div className="single">
             <Sidebar/>
@@ -30,7 +33,8 @@ const NhanVienSingle = () =>
 
                         <div className="item">
                             <img
-                                src={location.state.chiTiet.hinhAnh}
+                                multiple accept="image/*"
+                                src={item}
                                 alt="Nhân viên " className="itemImg"/>
                             <div className="details">
                                 <div className="itemTitle">
