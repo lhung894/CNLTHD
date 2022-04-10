@@ -26,6 +26,7 @@ const NhanVienDuAnTable = (props) =>
         setDk({...dk, flag: value});
     }
 
+    ////Xóa  nhân viên trong dự án
     const xoaNVDuAn = (da) =>
     {
         delete da.id;

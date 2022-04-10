@@ -64,8 +64,8 @@ const NhanVienTable = () =>
             {
                 return (
                     <div className="cellAction">
-                        <Link to={`/nhanvien/${params.row.nhanVien.nhanVienId}`}
-                              state={
+                        <Link to={`/nhanvien/${params.row.nhanVien.nhanVienId}`} // Template literal của ES6
+                              state={ // Gom dữ liệu
                                   {
                                       // nvID: `${params.row.nhanVienId}`,
                                       // nvHo: `${params.row.tenCongViec}`,
@@ -129,7 +129,7 @@ const NhanVienTable = () =>
                 tenChucVu: items.nhanVien.chucVu.tenChucVu,
                 congViecId: items.nhanVien.congViec.congViecId,
                 tenCongViec: items.nhanVien.congViec.tenCongViec,
-                ...items
+                ...items //Spread Operator của ES6 - Lấy toàn bộ phần tử của object
             }
         });
         console.log("Lấy đc từ API ", rowData);
@@ -201,6 +201,8 @@ const NhanVienTable = () =>
 
             {/*</div>*/}
 
+
+            {/* DataGrid của Material UI*/}
             <DataGrid className="chinhmau"
                       rows={rows}
                       columns={columns}

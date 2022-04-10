@@ -29,7 +29,7 @@ const ChamCongAreaChart = () =>
     return (
         <div className="chart">
             <div className="titleChart">
-                <Box sx={{minWidth: 120}}>
+                <Box sx={{minWidth: 120}}>  {/* Select của Material UI*/}
                     <FormControl fullWidth>
                         <InputLabel id="demo-simple-select-label">Năm</InputLabel>
                         <Select
@@ -47,6 +47,8 @@ const ChamCongAreaChart = () =>
                 </Box>
             </div>
             <br/>
+
+            {/* StackbarChart của Rechartjs*/}
             <ResponsiveContainer width="100%" height={400}>
                 <BarChart
                     width={500}

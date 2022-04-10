@@ -14,7 +14,7 @@ const lisstImg = [nv, nv1, nv2, nv3, nv4];
 
 const NhanVienSingle = () =>
 {
-    const location = useLocation();
+    const location = useLocation(); // Lấy được dữ liệu từ state của Link
     console.log("dsdsdsd", location.state.chiTiet);
     let item = lisstImg[Math.floor(Math.random() * lisstImg.length)];
     return (
