@@ -137,7 +137,7 @@ const PhongBanNew = (props) => {
                                    }}
                                    name="sdtPhongBan"
                                    value={dlBD.sdtPhongBan}
-                                   name="sdtPhongBan"
+                                   
                                    onChange={handleInputChange}
                         />
                     </div>
