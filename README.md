@@ -25,6 +25,8 @@
 <img align="left" alt="SQL Server" width="26px" src="https://img.icons8.com/external-wanicon-flat-wanicon/48/external-sql-server-big-data-wanicon-flat-wanicon.png" style="padding-right:10px;" />
 <img align="left" alt="Git" width="26px" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/git/git-original.svg" style="padding-right:10px;" />
 
+<br />
+
 ---
 ### 📺 Video Demo App
 
