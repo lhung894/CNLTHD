@@ -12,4 +12,4 @@
 + Quản lý chức vụ: Tiêu chí CRUD
 + Quản lý chấm công: Chấm công theo tình trang: Đi làm - Nghỉ CP - Nghỉ KP
 + Quản lý lương: Tính lương cho nhân viên
-- Live Demo
+- Video Demo: https://youtu.be/PcqYyYFSFf0
