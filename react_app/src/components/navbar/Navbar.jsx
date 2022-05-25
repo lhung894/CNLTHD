@@ -7,9 +7,11 @@ import SearchOutlinedIcon from '@mui/icons-material/SearchOutlined';
 // import NotificationsOutlinedIcon from '@mui/icons-material/NotificationsOutlined';
 // import ChatBubbleOutlineOutlinedIcon from '@mui/icons-material/ChatBubbleOutlineOutlined';
 // import ListAltOutlinedIcon from '@mui/icons-material/ListAltOutlined';
+import nv2 from '../navbar/nv2.jpg';
 
 const Navbar = () =>
 {
+    let hinh=nv2;
     return (
         <div className="navbar">
             <div className="wrapper">
@@ -47,7 +49,7 @@ const Navbar = () =>
                     </div>
                     <div className="item">
                         <img className="avatar"
-                             src="https://scontent-hkg4-2.xx.fbcdn.net/v/t1.6435-9/122145818_1721935137973387_1332276115306645951_n.jpg?_nc_cat=109&ccb=1-5&_nc_sid=09cbfe&_nc_ohc=0UWGHn_-M_0AX__XOun&_nc_ht=scontent-hkg4-2.xx&oh=00_AT-smhMI4uUpZj2m8d5oF-CZE-eriN-sGtg_Uhjec8_zOQ&oe=625F8B09"
+                             src={nv2}
                              alt="Ảnh"/>
                     </div>
                 </div>

@@ -54,10 +54,10 @@ const ChamCongTable = () =>
             {
                 return (
                     <div className="cellAction">
-                        {/*<Button className="update" onClick={() =>*/}
-                        {/*{*/}
-                        {/*    return suaCongViec(params.row)*/}
-                        {/*}}>Sửa</Button>*/}
+                        <Button className="update" onClick={() =>
+                        {
+                            return suaCongViec(params.row)
+                        }}>Sửa</Button>
 
                         <Button className="delete" onClick={(e) =>
                         {
@@ -209,7 +209,7 @@ const ChamCongTable = () =>
                 {/*<Link to="/congviec/new" style={{textDecoration: "none"}}>*/}
                 {/*</Link>*/}
                 <Button className="link" style={{marginRight: '10px'}} onClick={capPhatCC}>Cấp phát</Button>
-                {/*<Button className="link" onClick={themChamCong}>Thêm</Button>*/}
+                <Button className="link" onClick={themChamCong}>Thêm</Button>
             </div>
 
             <DataGrid className="chinhmauCC"

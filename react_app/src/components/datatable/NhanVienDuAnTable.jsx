@@ -174,11 +174,11 @@ const NhanVienDuAnTable = (props) =>
 
     return (
         <div className="datatable" style={{backgroundColor: 'inherit'}}>
-            {/*<div className="addNew">*/}
-            {/*    /!*<Link to="/congviec/new" style={{textDecoration: "none"}}>*!/*/}
-            {/*    /!*</Link>*!/*/}
-            {/*    <Button className="link" onClick={themChamCong}>Thêm</Button>*/}
-            {/*</div>*/}
+            <div className="addNew">
+                {/*<Link to="/congviec/new" style={{textDecoration: "none"}}>*/}
+                {/*</Link>*/}
+                <Button className="link" onClick={themChamCong}>Thêm</Button>
+            </div>
             <DataGrid className="chinhmau"
                       rows={rows}
                       columns={columns}

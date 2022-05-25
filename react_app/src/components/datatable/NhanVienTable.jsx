@@ -84,19 +84,19 @@ const NhanVienTable = () =>
                         {/*    return suaNhanVien(params.row)*/}
                         {/*}}>Sửa</Button>*/}
 
-                        {/*<Link to={`/nhanvien/edit/${params.row.nhanVien.nhanVienId}`}*/}
-                        {/*      state={*/}
-                        {/*          {*/}
-                        {/*              // nvID: `${params.row.nhanVienId}`,*/}
-                        {/*              // nvHo: `${params.row.tenCongViec}`,*/}
-                        {/*              // nvHeso: `${params.row.heSoCongViec}`,*/}
-                        {/*              // nvStatus: `${params.row.status}`*/}
-                        {/*              chiTiet: params.row, chucNang: chucNang*/}
-                        {/*          }*/}
-                        {/*      }*/}
-                        {/*      style={{textDecoration: "none"}}>*/}
-                        {/*    <Button className="update">Sửa</Button>*/}
-                        {/*</Link>*/}
+                        <Link to={`/nhanvien/edit/${params.row.nhanVien.nhanVienId}`}
+                              state={
+                                  {
+                                      // nvID: `${params.row.nhanVienId}`,
+                                      // nvHo: `${params.row.tenCongViec}`,
+                                      // nvHeso: `${params.row.heSoCongViec}`,
+                                      // nvStatus: `${params.row.status}`
+                                      chiTiet: params.row, chucNang: chucNang
+                                  }
+                              }
+                              style={{textDecoration: "none"}}>
+                            <Button className="update">Sửa</Button>
+                        </Link>
 
 
                         <Button className="delete" onClick={() =>
@@ -184,22 +184,22 @@ const NhanVienTable = () =>
     return (
         <div className="datatable">
 
-            {/*<div className="addNew">*/}
-            {/*    /!*<Link to="/congviec/new" style={{textDecoration: "none"}}>*!/*/}
-            {/*    /!*</Link>*!/*/}
-            {/*    <Link to={`/nhanvien/new`}*/}
-            {/*          state={*/}
-            {/*              {*/}
-            {/*                  chiTiet: {},*/}
-            {/*                  chucNang: 1*/}
-            {/*              }*/}
-            {/*          }*/}
-            {/*          thuoctinh={100}*/}
-            {/*          style={{textDecoration: "none"}}>*/}
-            {/*        <Button className="link">Thêm</Button>*/}
-            {/*    </Link>*/}
+            <div className="addNew">
+                {/*<Link to="/congviec/new" style={{textDecoration: "none"}}>*/}
+                {/*</Link>*/}
+                <Link to={`/nhanvien/new`}
+                      state={
+                          {
+                              chiTiet: {},
+                              chucNang: 1
+                          }
+                      }
+                      thuoctinh={100}
+                      style={{textDecoration: "none"}}>
+                    <Button className="link">Thêm</Button>
+                </Link>
 
-            {/*</div>*/}
+            </div>
 
 
             {/* DataGrid của Material UI*/}
