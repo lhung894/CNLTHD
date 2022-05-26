@@ -4,11 +4,11 @@
 ## Ứng dụng quản lý nhân sự
 
 ### 🎯 Chức Năng
-- 🔭 Quản lý nhân viên: Xem - Thêm - Sửa - Xóa
-- 🌱 Quản lý phòng ban: Xem - Thêm - Sửa - Xóa
-- 👯 Quản lý dự án: Xem - Thêm - Sửa - Xóa
-- 🥅 Quản lý công việc: Xem - Thêm - Sửa - Xóa
-- ⚡ Quản lý chức vụ: Xem - Thêm - Sửa - Xóa
+- 🔭 Quản lý nhân viên: CRUD
+- 🌱 Quản lý phòng ban: CRUD
+- 👯 Quản lý dự án: CRUD
+- 🥅 Quản lý công việc: CRUD
+- ⚡ Quản lý chức vụ: CRUD
 - 😻 Quản lý chấm công : Chấm công NV theo các tiêu chí : Đi làm - Nghỉ KP - Nghỉ CP
 - 💎 Quản lý lương: Tính lương NV dựa theo các tiêu chí trên
 
